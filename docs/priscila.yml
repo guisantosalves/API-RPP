@@ -1,0 +1,163 @@
+openapi: 3.0.3
+info:
+  title: OPP - IFRO 1.0
+  description: |-
+    Observatório de Políticas Públicas 
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:3030
+tags:
+  - name: Usuários
+    description: Usuários do Observatório de Políticas Públicas
+    externalDocs:
+      description: Leia mais 
+      url: http://swagger.io
+paths:
+  /usuarios:
+    get:
+      tags:
+        - Usuários
+      summary: Recupera todos os usuários
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarios'
+                
+        '404':
+          description: Nenhum usuário encontrado
+          content:
+            application/json:
+              example: Not Found
+    post:
+      tags:
+        - Usuários
+      summary: Cadastra um novo usuário
+      requestBody: 
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                descricao:
+                  type: string
+      responses: 
+        '201':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarios'
+        '404':
+          description: Sem acesso ao banco
+          content:
+            application/json:
+              example: Not Found
+        '409':
+          description: Usuáriio já existente
+          content:
+            application/json:
+              example: Conflict
+              
+  /usuarios/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema: 
+          type: integer
+        required: true
+    get:
+      tags:
+        - Usuários
+      summary: Recupera usuário por ID
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json: 
+              schema:
+                $ref: '#/components/schemas/usuario'
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              example: Not Found
+  
+    put:
+      tags:
+        - Usuários
+      summary: Atualiza um usuário pelo ID
+      requestBody:
+        description: Atualiza um usuário pelo ID
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/usuario'
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuario'
+                
+        '404':
+          description: Nenhum usuário encontrado
+          content:
+            application/json:
+              example: Not Found
+    delete:
+      tags:
+        - Usuários
+      summary: Apaga um usuário pelo ID
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              example: Deleted
+                
+        '404':
+          description: Nenhum usuário encontrado
+          content:
+            application/json:
+              example: Not Found
+components:
+  schemas:
+    usuario:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome_usuario:
+          type: string
+        senha:
+          type: string
+        formacao:
+          type: string
+        nome:
+          type: string
+        inativo:
+          type: boolean
+        adm:
+          type: boolean
+        path_photo:
+          type: string
+    usuarios:
+      type: array
+      
+      items: 
+        $ref: '#/components/schemas/usuario'
