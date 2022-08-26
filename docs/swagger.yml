@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: API do repositório de políticas públicas
+  description: api para controlar a logica de negócio do site
+  version: 0.0.1
+  termsOfService: http://localhost:3030
+  contact:
+    name: developer
+    email: workguisantos@gmail.com
+  license:
+    name: "MIT"
+servers:
+# Pode ter quantos servidores forem necessário (Produção + Teste)
+- url: http://localhost:3030
+  description: API de teste
+paths:
+  /login:
+    get:
+      summary: recupera todos os logins
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                  $ref: "#/components/schemas/login"
+  /login/{id}:
+  # O parâmentro nessa área permitirá utilizá-lo para todos os verbos nesta rota
+    parameters:
+    - name: id
+      in: path
+      schema:
+        type: integer
+      required: true
+      
+    get:
+      summary: recupera um login por ID
+   # Lugar possível de colocar o parametro, mas servirá apenas para o verbo get
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                # usando por conponente
+                $ref: "#/components/schemas/login"
+        404:
+          description: login não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    post:
+      summary: cria um novo login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                login:
+                  type: string
+                senha:
+                  type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                # usando por conponente
+                $ref: "#/components/schemas/login"
+        404:
+          description: login não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    put:
+      summary: update de um login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                login:
+                  type: string
+                senha:
+                  type: string
+      responses:
+        201:
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                # usando por conponente
+                $ref: "#/components/schemas/login"
+        404:
+          description: login não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    delete:
+      summary: delete de um login
+      responses:
+        200:
+          description: "Sucesso"
+          content:
+            application/json:
+              example: Success
+        404:
+          description: login não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+
+security: 
+- auth: []
+
+components:
+  schemas:
+    login:
+      type: object
+      properties:
+        id:
+          type: integer
+        login:
+          type: string 
+        senha:
+          type: string
+        ativo:
+          type: boolean
+          # Lembrando que string pode ter outros formatos Ex. (format: date-time; format: currency)
+    logins:
+      type: array
+      items:
+       $ref: "#/components/schemas/login"
+       
+  securitySchemes:
+    auth:
+      type: http
+      # tipo Token do portador
+      scheme: bearer   
+      bearerFormat: JWT
