@@ -10,9 +10,9 @@ info:
   license:
     name: "MIT"
 servers:
-# Pode ter quantos servidores forem necessário (Produção + Teste)
-- url: http://localhost:3030
-  description: API de teste
+  # Pode ter quantos servidores forem necessário (Produção + Teste)
+  - url: http://localhost:3030
+    description: API de teste
 paths:
   /login:
     get:
@@ -23,19 +23,19 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: "#/components/schemas/login"
+                $ref: "#/components/schemas/login"
   /login/{id}:
-  # O parâmentro nessa área permitirá utilizá-lo para todos os verbos nesta rota
+    # O parâmentro nessa área permitirá utilizá-lo para todos os verbos nesta rota
     parameters:
-    - name: id
-      in: path
-      schema:
-        type: integer
-      required: true
-      
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+
     get:
       summary: recupera um login por ID
-   # Lugar possível de colocar o parametro, mas servirá apenas para o verbo get
+      # Lugar possível de colocar o parametro, mas servirá apenas para o verbo get
       responses:
         200:
           description: Sucesso
@@ -113,8 +113,8 @@ paths:
             application/json:
               example: "Not Found"
 
-security: 
-- auth: []
+security:
+  - auth: []
 
 components:
   schemas:
@@ -124,7 +124,7 @@ components:
         id:
           type: integer
         login:
-          type: string 
+          type: string
         senha:
           type: string
         ativo:
@@ -133,11 +133,46 @@ components:
     logins:
       type: array
       items:
-       $ref: "#/components/schemas/login"
-       
+        $ref: "#/components/schemas/login"
+
+    publicacao:
+      type: object
+      properties:
+        id:
+          type: integer
+        data:
+          type: string
+        titulo:
+          type: string
+        registro:
+          type: string
+        tipo:
+          type: string
+        usuarioId:
+          type: integer
+
+    publicacao_put:
+      type: object
+      properties:
+        data:
+          type: string
+        titulo:
+          type: string
+        registro:
+          type: string
+        tipo:
+          type: string
+        usuarioId:
+          type: integer
+
+    publicacoes:
+      type: array
+      items:
+        $ref: "#/components/schemas/publicacao"
+
   securitySchemes:
     auth:
       type: http
       # tipo Token do portador
-      scheme: bearer   
+      scheme: bearer
       bearerFormat: JWT
