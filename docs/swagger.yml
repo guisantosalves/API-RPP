@@ -13,7 +13,136 @@ servers:
   # Pode ter quantos servidores forem necessário (Produção + Teste)
   - url: http://localhost:3030
     description: API de teste
+
+tags:
+  - name: Usuários
+    description: Usuários do Observatório de Políticas Públicas
+    externalDocs:
+      description: Leia mais 
+      url: http://swagger.io
+  - name: Publicações
+    description: Publicações da plataforma
+    externalDocs:
+      description: Leia mais 
+      url: http://swagger.io
+
 paths:
+  #Rotas para usuário
+  /usuarios:
+    get:
+      tags:
+        - Usuários
+      summary: Recupera todos os usuários
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarios'
+                
+        '404':
+          description: Nenhum usuário encontrado
+          content:
+            application/json:
+              example: Not Found
+    post:
+      tags:
+        - Usuários
+      summary: Cadastra um novo usuário
+      requestBody: 
+        content: 
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                descricao:
+                  type: string
+      responses: 
+        '201':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuarios'
+        '404':
+          description: Sem acesso ao banco
+          content:
+            application/json:
+              example: Not Found
+        '409':
+          description: Usuáriio já existente
+          content:
+            application/json:
+              example: Conflict
+              
+  /usuarios/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema: 
+          type: integer
+        required: true
+    get:
+      tags:
+        - Usuários
+      summary: Recupera usuário por ID
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json: 
+              schema:
+                $ref: '#/components/schemas/usuario'
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              example: Not Found
+  
+    put:
+      tags:
+        - Usuários
+      summary: Atualiza um usuário pelo ID
+      requestBody:
+        description: Atualiza um usuário pelo ID
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/usuario'
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/usuario'
+                
+        '404':
+          description: Nenhum usuário encontrado
+          content:
+            application/json:
+              example: Not Found
+    delete:
+      tags:
+        - Usuários
+      summary: Apaga um usuário pelo ID
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              example: Deleted
+                
+        '404':
+          description: Nenhum usuário encontrado
+          content:
+            application/json:
+              example: Not Found
+
+  #Rotas para login
   /login:
     get:
       summary: recupera todos os logins
@@ -234,12 +363,38 @@ paths:
             application/json:
               example: Not Found
 
-
 security:
   - auth: []
 
 components:
   schemas:
+    #Elementos para usuário
+    usuario:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome_usuario:
+          type: string
+        senha:
+          type: string
+        formacao:
+          type: string
+        nome:
+          type: string
+        inativo:
+          type: boolean
+        adm:
+          type: boolean
+        path_photo:
+          type: string
+    usuarios:
+      type: array
+      
+      items: 
+        $ref: '#/components/schemas/usuario'
+
+    #Elementos para login
     login:
       type: object
       properties:
@@ -257,6 +412,7 @@ components:
       items:
         $ref: "#/components/schemas/login"
 
+    #Elementos para publicações
     publicacao:
       type: object
       properties:
