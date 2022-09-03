@@ -24,8 +24,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': true,
       'path_photo': 'arb.png',
-    },
-    {
+    },{
       'nome': 'Daniel Estêvão Ramos de Miranda',
       'login': {
         'usuario': 'email@server.com.br',
@@ -36,8 +35,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': false,
       'path_photo': 'derdm.png'
-    },
-    {
+    },{
       'nome': 'Daniely Batista Alves',
       'login': {
         'usuario': 'email@server.com.br',
@@ -48,8 +46,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': false,
       'path_photo': 'dba.png'
-    },
-    {
+    },{
       'nome': 'Eder Carlos Cardoso Diniz',
       'login': {
         'usuario': 'email@server.com.br',
@@ -60,8 +57,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': true,
       'path_photo': 'eccd.png'
-    },
-    {
+    },{
       'nome': 'Camila Antonia Coelho de Andrade',
       'login': {
         'usuario': 'cacda@gmail.com',
@@ -71,8 +67,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png'
-    },
-    {
+    },{
 
       'nome': 'Diana Camila de Souza',
       'login': {
@@ -83,8 +78,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png',
-    },
-    {
+    },{
       'nome': 'Francielle Araujo',
       'login': {
         'usuario': 'fa@gmail.com',
@@ -94,8 +88,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png'
-    },
-    {
+    },{
       'nome': 'Lucas Gabriel Aires',
       'login': {
         'usuario': 'lga@gmail.com',
