@@ -4,7 +4,7 @@
 const database = 'OBSERVATORIO_POLITICAS_PUBLICAS';
 const collection = 'usuarios';
 
-db.dropDatabase(database);
+//db.dropDatabase(database);
 use(database);
 
 db.createCollection(collection);
