@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: API do repositório de políticas públicas
-  description: api para controlar a logica de negócio do site
+  title: API do Observatório de Políticas Públicas
+  description: API para controlar a lógica de negócio do site
   version: 0.0.1
   termsOfService: http://localhost:3030
   contact:
@@ -54,12 +54,8 @@ paths:
         content: 
           application/json:
             schema:
-              type: object
-              properties:
-                nome:
-                  type: string
-                descricao:
-                  type: string
+               $ref: '#/components/schemas/usuario'  
+                
       responses: 
         '201':
           description: Sucesso
@@ -73,7 +69,7 @@ paths:
             application/json:
               example: Not Found
         '409':
-          description: Usuáriio já existente
+          description: Usuário já existente
           content:
             application/json:
               example: Conflict
@@ -88,7 +84,7 @@ paths:
     get:
       tags:
         - Usuários
-      summary: Recupera usuário por ID
+      summary: Recupera um usuário por ID
       responses:
         '200':
           description: Sucesso
@@ -145,14 +141,49 @@ paths:
   #Rotas para login
   /login:
     get:
-      summary: recupera todos os logins
+      tags:
+        - Login
+      summary: Recupera todos os logins
       responses:
-        200:
+        '200':
           description: Sucesso
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/logins"
+        '404':
+          description: login não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+    post:
+      tags:
+        - Login
+      summary: Cadastra um novo login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                login:
+                  type: string
+                senha:
+                  type: string
+      responses:
+        '201':
+          description: "Sucesso"
+          content:
+            application/json:
+              schema:
+                # usando por conponente
+                $ref: "#/components/schemas/login"
+        '404':
+          description: Login não encontrado
+          content:
+            application/json:
+              example: "Not Found"
+              
   /login/{id}:
     # O parâmentro nessa área permitirá utilizá-lo para todos os verbos nesta rota
     parameters:
@@ -163,48 +194,28 @@ paths:
         required: true
 
     get:
-      summary: recupera um login por ID
+      tags:
+        - Login
+      summary: Recupera login por ID
       # Lugar possível de colocar o parametro, mas servirá apenas para o verbo get
       responses:
-        200:
+        '200':
           description: Sucesso
           content:
             application/json:
               schema:
                 # usando por conponente
                 $ref: "#/components/schemas/login"
-        404:
+        '404':
           description: login não encontrado
           content:
             application/json:
               example: "Not Found"
-    post:
-      summary: cria um novo login
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                login:
-                  type: string
-                senha:
-                  type: string
-      responses:
-        201:
-          description: "Sucesso"
-          content:
-            application/json:
-              schema:
-                # usando por conponente
-                $ref: "#/components/schemas/login"
-        404:
-          description: login não encontrado
-          content:
-            application/json:
-              example: "Not Found"
+    
     put:
-      summary: update de um login
+      tags:
+        - Login
+      summary: Atualiza login por ID
       requestBody:
         content:
           application/json:
@@ -216,28 +227,30 @@ paths:
                 senha:
                   type: string
       responses:
-        201:
+        '200':
           description: "Sucesso"
           content:
             application/json:
               schema:
                 # usando por conponente
                 $ref: "#/components/schemas/login"
-        404:
+        '404':
           description: login não encontrado
           content:
             application/json:
               example: "Not Found"
     delete:
-      summary: delete de um login
+      tags:
+        - Login
+      summary: Apaga um login
       responses:
-        200:
+        '200':
           description: "Sucesso"
           content:
             application/json:
               example: Success
-        404:
-          description: login não encontrado
+        '404':
+          description: Login não encontrado
           content:
             application/json:
               example: "Not Found"
@@ -249,13 +262,13 @@ paths:
         - Publicações
       summary: Recupera todas as publicações
       responses:
-        200:
+        '200':
           description: "Sucesso"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/publicacoes"
-        404:
+        '404':
           description: "Não foi possível acessar o banco de dados"
           content:
             application/json:
@@ -272,20 +285,20 @@ paths:
               $ref: "#/components/schemas/publicacao_put"
 
       responses:
-        201:
+        '201':
           description: "Sucesso"
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/publicacao"
 
-        404:
+        '404':
           description: "Não foi possível inserir a publicação"
           content:
             application/json:
               example: Not Found
               
-        409:
+        '409':
           description: "Publicação existente"
           content: 
             application/json:
@@ -301,7 +314,7 @@ paths:
     get:
       tags:
         - Publicações
-      summary: Recupera publicação por ID
+      summary: Recupera uma publicação por ID
       responses:
         '200':
           description: "Sucesso"
@@ -318,7 +331,7 @@ paths:
     put:
       tags:
         - Publicações
-      summary: Atualiza publicacao pelo ID
+      summary: Atualiza uma publicação por ID
 
       requestBody:
         content:
