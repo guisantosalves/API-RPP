@@ -2,157 +2,188 @@
 // Use Ctrl+Space inside a snippet or a string literal to trigger completions.
 
 const database = 'OBSERVATORIO_POLITICAS_PUBLICAS';
-const collection = 'membros';
+const collection = 'usuarios';
 
-// Create a new database.
-// drop(database);
+//db.dropDatabase(database);
 use(database);
 
-// Create a new collection.
 db.createCollection(collection);
 
-db.membros.insertMany(
+db.usuarios.insertMany(
   [
     {
-      'nomeMembro': 'Aline Ramos Barbosa',
-      'loginMembro': {
+      'nome': 'Aline Ramos Barbosa',
+      'login': {
         'usuario': 'aline@ifro.edu.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacaoMembro': [{'curso':'Graduação em Ciências Sociais'}, {'curso':'Doutorado em Ciências Sociais'}],
-      'curriculoMembro': 'http://lattes.cnpq.br/7939834632437833',
-      'atividadeMembro': true,
-      'adminstrarMembro': true,
-      'imagemMembro': 'arb.png',
-      'publicacoes':{
-          'tituloPublicacao': 'Saúde Pública em Vilhena',
-          'dataPublicacao' : '2012-12-05',
-          'tipoPublicacao' : 'noticia',
-          'corpoPublicacao': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eros neque, convallis laoreet tortor et, cursus pharetra turpis. Mauris sagittis sapien ante, quis imperdiet ante vulputate sed. Nulla porta magna nec mi convallis semper. Pellentesque pulvinar orci tempor imperdiet pharetra. Nunc urna dui, venenatis eu neque non, volutpat elementum arcu. Mauris placerat vitae neque eget malesuada. Morbi ornare cursus orci sit amet fermentum. Aliquam erat volutpat. Suspendisse eu enim molestie, imperdiet augue ut, feugiat tellus. Ut nec neque rutrum, auctor mi sit amet, pulvinar nisi. Vivamus ut pharetra sem. Maecenas at quam nec leo suscipit ullamcorper at sit amet tellus. Etiam aliquam interdum dui mollis fringilla. Proin pretium, tellus sed vehicula lacinia, dolor libero auctor turpis, a lacinia magna lacus ut elit. Pellentesque nec lobortis nulla, in vulputate quam. Nullam sodales fermentum cursus. Mauris semper et libero ut dictum. Sed at sagittis tellus, in ornare nulla. Nam varius vel erat eu consequat. Sed eget interdum nulla. Donec ac lacus augue. Phasellus dolor diam, gravida quis tempus sed, pulvinar in augue. Phasellus sapien metus, suscipit a arcu vitae, mattis mollis felis. Duis pellentesque efficitur varius. Morbi vitae ipsum et arcu mattis egestas nec quis diam. Nulla egestas rutrum diam, vitae aliquet eros. Ut id ex dui. Cras mattis lacus efficitur nulla pellentesque imperdiet. Nunc condimentum est nec rhoncus mattis. Nulla facilisi. Ut semper molestie elit ut sagittis. Nullam fermentum aliquet volutpat. Mauris in est convallis eros mattis dictum. Sed id quam fringilla, condimentum odio et, rhoncus nulla. Etiam viverra nisl eget pharetra posuere. Maecenas ornare sapien a sollicitudin viverra. Morbi blandit tristique arcu, id congue libero finibus a. Nullam bibendum vulputate sapien quis luctus. Sed mattis nunc libero, eu ornare nunc ultrices vitae. Phasellus euismod porta odio a sollicitudin. Vivamus sed quam est. Vivamus vestibulum, nunc nec congue sollicitudin, diam mi tincidunt nisl, non ultrices mi enim et enim. Maecenas sit amet maximus quam. Cras a massa nec neque aliquam dignissim. Vivamus condimentum justo metus, eu finibus elit egestas vitae. Nullam non volutpat lorem, eget venenatis sem. Quisque vehicula, risus id convallis fermentum, odio eros accumsan arcu, quis mollis nulla nulla non elit. Nam ultricies ipsum tellus, a venenatis lorem tempor nec. Praesent sed erat varius, suscipit ante in, euismod elit. Maecenas in porta libero. Vivamus faucibus lectus quis leo volutpat tempor ac non augue. Aenean dolor massa, ultricies at leo id, viverra lobortis ligula. Cras sit amet pulvinar mi. Donec euismod sodales tortor vitae fermentum. Sed tincidunt fringilla tincidunt. Aenean dolor elit, varius vel faucibus a, posuere ut sem. Aliquam non aliquam lacus. Phasellus ullamcorper, ligula sed faucibus faucibus, enim leo lobortis lacus, a fringilla elit urna at metus. Mauris maximus pulvinar odio sed fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. '
-      }
-    },
-    {
-      'nomeMembro': 'Daniel Estêvão Ramos de Miranda',
-      'loginMembro': {
+      'formacao': [{'curso': 'Graduação em Ciências Sociais'},{'curso': 'Doutorado em Ciências Sociais'}],
+      'curriculo': 'http://lattes.cnpq.br/7939834632437833',
+      'ativo': true,
+      'adm': true,
+      'path_photo': 'arb.png',
+    },{
+      'nome': 'Daniel Estêvão Ramos de Miranda',
+      'login': {
         'usuario': 'email@server.com.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacaoMembro': [{'curso':'Graduação em Ciências Sociais'}, {'curso':'Doutorado em Ciência Política'}],
-      'curriculoMembro': 'http://lattes.cnpq.br/6336876650420963',
-      'atividadeMembro': true,
-      'adminstrarMembro': false,
-      'imagemMembro': 'derdm.png',
-      'publicacoes':{
-          'tituloPublicacao': 'Educação Básica em Vilhena',
-          'dataPublicacao' : '2021-05-03',
-          'tipoPublicacao' : 'noticia',
-          'corpoPublicacao': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eros neque, convallis laoreet tortor et, cursus pharetra turpis. Mauris sagittis sapien ante, quis imperdiet ante vulputate sed. Nulla porta magna nec mi convallis semper. Pellentesque pulvinar orci tempor imperdiet pharetra. Nunc urna dui, venenatis eu neque non, volutpat elementum arcu. Mauris placerat vitae neque eget malesuada. Morbi ornare cursus orci sit amet fermentum. Aliquam erat volutpat. Suspendisse eu enim molestie, imperdiet augue ut, feugiat tellus. Ut nec neque rutrum, auctor mi sit amet, pulvinar nisi. Vivamus ut pharetra sem. Maecenas at quam nec leo suscipit ullamcorper at sit amet tellus. Etiam aliquam interdum dui mollis fringilla. Proin pretium, tellus sed vehicula lacinia, dolor libero auctor turpis, a lacinia magna lacus ut elit. Pellentesque nec lobortis nulla, in vulputate quam. Nullam sodales fermentum cursus. Mauris semper et libero ut dictum. Sed at sagittis tellus, in ornare nulla. Nam varius vel erat eu consequat. Sed eget interdum nulla. Donec ac lacus augue. Phasellus dolor diam, gravida quis tempus sed, pulvinar in augue. Phasellus sapien metus, suscipit a arcu vitae, mattis mollis felis. Duis pellentesque efficitur varius. Morbi vitae ipsum et arcu mattis egestas nec quis diam. Nulla egestas rutrum diam, vitae aliquet eros. Ut id ex dui. Cras mattis lacus efficitur nulla pellentesque imperdiet. Nunc condimentum est nec rhoncus mattis. Nulla facilisi. Ut semper molestie elit ut sagittis. Nullam fermentum aliquet volutpat. Mauris in est convallis eros mattis dictum. Sed id quam fringilla, condimentum odio et, rhoncus nulla. Etiam viverra nisl eget pharetra posuere. Maecenas ornare sapien a sollicitudin viverra. Morbi blandit tristique arcu, id congue libero finibus a. Nullam bibendum vulputate sapien quis luctus. Sed mattis nunc libero, eu ornare nunc ultrices vitae. Phasellus euismod porta odio a sollicitudin. Vivamus sed quam est. Vivamus vestibulum, nunc nec congue sollicitudin, diam mi tincidunt nisl, non ultrices mi enim et enim. Maecenas sit amet maximus quam. Cras a massa nec neque aliquam dignissim. Vivamus condimentum justo metus, eu finibus elit egestas vitae. Nullam non volutpat lorem, eget venenatis sem. Quisque vehicula, risus id convallis fermentum, odio eros accumsan arcu, quis mollis nulla nulla non elit. Nam ultricies ipsum tellus, a venenatis lorem tempor nec. Praesent sed erat varius, suscipit ante in, euismod elit. Maecenas in porta libero. Vivamus faucibus lectus quis leo volutpat tempor ac non augue. Aenean dolor massa, ultricies at leo id, viverra lobortis ligula. Cras sit amet pulvinar mi. Donec euismod sodales tortor vitae fermentum. Sed tincidunt fringilla tincidunt. Aenean dolor elit, varius vel faucibus a, posuere ut sem. Aliquam non aliquam lacus. Phasellus ullamcorper, ligula sed faucibus faucibus, enim leo lobortis lacus, a fringilla elit urna at metus. Mauris maximus pulvinar odio sed fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. '
-      }
-    },
-    {
-      'nomeMembro': 'Daniely Batista Alves',
-      'loginMembro': {
+      'formacao': [{ 'curso': 'Graduação em Ciências Sociais' }, { 'curso': 'Doutorado em Ciência Política' }],
+      'curriculo': 'http://lattes.cnpq.br/6336876650420963',
+      'ativo': true,
+      'adm': false,
+      'path_photo': 'derdm.png'
+    },{
+      'nome': 'Daniely Batista Alves',
+      'login': {
         'usuario': 'email@server.com.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacaoMembro': [{'curso':'Graduação em Ciências Biológicas'}, {'curso':'Mestrado em Desenvolvimento Regional e Meio Ambiente'}],
-      'curriculoMembro': 'http://lattes.cnpq.br/6992500263269748',
-      'atividadeMembro': true,
-      'adminstrarMembro': false,
-      'imagemMembro': 'dba.png',
-      'publicacoes':{
-          'tituloPublicacao': 'Projeto Educar com Amor',
-          'dataPublicacao' : '2021-03-05',
-          'tipoPublicacao' : 'projeto',
-          'corpoPublicacao': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eros neque, convallis laoreet tortor et, cursus pharetra turpis. Mauris sagittis sapien ante, quis imperdiet ante vulputate sed. Nulla porta magna nec mi convallis semper. Pellentesque pulvinar orci tempor imperdiet pharetra. Nunc urna dui, venenatis eu neque non, volutpat elementum arcu. Mauris placerat vitae neque eget malesuada. Morbi ornare cursus orci sit amet fermentum. Aliquam erat volutpat. Suspendisse eu enim molestie, imperdiet augue ut, feugiat tellus. Ut nec neque rutrum, auctor mi sit amet, pulvinar nisi. Vivamus ut pharetra sem. Maecenas at quam nec leo suscipit ullamcorper at sit amet tellus. Etiam aliquam interdum dui mollis fringilla. Proin pretium, tellus sed vehicula lacinia, dolor libero auctor turpis, a lacinia magna lacus ut elit. Pellentesque nec lobortis nulla, in vulputate quam. Nullam sodales fermentum cursus. Mauris semper et libero ut dictum. Sed at sagittis tellus, in ornare nulla. Nam varius vel erat eu consequat. Sed eget interdum nulla. Donec ac lacus augue. Phasellus dolor diam, gravida quis tempus sed, pulvinar in augue. Phasellus sapien metus, suscipit a arcu vitae, mattis mollis felis. Duis pellentesque efficitur varius. Morbi vitae ipsum et arcu mattis egestas nec quis diam. Nulla egestas rutrum diam, vitae aliquet eros. Ut id ex dui. Cras mattis lacus efficitur nulla pellentesque imperdiet. Nunc condimentum est nec rhoncus mattis. Nulla facilisi. Ut semper molestie elit ut sagittis. Nullam fermentum aliquet volutpat. Mauris in est convallis eros mattis dictum. Sed id quam fringilla, condimentum odio et, rhoncus nulla. Etiam viverra nisl eget pharetra posuere. Maecenas ornare sapien a sollicitudin viverra. Morbi blandit tristique arcu, id congue libero finibus a. Nullam bibendum vulputate sapien quis luctus. Sed mattis nunc libero, eu ornare nunc ultrices vitae. Phasellus euismod porta odio a sollicitudin. Vivamus sed quam est. Vivamus vestibulum, nunc nec congue sollicitudin, diam mi tincidunt nisl, non ultrices mi enim et enim. Maecenas sit amet maximus quam. Cras a massa nec neque aliquam dignissim. Vivamus condimentum justo metus, eu finibus elit egestas vitae. Nullam non volutpat lorem, eget venenatis sem. Quisque vehicula, risus id convallis fermentum, odio eros accumsan arcu, quis mollis nulla nulla non elit. Nam ultricies ipsum tellus, a venenatis lorem tempor nec. Praesent sed erat varius, suscipit ante in, euismod elit. Maecenas in porta libero. Vivamus faucibus lectus quis leo volutpat tempor ac non augue. Aenean dolor massa, ultricies at leo id, viverra lobortis ligula. Cras sit amet pulvinar mi. Donec euismod sodales tortor vitae fermentum. Sed tincidunt fringilla tincidunt. Aenean dolor elit, varius vel faucibus a, posuere ut sem. Aliquam non aliquam lacus. Phasellus ullamcorper, ligula sed faucibus faucibus, enim leo lobortis lacus, a fringilla elit urna at metus. Mauris maximus pulvinar odio sed fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. '
-      }
-    },
-    {
-      'nomeMembro': 'Eder Carlos Cardoso Diniz',
-      'loginMembro': {
+      'formacao': [{ 'curso': 'Graduação em Ciências Biológicas' }, { 'curso': 'Mestrado em Desenvolvimento Regional e Meio Ambiente' }],
+      'curriculo': 'http://lattes.cnpq.br/6992500263269748',
+      'ativo': true,
+      'adm': false,
+      'path_photo': 'dba.png'
+    },{
+      'nome': 'Eder Carlos Cardoso Diniz',
+      'login': {
         'usuario': 'email@server.com.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacaoMembro': [{'curso':'Graduação em História'}, {'curso':'Mestrado em Educação'}],
-      'curriculoMembro': 'http://lattes.cnpq.br/2697971948700205',
-      'atividadeMembro': true,
-      'adminstrarMembro': true,
-      'imagemMembro': 'eccd.png',
-      'publicacoes':{
-          'tituloPublicacao': 'Projeto Mãos Limpas',
-          'dataPublicacao' : '2021-09-05',
-          'tipoPublicacao' : 'projeto',
-          'corpoPublicacao': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eros neque, convallis laoreet tortor et, cursus pharetra turpis. Mauris sagittis sapien ante, quis imperdiet ante vulputate sed. Nulla porta magna nec mi convallis semper. Pellentesque pulvinar orci tempor imperdiet pharetra. Nunc urna dui, venenatis eu neque non, volutpat elementum arcu. Mauris placerat vitae neque eget malesuada. Morbi ornare cursus orci sit amet fermentum. Aliquam erat volutpat. Suspendisse eu enim molestie, imperdiet augue ut, feugiat tellus. Ut nec neque rutrum, auctor mi sit amet, pulvinar nisi. Vivamus ut pharetra sem. Maecenas at quam nec leo suscipit ullamcorper at sit amet tellus. Etiam aliquam interdum dui mollis fringilla. Proin pretium, tellus sed vehicula lacinia, dolor libero auctor turpis, a lacinia magna lacus ut elit. Pellentesque nec lobortis nulla, in vulputate quam. Nullam sodales fermentum cursus. Mauris semper et libero ut dictum. Sed at sagittis tellus, in ornare nulla. Nam varius vel erat eu consequat. Sed eget interdum nulla. Donec ac lacus augue. Phasellus dolor diam, gravida quis tempus sed, pulvinar in augue. Phasellus sapien metus, suscipit a arcu vitae, mattis mollis felis. Duis pellentesque efficitur varius. Morbi vitae ipsum et arcu mattis egestas nec quis diam. Nulla egestas rutrum diam, vitae aliquet eros. Ut id ex dui. Cras mattis lacus efficitur nulla pellentesque imperdiet. Nunc condimentum est nec rhoncus mattis. Nulla facilisi. Ut semper molestie elit ut sagittis. Nullam fermentum aliquet volutpat. Mauris in est convallis eros mattis dictum. Sed id quam fringilla, condimentum odio et, rhoncus nulla. Etiam viverra nisl eget pharetra posuere. Maecenas ornare sapien a sollicitudin viverra. Morbi blandit tristique arcu, id congue libero finibus a. Nullam bibendum vulputate sapien quis luctus. Sed mattis nunc libero, eu ornare nunc ultrices vitae. Phasellus euismod porta odio a sollicitudin. Vivamus sed quam est. Vivamus vestibulum, nunc nec congue sollicitudin, diam mi tincidunt nisl, non ultrices mi enim et enim. Maecenas sit amet maximus quam. Cras a massa nec neque aliquam dignissim. Vivamus condimentum justo metus, eu finibus elit egestas vitae. Nullam non volutpat lorem, eget venenatis sem. Quisque vehicula, risus id convallis fermentum, odio eros accumsan arcu, quis mollis nulla nulla non elit. Nam ultricies ipsum tellus, a venenatis lorem tempor nec. Praesent sed erat varius, suscipit ante in, euismod elit. Maecenas in porta libero. Vivamus faucibus lectus quis leo volutpat tempor ac non augue. Aenean dolor massa, ultricies at leo id, viverra lobortis ligula. Cras sit amet pulvinar mi. Donec euismod sodales tortor vitae fermentum. Sed tincidunt fringilla tincidunt. Aenean dolor elit, varius vel faucibus a, posuere ut sem. Aliquam non aliquam lacus. Phasellus ullamcorper, ligula sed faucibus faucibus, enim leo lobortis lacus, a fringilla elit urna at metus. Mauris maximus pulvinar odio sed fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. '
-      }
-    },
-    {
-      'nomeMembro': 'Camila Antonia Coelho de Andrade',
-      'loginMembro': {
+      'formacao': [{ 'curso': 'Graduação em História' }, { 'curso': 'Mestrado em Educação' }],
+      'curriculo': 'http://lattes.cnpq.br/2697971948700205',
+      'ativo': true,
+      'adm': true,
+      'path_photo': 'eccd.png'
+    },{
+      'nome': 'Camila Antonia Coelho de Andrade',
+      'login': {
         'usuario': 'cacda@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacaoMembro': [{'curso':'Graduanda em Arquitetura e Urbanismo'}],
-      'atividadeMembro': true,
-      'adminstrarMembro': true,
-      'imagemMembro': 'jbc.png',
-      'publicacoes':{
-          'tituloPublicacao': '',
-          'dataPublicacao' : '2012-12-05',
-          'tipoPublicacao' : 'artigo',
-          'corpoPublicacao': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eros neque, convallis laoreet tortor et, cursus pharetra turpis. Mauris sagittis sapien ante, quis imperdiet ante vulputate sed. Nulla porta magna nec mi convallis semper. Pellentesque pulvinar orci tempor imperdiet pharetra. Nunc urna dui, venenatis eu neque non, volutpat elementum arcu. Mauris placerat vitae neque eget malesuada. Morbi ornare cursus orci sit amet fermentum. Aliquam erat volutpat. Suspendisse eu enim molestie, imperdiet augue ut, feugiat tellus. Ut nec neque rutrum, auctor mi sit amet, pulvinar nisi. Vivamus ut pharetra sem. Maecenas at quam nec leo suscipit ullamcorper at sit amet tellus. Etiam aliquam interdum dui mollis fringilla. Proin pretium, tellus sed vehicula lacinia, dolor libero auctor turpis, a lacinia magna lacus ut elit. Pellentesque nec lobortis nulla, in vulputate quam. Nullam sodales fermentum cursus. Mauris semper et libero ut dictum. Sed at sagittis tellus, in ornare nulla. Nam varius vel erat eu consequat. Sed eget interdum nulla. Donec ac lacus augue. Phasellus dolor diam, gravida quis tempus sed, pulvinar in augue. Phasellus sapien metus, suscipit a arcu vitae, mattis mollis felis. Duis pellentesque efficitur varius. Morbi vitae ipsum et arcu mattis egestas nec quis diam. Nulla egestas rutrum diam, vitae aliquet eros. Ut id ex dui. Cras mattis lacus efficitur nulla pellentesque imperdiet. Nunc condimentum est nec rhoncus mattis. Nulla facilisi. Ut semper molestie elit ut sagittis. Nullam fermentum aliquet volutpat. Mauris in est convallis eros mattis dictum. Sed id quam fringilla, condimentum odio et, rhoncus nulla. Etiam viverra nisl eget pharetra posuere. Maecenas ornare sapien a sollicitudin viverra. Morbi blandit tristique arcu, id congue libero finibus a. Nullam bibendum vulputate sapien quis luctus. Sed mattis nunc libero, eu ornare nunc ultrices vitae. Phasellus euismod porta odio a sollicitudin. Vivamus sed quam est. Vivamus vestibulum, nunc nec congue sollicitudin, diam mi tincidunt nisl, non ultrices mi enim et enim. Maecenas sit amet maximus quam. Cras a massa nec neque aliquam dignissim. Vivamus condimentum justo metus, eu finibus elit egestas vitae. Nullam non volutpat lorem, eget venenatis sem. Quisque vehicula, risus id convallis fermentum, odio eros accumsan arcu, quis mollis nulla nulla non elit. Nam ultricies ipsum tellus, a venenatis lorem tempor nec. Praesent sed erat varius, suscipit ante in, euismod elit. Maecenas in porta libero. Vivamus faucibus lectus quis leo volutpat tempor ac non augue. Aenean dolor massa, ultricies at leo id, viverra lobortis ligula. Cras sit amet pulvinar mi. Donec euismod sodales tortor vitae fermentum. Sed tincidunt fringilla tincidunt. Aenean dolor elit, varius vel faucibus a, posuere ut sem. Aliquam non aliquam lacus. Phasellus ullamcorper, ligula sed faucibus faucibus, enim leo lobortis lacus, a fringilla elit urna at metus. Mauris maximus pulvinar odio sed fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. '
-      }
-    },
-    {
+      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'ativo': true,
+      'adm': true,
+      'path_photo': 'jbc.png'
+    },{
 
-      'nomeMembro': 'Diana Camila de Souza',
-      'loginMembro': {
+      'nome': 'Diana Camila de Souza',
+      'login': {
         'usuario': 'dcs@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacaoMembro': [{'curso':'Graduanda em Arquitetura e Urbanismo'}],
-      'atividadeMembro': true,
-      'adminstrarMembro': true,
-      'imagemMembro': 'jbc.png',
-      'publicacoes':{
-          'tituloPublicacao': '',
-          'dataPublicacao' : '2012-12-05',
-          'tipoPublicacao' : 'artigo',
-          'corpoPublicacao': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eros neque, convallis laoreet tortor et, cursus pharetra turpis. Mauris sagittis sapien ante, quis imperdiet ante vulputate sed. Nulla porta magna nec mi convallis semper. Pellentesque pulvinar orci tempor imperdiet pharetra. Nunc urna dui, venenatis eu neque non, volutpat elementum arcu. Mauris placerat vitae neque eget malesuada. Morbi ornare cursus orci sit amet fermentum. Aliquam erat volutpat. Suspendisse eu enim molestie, imperdiet augue ut, feugiat tellus. Ut nec neque rutrum, auctor mi sit amet, pulvinar nisi. Vivamus ut pharetra sem. Maecenas at quam nec leo suscipit ullamcorper at sit amet tellus. Etiam aliquam interdum dui mollis fringilla. Proin pretium, tellus sed vehicula lacinia, dolor libero auctor turpis, a lacinia magna lacus ut elit. Pellentesque nec lobortis nulla, in vulputate quam. Nullam sodales fermentum cursus. Mauris semper et libero ut dictum. Sed at sagittis tellus, in ornare nulla. Nam varius vel erat eu consequat. Sed eget interdum nulla. Donec ac lacus augue. Phasellus dolor diam, gravida quis tempus sed, pulvinar in augue. Phasellus sapien metus, suscipit a arcu vitae, mattis mollis felis. Duis pellentesque efficitur varius. Morbi vitae ipsum et arcu mattis egestas nec quis diam. Nulla egestas rutrum diam, vitae aliquet eros. Ut id ex dui. Cras mattis lacus efficitur nulla pellentesque imperdiet. Nunc condimentum est nec rhoncus mattis. Nulla facilisi. Ut semper molestie elit ut sagittis. Nullam fermentum aliquet volutpat. Mauris in est convallis eros mattis dictum. Sed id quam fringilla, condimentum odio et, rhoncus nulla. Etiam viverra nisl eget pharetra posuere. Maecenas ornare sapien a sollicitudin viverra. Morbi blandit tristique arcu, id congue libero finibus a. Nullam bibendum vulputate sapien quis luctus. Sed mattis nunc libero, eu ornare nunc ultrices vitae. Phasellus euismod porta odio a sollicitudin. Vivamus sed quam est. Vivamus vestibulum, nunc nec congue sollicitudin, diam mi tincidunt nisl, non ultrices mi enim et enim. Maecenas sit amet maximus quam. Cras a massa nec neque aliquam dignissim. Vivamus condimentum justo metus, eu finibus elit egestas vitae. Nullam non volutpat lorem, eget venenatis sem. Quisque vehicula, risus id convallis fermentum, odio eros accumsan arcu, quis mollis nulla nulla non elit. Nam ultricies ipsum tellus, a venenatis lorem tempor nec. Praesent sed erat varius, suscipit ante in, euismod elit. Maecenas in porta libero. Vivamus faucibus lectus quis leo volutpat tempor ac non augue. Aenean dolor massa, ultricies at leo id, viverra lobortis ligula. Cras sit amet pulvinar mi. Donec euismod sodales tortor vitae fermentum. Sed tincidunt fringilla tincidunt. Aenean dolor elit, varius vel faucibus a, posuere ut sem. Aliquam non aliquam lacus. Phasellus ullamcorper, ligula sed faucibus faucibus, enim leo lobortis lacus, a fringilla elit urna at metus. Mauris maximus pulvinar odio sed fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. '
+      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'ativo': true,
+      'adm': true,
+      'path_photo': 'jbc.png',
+    },{
+      'nome': 'Francielle Araujo',
+      'login': {
+        'usuario': 'fa@gmail.com',
+        'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-    },
-    { 
-      'nomeMembro': 'Francielle Araujo',
-          'loginMembro': {
-            'usuario': 'fa@gmail.com',
-            'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
+      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'ativo': true,
+      'adm': true,
+      'path_photo': 'jbc.png'
+    },{
+      'nome': 'Lucas Gabriel Aires',
+      'login': {
+        'usuario': 'lga@gmail.com',
+        'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacaoMembro': [{'curso':'Graduanda em Arquitetura e Urbanismo'}],
-      'atividadeMembro': true,
-      'adminstrarMembro': true,
-      'imagemMembro': 'jbc.png',
-      'publicacoes':{
-          'tituloPublicacao': '',
-          'dataPublicacao' : '2012-12-05',
-          'tipoPublicacao' : 'noticia',
-          'corpoPublicacao': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eros neque, convallis laoreet tortor et, cursus pharetra turpis. Mauris sagittis sapien ante, quis imperdiet ante vulputate sed. Nulla porta magna nec mi convallis semper. Pellentesque pulvinar orci tempor imperdiet pharetra. Nunc urna dui, venenatis eu neque non, volutpat elementum arcu. Mauris placerat vitae neque eget malesuada. Morbi ornare cursus orci sit amet fermentum. Aliquam erat volutpat. Suspendisse eu enim molestie, imperdiet augue ut, feugiat tellus. Ut nec neque rutrum, auctor mi sit amet, pulvinar nisi. Vivamus ut pharetra sem. Maecenas at quam nec leo suscipit ullamcorper at sit amet tellus. Etiam aliquam interdum dui mollis fringilla. Proin pretium, tellus sed vehicula lacinia, dolor libero auctor turpis, a lacinia magna lacus ut elit. Pellentesque nec lobortis nulla, in vulputate quam. Nullam sodales fermentum cursus. Mauris semper et libero ut dictum. Sed at sagittis tellus, in ornare nulla. Nam varius vel erat eu consequat. Sed eget interdum nulla. Donec ac lacus augue. Phasellus dolor diam, gravida quis tempus sed, pulvinar in augue. Phasellus sapien metus, suscipit a arcu vitae, mattis mollis felis. Duis pellentesque efficitur varius. Morbi vitae ipsum et arcu mattis egestas nec quis diam. Nulla egestas rutrum diam, vitae aliquet eros. Ut id ex dui. Cras mattis lacus efficitur nulla pellentesque imperdiet. Nunc condimentum est nec rhoncus mattis. Nulla facilisi. Ut semper molestie elit ut sagittis. Nullam fermentum aliquet volutpat. Mauris in est convallis eros mattis dictum. Sed id quam fringilla, condimentum odio et, rhoncus nulla. Etiam viverra nisl eget pharetra posuere. Maecenas ornare sapien a sollicitudin viverra. Morbi blandit tristique arcu, id congue libero finibus a. Nullam bibendum vulputate sapien quis luctus. Sed mattis nunc libero, eu ornare nunc ultrices vitae. Phasellus euismod porta odio a sollicitudin. Vivamus sed quam est. Vivamus vestibulum, nunc nec congue sollicitudin, diam mi tincidunt nisl, non ultrices mi enim et enim. Maecenas sit amet maximus quam. Cras a massa nec neque aliquam dignissim. Vivamus condimentum justo metus, eu finibus elit egestas vitae. Nullam non volutpat lorem, eget venenatis sem. Quisque vehicula, risus id convallis fermentum, odio eros accumsan arcu, quis mollis nulla nulla non elit. Nam ultricies ipsum tellus, a venenatis lorem tempor nec. Praesent sed erat varius, suscipit ante in, euismod elit. Maecenas in porta libero. Vivamus faucibus lectus quis leo volutpat tempor ac non augue. Aenean dolor massa, ultricies at leo id, viverra lobortis ligula. Cras sit amet pulvinar mi. Donec euismod sodales tortor vitae fermentum. Sed tincidunt fringilla tincidunt. Aenean dolor elit, varius vel faucibus a, posuere ut sem. Aliquam non aliquam lacus. Phasellus ullamcorper, ligula sed faucibus faucibus, enim leo lobortis lacus, a fringilla elit urna at metus. Mauris maximus pulvinar odio sed fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. '
-      }
-    },
-    {
-      'nomeMembro': 'Lucas Gabriel Aires',
-          'loginMembro': {
-            'usuario': 'lga@gmail.com',
-            'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
-      },
-      'formacaoMembro': [{'curso':'Graduando em Arquitetura e Urbanismo'}],
-      'atividadeMembro': true,
-      'adminstrarMembro': true,
-      'imagemMembro': 'jbc.png',
-      'publicacoes':{
-          'tituloPublicacao': '',
-          'dataPublicacao' : '2012-12-05',
-          'tipoPublicacao' : 'noticia',
-          'corpoPublicacao': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eros neque, convallis laoreet tortor et, cursus pharetra turpis. Mauris sagittis sapien ante, quis imperdiet ante vulputate sed. Nulla porta magna nec mi convallis semper. Pellentesque pulvinar orci tempor imperdiet pharetra. Nunc urna dui, venenatis eu neque non, volutpat elementum arcu. Mauris placerat vitae neque eget malesuada. Morbi ornare cursus orci sit amet fermentum. Aliquam erat volutpat. Suspendisse eu enim molestie, imperdiet augue ut, feugiat tellus. Ut nec neque rutrum, auctor mi sit amet, pulvinar nisi. Vivamus ut pharetra sem. Maecenas at quam nec leo suscipit ullamcorper at sit amet tellus. Etiam aliquam interdum dui mollis fringilla. Proin pretium, tellus sed vehicula lacinia, dolor libero auctor turpis, a lacinia magna lacus ut elit. Pellentesque nec lobortis nulla, in vulputate quam. Nullam sodales fermentum cursus. Mauris semper et libero ut dictum. Sed at sagittis tellus, in ornare nulla. Nam varius vel erat eu consequat. Sed eget interdum nulla. Donec ac lacus augue. Phasellus dolor diam, gravida quis tempus sed, pulvinar in augue. Phasellus sapien metus, suscipit a arcu vitae, mattis mollis felis. Duis pellentesque efficitur varius. Morbi vitae ipsum et arcu mattis egestas nec quis diam. Nulla egestas rutrum diam, vitae aliquet eros. Ut id ex dui. Cras mattis lacus efficitur nulla pellentesque imperdiet. Nunc condimentum est nec rhoncus mattis. Nulla facilisi. Ut semper molestie elit ut sagittis. Nullam fermentum aliquet volutpat. Mauris in est convallis eros mattis dictum. Sed id quam fringilla, condimentum odio et, rhoncus nulla. Etiam viverra nisl eget pharetra posuere. Maecenas ornare sapien a sollicitudin viverra. Morbi blandit tristique arcu, id congue libero finibus a. Nullam bibendum vulputate sapien quis luctus. Sed mattis nunc libero, eu ornare nunc ultrices vitae. Phasellus euismod porta odio a sollicitudin. Vivamus sed quam est. Vivamus vestibulum, nunc nec congue sollicitudin, diam mi tincidunt nisl, non ultrices mi enim et enim. Maecenas sit amet maximus quam. Cras a massa nec neque aliquam dignissim. Vivamus condimentum justo metus, eu finibus elit egestas vitae. Nullam non volutpat lorem, eget venenatis sem. Quisque vehicula, risus id convallis fermentum, odio eros accumsan arcu, quis mollis nulla nulla non elit. Nam ultricies ipsum tellus, a venenatis lorem tempor nec. Praesent sed erat varius, suscipit ante in, euismod elit. Maecenas in porta libero. Vivamus faucibus lectus quis leo volutpat tempor ac non augue. Aenean dolor massa, ultricies at leo id, viverra lobortis ligula. Cras sit amet pulvinar mi. Donec euismod sodales tortor vitae fermentum. Sed tincidunt fringilla tincidunt. Aenean dolor elit, varius vel faucibus a, posuere ut sem. Aliquam non aliquam lacus. Phasellus ullamcorper, ligula sed faucibus faucibus, enim leo lobortis lacus, a fringilla elit urna at metus. Mauris maximus pulvinar odio sed fermentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. '
-      }
+      'formacao': [{ 'curso': 'Graduando em Arquitetura e Urbanismo' }],
+      'ativo': true,
+      'adm': true,
+      'path_photo': 'jbc.png'
     }
   ]
 );
+
+const publicacoes = "publicacoes"
+
+db.createCollection(publicacoes)
+
+db.publicacoes.insertMany([
+  {
+    'titulo': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+    'data': '27/02/2018',
+    'tipo': 'artigo',
+    'registro': 'Praesent cursus massa quis justo tincidunt, rutrum fermentum neque vulputate. Cras laoreet molestie dui. Sed a mi pulvinar, eleifend magna et, egestas ligula. Nulla vel diam sodales, vehicula urna id, vehicula ligula. Praesent id ullamcorper libero, quis sagittis purus. Nunc urna lacus, sagittis eu massa sit amet, egestas luctus magna. Pellentesque congue ut nisl non maximus. Suspendisse blandit dolor vel ipsum gravida, vel volutpat ex rutrum. Aliquam laoreet molestie nisi non posuere. Etiam ultricies suscipit libero, ut pretium ex tempus id. Morbi aliquam a eros id porta.',
+    'usuario': {
+      'nome': 'Lucas Gabriel Aires',
+      'login': {
+        'usuario': 'lga@gmail.com',
+        'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
+      },
+      'formacao': [{ 'curso': 'Graduando em Arquitetura e Urbanismo' }],
+      'ativo': true,
+      'adm': true,
+      'path_photo': 'jbc.png'
+    }
+  },{
+    'titulo': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+    'data': '21/12/2020',
+    'tipo': 'noticia',
+    'registro': 'Praesent cursus massa quis justo tincidunt, rutrum fermentum neque vulputate. Cras laoreet molestie dui. Sed a mi pulvinar, eleifend magna et, egestas ligula. Nulla vel diam sodales, vehicula urna id, vehicula ligula. Praesent id ullamcorper libero, quis sagittis purus. Nunc urna lacus, sagittis eu massa sit amet, egestas luctus magna. Pellentesque congue ut nisl non maximus. Suspendisse blandit dolor vel ipsum gravida, vel volutpat ex rutrum. Aliquam laoreet molestie nisi non posuere. Etiam ultricies suscipit libero, ut pretium ex tempus id. Morbi aliquam a eros id porta.',
+    'usuario': {
+      'nome': 'Francielle Araujo',
+      'login': {
+        'usuario': 'fa@gmail.com',
+        'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
+      },
+      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'ativo': true,
+      'adm': true,
+      'path_photo': 'jbc.png'
+    }
+  },{
+    'titulo': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+    'data': '15/01/2020',
+    'tipo': 'artigo',
+    'registro': 'Praesent cursus massa quis justo tincidunt, rutrum fermentum neque vulputate. Cras laoreet molestie dui. Sed a mi pulvinar, eleifend magna et, egestas ligula. Nulla vel diam sodales, vehicula urna id, vehicula ligula. Praesent id ullamcorper libero, quis sagittis purus. Nunc urna lacus, sagittis eu massa sit amet, egestas luctus magna. Pellentesque congue ut nisl non maximus. Suspendisse blandit dolor vel ipsum gravida, vel volutpat ex rutrum. Aliquam laoreet molestie nisi non posuere. Etiam ultricies suscipit libero, ut pretium ex tempus id. Morbi aliquam a eros id porta.',
+    'usuario': {
+      'nome': 'Diana Camila de Souza',
+      'login': {
+        'usuario': 'dcs@gmail.com',
+        'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
+      },
+      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'ativo': true,
+      'adm': true,
+      'path_photo': 'jbc.png',
+    }
+  },{
+    'titulo': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+    'data': '12/06/2018',
+    'tipo': 'projeto',
+    'registro': 'Praesent cursus massa quis justo tincidunt, rutrum fermentum neque vulputate. Cras laoreet molestie dui. Sed a mi pulvinar, eleifend magna et, egestas ligula. Nulla vel diam sodales, vehicula urna id, vehicula ligula. Praesent id ullamcorper libero, quis sagittis purus. Nunc urna lacus, sagittis eu massa sit amet, egestas luctus magna. Pellentesque congue ut nisl non maximus. Suspendisse blandit dolor vel ipsum gravida, vel volutpat ex rutrum. Aliquam laoreet molestie nisi non posuere. Etiam ultricies suscipit libero, ut pretium ex tempus id. Morbi aliquam a eros id porta.',
+    'usuario': {
+      'nome': 'Camila Antonia Coelho de Andrade',
+      'login': {
+        'usuario': 'cacda@gmail.com',
+        'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
+      },
+      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'ativo': true,
+      'adm': true,
+      'path_photo': 'jbc.png'
+    }
+  },{
+    'titulo': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+    'data': '27/01/2020',
+    'tipo': 'projeto',
+    'registro': 'Praesent cursus massa quis justo tincidunt, rutrum fermentum neque vulputate. Cras laoreet molestie dui. Sed a mi pulvinar, eleifend magna et, egestas ligula. Nulla vel diam sodales, vehicula urna id, vehicula ligula. Praesent id ullamcorper libero, quis sagittis purus. Nunc urna lacus, sagittis eu massa sit amet, egestas luctus magna. Pellentesque congue ut nisl non maximus. Suspendisse blandit dolor vel ipsum gravida, vel volutpat ex rutrum. Aliquam laoreet molestie nisi non posuere. Etiam ultricies suscipit libero, ut pretium ex tempus id. Morbi aliquam a eros id porta.',
+    'usuario': {
+      'nome': 'Camila Antonia Coelho de Andrade',
+      'login': {
+        'usuario': 'cacda@gmail.com',
+        'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
+      },
+      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'ativo': true,
+      'adm': true,
+      'path_photo': 'jbc.png'
+    }
+  }
+])
