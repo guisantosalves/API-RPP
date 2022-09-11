@@ -12,7 +12,7 @@ const publicacaoSchema = new mongoose.Schema(
             nome: { type: String, required: true},
             login: {
                 usuario: { type: String, required: true },
-                senha: { thpe: String, required: true },
+                senha: { type: String, required: true },
             },
             formacao: [
                 {
@@ -33,4 +33,4 @@ publicacaoSchema.plugin(mongoosePaginate);
 
 const publicacoes = mongoose.model('publicacoes', publicacaoSchema);
 
-export default publicacaoes;
+export default publicacoes;
