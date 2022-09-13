@@ -10,5 +10,4 @@ router
   .put("/publicacoes/:id", PublicacaoController.atualizarPublicacao)
   .delete("/publicacoes/:id", PublicacaoController.excluirPublicacao)
 
-/* A comment. */
 export default router;
