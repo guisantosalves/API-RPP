@@ -4,7 +4,7 @@ const {Schema} = mongoose
 
 const usuarioSchema = new mongoose.Schema(
   {
-    _id: {type: Schema.Types.ObjectId},
+    // _id: {type: Schema.Types.ObjectId},
     login: {
       usuario: {type: String},
       senha: {type: String} 

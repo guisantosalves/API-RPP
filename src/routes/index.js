@@ -1,6 +1,6 @@
 import express from "express";
-// import publicacoes from "./publicacoesRoutes.js";
 import usuarios from "./usuariosRoutes.js";
+import publicacoes from "./publicacoesRoutes.js";
 // import parceiros from "./parceirosRoutes.js";
 
 const routes = (app) => {
@@ -10,7 +10,8 @@ const routes = (app) => {
 
   app.use(
     express.json(),
-    usuarios
+    usuarios,
+    publicacoes
   )
 }
 
