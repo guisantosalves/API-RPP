@@ -5,10 +5,9 @@ const database = 'OBSERVATORIO_POLITICAS_PUBLICAS';
 const collection = 'usuarios';
 
 //db.dropDatabase(database);
+
 use(database);
-
 db.createCollection(collection);
-
 db.usuarios.insertMany(
   [
     {
@@ -17,12 +16,12 @@ db.usuarios.insertMany(
         'usuario': 'aline@ifro.edu.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{'curso': 'Graduação em Ciências Sociais'},{'curso': 'Doutorado em Ciências Sociais'}],
+      'formacao': [{ 'curso': 'Graduação em Ciências Sociais' }, { 'curso': 'Doutorado em Ciências Sociais' }],
       'curriculo': 'http://lattes.cnpq.br/7939834632437833',
       'ativo': true,
       'adm': true,
       'path_photo': 'arb.png',
-    },{
+    }, {
       'nome': 'Daniel Estêvão Ramos de Miranda',
       'login': {
         'usuario': 'email@server.com.br',
@@ -33,7 +32,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': false,
       'path_photo': 'derdm.png'
-    },{
+    }, {
       'nome': 'Daniely Batista Alves',
       'login': {
         'usuario': 'email@server.com.br',
@@ -44,7 +43,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': false,
       'path_photo': 'dba.png'
-    },{
+    }, {
       'nome': 'Eder Carlos Cardoso Diniz',
       'login': {
         'usuario': 'email@server.com.br',
@@ -55,7 +54,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': true,
       'path_photo': 'eccd.png'
-    },{
+    }, {
       'nome': 'Camila Antonia Coelho de Andrade',
       'login': {
         'usuario': 'cacda@gmail.com',
@@ -65,8 +64,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png'
-    },{
-
+    }, {
       'nome': 'Diana Camila de Souza',
       'login': {
         'usuario': 'dcs@gmail.com',
@@ -76,7 +74,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png',
-    },{
+    }, {
       'nome': 'Francielle Araujo',
       'login': {
         'usuario': 'fa@gmail.com',
@@ -86,7 +84,7 @@ db.usuarios.insertMany(
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png'
-    },{
+    }, {
       'nome': 'Lucas Gabriel Aires',
       'login': {
         'usuario': 'lga@gmail.com',
@@ -99,11 +97,8 @@ db.usuarios.insertMany(
     }
   ]
 );
-
 const publicacoes = "publicacoes"
-
 db.createCollection(publicacoes)
-
 db.publicacoes.insertMany([
   {
     'titulo': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
@@ -121,7 +116,7 @@ db.publicacoes.insertMany([
       'adm': true,
       'path_photo': 'jbc.png'
     }
-  },{
+  }, {
     'titulo': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
     'data': '21/12/2020',
     'tipo': 'noticia',
@@ -137,7 +132,7 @@ db.publicacoes.insertMany([
       'adm': true,
       'path_photo': 'jbc.png'
     }
-  },{
+  }, {
     'titulo': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
     'data': '15/01/2020',
     'tipo': 'artigo',
@@ -153,7 +148,7 @@ db.publicacoes.insertMany([
       'adm': true,
       'path_photo': 'jbc.png',
     }
-  },{
+  }, {
     'titulo': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
     'data': '12/06/2018',
     'tipo': 'projeto',
@@ -169,7 +164,7 @@ db.publicacoes.insertMany([
       'adm': true,
       'path_photo': 'jbc.png'
     }
-  },{
+  }, {
     'titulo': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
     'data': '27/01/2020',
     'tipo': 'projeto',
@@ -186,4 +181,25 @@ db.publicacoes.insertMany([
       'path_photo': 'jbc.png'
     }
   }
-])
+]);
+const parceiros = 'parceiros';
+db.createCollection(parceiros);
+
+db.parceiros.insertMany(
+  [
+    {
+      'nome': 'Observatório de Segurança Pública – UNESP-FFC/Marília',
+      'ativo': true,
+      'caminho_logo': 'arb.png',
+      'descricao': 'De forma a desenvolver pesquisas e contribuir para a reflexão sobre questões de segurança pública no espaço acadêmico, o Grupo de Estudos em Segurança Pública da Unesp, o GESP, tem realizado encontro na Faculdade de Filosofia e Ciências (FFC) da Unesp, câmpus de Marília. Coordenado pelo professor Luís Antônio Francisco de Souza, do Departamento de Sociologia e Antropologia (DSA), o grupo de estudos encontra-se quinzenalmente em reuniões abertas à comunidade acadêmica e interessados na temática. O grupo iniciou suas atividades em 2005, realizando discussões, exibições de filmes e publicações internas na Unesp de Marília. Desde então, guarda os registros de suas atividades, materiais de leituras realizadas, e conta ainda com uma biblioteca especializada no tema da Segurança Pública, sobretudo para os novos integrantes, a fim de que eles tomem conhecimento das discussões recentemente articuladas pelo grupo.',
+      'link': 'https://www.marilia.unesp.br/#!N,481',
+    },
+    {
+      'nome': 'Departamento de Ciências Sociais – UNIR ',
+      'ativo': true,
+      'caminho_logo': 'arb.png',
+      'descricao': 'O Departamento de Ciências Sociais da Universidade Federal de Rondônia (DCS/UNIR) foi constituído a partir do desmembramento do antigo Departamento de Sociologia e Filosofia, quando já estava em funcionamento o curso de graduação em Ciências Sociais e discutia-se a criação do curso de Filosofia, à época, vinculados ao Núcleo de Educação (hoje, Núcleo de Ciências Humanas - NCH).Nesse contexto, com o objetivo de aumentar a especialização dos docentes de acordo com a área de atuação social, foram constituídos dois departamentos (Ciências Sociais e Filosofia), concedendo o direito de opção aos docentes que eram integrantes daquela formação originária. Durante esse período, o Departamento de Sociologia e Filosofia não era dotado de um curso de graduação ou pós-graduação, mas, sim, ficava responsável pelo atendimento das demandas de disciplinas sociais e filosóficas para todos os outros cursos da UNIR.',
+      'link': 'Link: https://cienciassociais.unir.br/homepage',
+    }
+  ]
+);
