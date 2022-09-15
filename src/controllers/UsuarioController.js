@@ -2,62 +2,104 @@ import usuarios from "../models/Usuario.js";
 
 class UsuarioController {
 
-  static listarUsuarios = (req, res) => {
-    usuarios.find()
-      .populate()
-      .exec((err, usuarios) => {
-          res.status(200).json(usuarios)
-    })
+  //dando certo
+  static listarUsuarios = async (req, res) => {
+    try{
+
+      const gettingUser = await usuarios.find({}).exec();
+      res.status(200).send(gettingUser);
+    }catch(err){
+
+      res.status(400).send(err);
+
+    }
+    
   }
 
-  static listarUsuarioPorId = (req, res) => {
+  // dando certo
+  static listarUsuarioPorId = async (req, res) => {
     const id = req.params.id;
-    usuarios.findById(id)
-    .populate()
-      .exec((err, usuarios) => {
-      if (err) {
-        res.status(404).send({ message: `${err.message} - Usuário não encontrado.` })
-      } else {
-        res.status(200).send(usuarios);
-      }
-    })
+    try{
+      
+      const gettingUserByID = await usuarios.findById(id).exec();
+      res.status(200).send(gettingUserByID)
+    }catch(err){
+
+      res.status(400).send(err)
+
+    }
+    
   }
 
-  static cadastrarUsuario = (req, res) => {
+  // dando certo
+  static cadastrarUsuario = async (req, res) => {
     let usuario = new usuarios(req.body);
-    usuario.save((err) => {
-      if (err) {
-        res.status(404).send({ message: `${err.message} - Sem acesso ao banco.` })
-      } if (err) {
-        res.status(409).send({ message: `${err.message} - Usuário já existente.` })
+    try{
+      await usuario.save((err, data) => {
+
+        res.status(201).send(data)
         
-      } else {
-        res.status(201).send(usuario.toJSON())
-      }
-    })
+      })
+    }catch(err){
+      res.status(400).send(err)
+    }
+
   }
 
-  static atualizarUsuario = (req, res) => {
+  // dando certo
+  static atualizarUsuario = async (req, res) => {
+    res.setHeader('Content-Type', 'text/plain');
     const id = req.params.id;
-    usuarios.findByIdAndUpdate(id, { $set: req.body }, (err) => {
-      if (!err) {
-        res.status(200).send({ message: 'Sucesso' })
-      } else {
-        res.status(404).send({ message: err.message })
-      }
-    })
+      usuarios.findByIdAndUpdate({_id:id}, { 
+        login: req.body.login,
+        senha: req.body.senha,
+        nomeCompleto: req.body.nomeCompleto,
+        formacao: req.body.formacao,
+        email: req.body.email,
+        ativo: req.body.ativo,
+        adm: req.body.adm,
+        path_foto: req.body.path_foto,
+      }, { new: true }).then((data, err) => {
+        if(data){
+          return res.status(200).send(data);
+        }else{
+          res.status(400);
+          return res.send(err);
+        }
+
+      })
+
   }
 
+  // dando certo
   static excluirUsuario = (req, res) => {
     const id = req.params.id;
-    usuarios.findByIdAndDelete(id, (err) => {
+    usuarios.findByIdAndDelete(id, (err, docs) => {
       if (!err) {
-        res.status(200).send({ message: 'Sucesso' })
+        res.status(200).send({message: "Usuário removido com sucesso"})
       } else {
         res.status(404).send({ message: err.message })
       }
     })
   }
+
+  //dando certo
+  static listarUsuarioPorNome = (req, res) => {
+    const nomefromQuery = req.query.nome;
+    console.log(nomefromQuery)
+    try{
+
+      usuarios.find({nomeCompleto: nomefromQuery}).then(result=>{
+        res.status(200)
+        res.send(result)
+      });
+      
+
+    }catch(err){
+      res.status(400).send(err)
+    }
+  }
+
 }
 
 export default UsuarioController;
