@@ -42,7 +42,7 @@ static listarPublicacoes = async (req, res) => {
     let publicacao = new publicacoes(req.body);
     await publicacao.save((err) => {
       if (err) {
-        res.status(500).send({ message: `${err.message} - falha ao cadastrar publicação.` })
+        res.status(500).send({ message: `${err.message} - Falha ao cadastrar publicação.` })
       } else {
         res.status(201).send(publicacao.toJSON())
       }
