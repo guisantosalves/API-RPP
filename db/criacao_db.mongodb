@@ -4,10 +4,11 @@
 const database = 'OBSERVATORIO_POLITICAS_PUBLICAS';
 const collection = 'usuarios';
 
-//db.dropDatabase(database);
+db.dropDatabase(database);
 
 use(database);
 db.createCollection(collection);
+
 db.usuarios.insertMany(
   [
     {
@@ -16,7 +17,15 @@ db.usuarios.insertMany(
         'email': 'aline@ifro.edu.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduação em Ciências Sociais' }, { 'curso': 'Doutorado em Ciências Sociais' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduado',
+          'curso': 'Ciências Sociais' 
+        }, {
+          'titulo': 'Doutorado',
+          'curso': 'Ciências Sociais' 
+        }
+      ],
       'curriculo': 'http://lattes.cnpq.br/7939834632437833',
       'ativo': true,
       'adm': true,
@@ -27,7 +36,15 @@ db.usuarios.insertMany(
         'email': 'email@server.com.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduação em Ciências Sociais' }, { 'curso': 'Doutorado em Ciência Política' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduado',
+          'curso': 'Ciências Sociais' 
+        }, {
+          'titulo': 'Doutorado',
+          'curso': 'Ciências Sociais' 
+        }
+      ],
       'curriculo': 'http://lattes.cnpq.br/6336876650420963',
       'ativo': true,
       'adm': false,
@@ -38,7 +55,15 @@ db.usuarios.insertMany(
         'email': 'email@server.com.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduação em Ciências Biológicas' }, { 'curso': 'Mestrado em Desenvolvimento Regional e Meio Ambiente' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduado',
+          'curso': 'Ciências Biológicas' 
+        }, { 
+          'titulo': 'Mestrado',
+          'curso': 'Desenvolvimento Regional e Meio Ambiente'
+        }
+      ],
       'curriculo': 'http://lattes.cnpq.br/6992500263269748',
       'ativo': true,
       'adm': false,
@@ -49,7 +74,16 @@ db.usuarios.insertMany(
         'email': 'email@server.com.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduação em História' }, { 'curso': 'Mestrado em Educação' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduação',
+          'curso': 'História' 
+        },
+        { 
+          'titulo': 'Mestrado',
+          'curso': 'Educação' 
+        }
+      ],
       'curriculo': 'http://lattes.cnpq.br/2697971948700205',
       'ativo': true,
       'adm': true,
@@ -60,7 +94,12 @@ db.usuarios.insertMany(
         'email': 'cacda@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduação',
+          'curso': 'Arquitetura e Urbanismo' 
+        }
+      ],
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png'
@@ -70,7 +109,12 @@ db.usuarios.insertMany(
         'email': 'dcs@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduação',
+          'curso': 'Arquitetura e Urbanismo' 
+        }
+      ],
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png',
@@ -80,7 +124,12 @@ db.usuarios.insertMany(
         'email': 'fa@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduação',
+          'curso': 'Arquitetura e Urbanismo' 
+        }
+      ],
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png'
@@ -90,7 +139,12 @@ db.usuarios.insertMany(
         'email': 'lga@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduando em Arquitetura e Urbanismo' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduação',
+          'curso': 'Arquitetura e Urbanismo' 
+        }
+      ],
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png'
@@ -99,6 +153,7 @@ db.usuarios.insertMany(
 );
 const publicacoes = "publicacoes"
 db.createCollection(publicacoes)
+
 db.publicacoes.insertMany([
   {
     'titulo': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
@@ -111,7 +166,12 @@ db.publicacoes.insertMany([
         'usuario': 'lga@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduando em Arquitetura e Urbanismo' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduação',
+          'curso': 'Arquitetura e Urbanismo' 
+        }
+      ],
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png'
@@ -127,7 +187,12 @@ db.publicacoes.insertMany([
         'usuario': 'fa@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduação',
+          'curso': 'Arquitetura e Urbanismo' 
+        }
+      ],
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png'
@@ -143,7 +208,12 @@ db.publicacoes.insertMany([
         'usuario': 'dcs@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduação',
+          'curso': 'Arquitetura e Urbanismo' 
+        }
+      ],
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png',
@@ -159,7 +229,12 @@ db.publicacoes.insertMany([
         'usuario': 'cacda@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduação',
+          'curso': 'Arquitetura e Urbanismo' 
+        }
+      ],
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png'
@@ -175,7 +250,12 @@ db.publicacoes.insertMany([
         'usuario': 'cacda@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
-      'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
+      'formacao': [
+        { 
+          'titulo': 'Graduação',
+          'curso': 'Arquitetura e Urbanismo' 
+        }
+      ],
       'ativo': true,
       'adm': true,
       'path_photo': 'jbc.png'
