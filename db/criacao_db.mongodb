@@ -13,7 +13,7 @@ db.usuarios.insertMany(
     {
       'nome': 'Aline Ramos Barbosa',
       'login': {
-        'usuario': 'aline@ifro.edu.br',
+        'email': 'aline@ifro.edu.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
       'formacao': [{ 'curso': 'Graduação em Ciências Sociais' }, { 'curso': 'Doutorado em Ciências Sociais' }],
@@ -24,7 +24,7 @@ db.usuarios.insertMany(
     }, {
       'nome': 'Daniel Estêvão Ramos de Miranda',
       'login': {
-        'usuario': 'email@server.com.br',
+        'email': 'email@server.com.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
       'formacao': [{ 'curso': 'Graduação em Ciências Sociais' }, { 'curso': 'Doutorado em Ciência Política' }],
@@ -35,7 +35,7 @@ db.usuarios.insertMany(
     }, {
       'nome': 'Daniely Batista Alves',
       'login': {
-        'usuario': 'email@server.com.br',
+        'email': 'email@server.com.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
       'formacao': [{ 'curso': 'Graduação em Ciências Biológicas' }, { 'curso': 'Mestrado em Desenvolvimento Regional e Meio Ambiente' }],
@@ -46,7 +46,7 @@ db.usuarios.insertMany(
     }, {
       'nome': 'Eder Carlos Cardoso Diniz',
       'login': {
-        'usuario': 'email@server.com.br',
+        'email': 'email@server.com.br',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
       'formacao': [{ 'curso': 'Graduação em História' }, { 'curso': 'Mestrado em Educação' }],
@@ -57,7 +57,7 @@ db.usuarios.insertMany(
     }, {
       'nome': 'Camila Antonia Coelho de Andrade',
       'login': {
-        'usuario': 'cacda@gmail.com',
+        'email': 'cacda@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
       'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
@@ -67,7 +67,7 @@ db.usuarios.insertMany(
     }, {
       'nome': 'Diana Camila de Souza',
       'login': {
-        'usuario': 'dcs@gmail.com',
+        'email': 'dcs@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
       'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
@@ -77,7 +77,7 @@ db.usuarios.insertMany(
     }, {
       'nome': 'Francielle Araujo',
       'login': {
-        'usuario': 'fa@gmail.com',
+        'email': 'fa@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
       'formacao': [{ 'curso': 'Graduanda em Arquitetura e Urbanismo' }],
@@ -87,7 +87,7 @@ db.usuarios.insertMany(
     }, {
       'nome': 'Lucas Gabriel Aires',
       'login': {
-        'usuario': 'lga@gmail.com',
+        'email': 'lga@gmail.com',
         'senha': '8CB2237D0679CA88DB6464EAC60DA96345513964'
       },
       'formacao': [{ 'curso': 'Graduando em Arquitetura e Urbanismo' }],
