@@ -58,11 +58,16 @@ const swaggerOptions = {
                         id: {
                             type: 'integer'
                         },
-                        nome_usuario: {
-                            type: 'string'
-                        },
-                        senha: {
-                            type: 'string'
+                        login: {
+                            type: 'object',
+                            properties: {
+                                email:{
+                                    type: 'string'
+                                },
+                                senha:{
+                                    type: 'string'
+                                }
+                            }
                         },
                         formacao: {
                             type: 'string'
@@ -70,7 +75,7 @@ const swaggerOptions = {
                         nome: {
                             type: 'string'
                         },
-                        inativo: {
+                        ativo: {
                             type: 'boolean'
                         },
                         adm: {
@@ -95,23 +100,18 @@ const swaggerOptions = {
                             type: 'integer'
                         },
                         data: {
-
                             type: 'string'
                         },
                         titulo: {
-
                             type: 'string'
                         },
                         registro: {
-
                             type: 'string'
                         },
                         tipo: {
-
                             type: 'string'
                         },
                         usuarioId: {
-
                             type: 'integer'
                         },
                     }
