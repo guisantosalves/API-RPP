@@ -122,7 +122,7 @@ const swaggerOptions = {
                         $ref: '#/components/schemas/publicacao'
                     }
                 },
-                parceiros: {
+                parceiro: {
                     type: 'object',
                     properties: {
                         id: {
@@ -142,8 +142,13 @@ const swaggerOptions = {
                             type: 'string'
                         }
                     }
+                },
+                parceiros: {
+                    type: 'array',
+                    items: {
+                        $ref: '#/components/schemas/parceiro'
+                    }
                 }
-
             }
         }
     },
