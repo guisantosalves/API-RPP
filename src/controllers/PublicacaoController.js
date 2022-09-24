@@ -9,7 +9,7 @@ static listarPublicacoes = async (req, res) => {
       const options = { // limitar a quantidade máxima por requisição
         titulo: (titulo),
         page: parseInt(page) || 1,
-        limit: parseInt(perPage)<30?parseInt(perPage):30,
+        limit: parseInt(perPage)<30?parseInt(perPage):30 || 10,
       };
 
       if (!titulo) {
