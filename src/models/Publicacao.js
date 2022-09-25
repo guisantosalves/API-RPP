@@ -11,13 +11,16 @@ const publicacaoSchema = new mongoose.Schema(
         usuario: {
             nome: { type: String, required: true},
             login: {
-                usuario: { type: String, required: true },
+                email: { type: String, required: true },
                 senha: { type: String, required: true },
             },
             formacao: [
                 {
                     titulo: { type: String, required: true },
                     curso: { type: String, required: true },
+                    _id: {
+                        required: false
+                    }
                 },
             ],
             ativo: { type: Boolean, required: true },

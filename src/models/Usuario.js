@@ -14,12 +14,24 @@ const usuarioSchema = new mongoose.Schema(
                 },
             }
         },
-        nomeCompleto: {
+        nome: {
             type: String,
             required: true
         },
         formacao: {
-            type: String,
+            type: {
+                titulo: {
+                    type: String,
+                    required: true
+                },
+                curso: {
+                    type: String,
+                    required: true
+                },
+                _id: {
+                    required: false
+                }
+            },
             required: true
         },
         ativo: {
@@ -30,7 +42,7 @@ const usuarioSchema = new mongoose.Schema(
             type: Boolean,
             required: true
         },
-        path_foto: {
+        path_photo: {
             type: String
         }
     }
