@@ -4,50 +4,53 @@ class UsuarioController {
 
   //dando certo
   static listarUsuarios = async (req, res) => {
-    try{
-
-      const gettingUser = await usuarios.find({}).exec();
-      res.status(200).send(gettingUser);
-    }catch(err){
-
-      res.status(400).send(err);
-
+    try {
+      const nome = req.query.nome;
+      const { page, perPage } = req.query;
+      const options = { // limitar a quantidade máxima por requisição
+        nome: (nome),
+        page: parseInt(page) || 1,
+        limit: parseInt(perPage) > 10 ? 10 : parseInt(perPage) || 10
+      };
+      if (!nome) {
+        const usuario = await usuarios.paginate({}, options);
+        return res.json(usuario);
+      } else {
+        const usuario = await usuarios.paginate({  nome: new RegExp(nome, 'i')  }, options);
+        return res.json(usuario);
+      }
+    } catch (err) {
+      console.error(err);
+      return res.status(500).send(err);
     }
-    
   }
 
-  // dando certo
   static listarUsuarioPorId = async (req, res) => {
     const id = req.params.id;
-    try{
-      
-      const gettingUserByID = await usuarios.findById(id).exec();
-      res.status(200).send(gettingUserByID)
-    }catch(err){
-
-      res.status(400).send(err)
-
-    }
-    
-  }
-
-  // dando certo
-  static cadastrarUsuario = async (req, res) => {
-    let usuario = new usuarios(req.body);
-    try{
-      await usuario.save((err, data) => {
-
-        res.status(201).send(data)
-        
+    await usuarios.findById(id)
+      .exec((err, usuarios) => {
+        if (err) {
+          res.status(400).send({ message: `${err.message} - Usuário não localizado.` })
+        } else {
+          res.status(200).send(usuarios);
+        }
       })
-    }catch(err){
-      res.status(400).send(err)
-    }
-
   }
 
-  // dando certo
-  static atualizarUsuario = async (req, res) => {
+
+  static cadastrarUsuario = async (req, res) => {
+    let usuarios = new usuarios(req.body);
+    usuarios.save((err) => {
+      if (err) {
+        res.status(500).send({ message: `${err.message} - Falha ao cadastrar usuário.` })
+      } else {
+        res.status(201).send(usuarios.toJSON())
+      }
+    })
+  }
+
+  
+  /* static atualizarUsuario = async (req, res) => {
     res.setHeader('Content-Type', 'text/plain');
     const id = req.params.id;
       usuarios.findByIdAndUpdate({_id:id}, { 
@@ -69,22 +72,33 @@ class UsuarioController {
 
       })
 
-  }
+  } */
 
-  // dando certo
-  static excluirUsuario = (req, res) => {
+  static atualizarUsuario = async (req, res) => {
     const id = req.params.id;
-    usuarios.findByIdAndDelete(id, (err, docs) => {
+    usuarios.findByIdAndUpdate(id, { $set: req.body }, (err) => {
       if (!err) {
-        res.status(200).send({message: "Usuário removido com sucesso"})
+        res.status(200).send({ message: 'Usuário atualizado com sucesso' })
       } else {
-        res.status(404).send({ message: err.message })
+        res.status(500).send({ message: err.message })
       }
     })
   }
 
-  //dando certo
-  static listarUsuarioPorNome = (req, res) => {
+
+  static excluirUsuario = async (req, res) => {
+    const id = req.params.id;
+    usuarios.findByIdAndDelete(id, (err) => {
+      if (!err) {
+        res.status(200).send({ message: 'Usuário removido com sucesso' })
+      } else {
+        res.status(500).send({ message: err.message })
+      }
+    })
+  }
+
+  
+  /* static listarUsuarioPorNome = (req, res) => {
     const nomefromQuery = req.query.nome;
     console.log(nomefromQuery)
     try{
@@ -98,6 +112,14 @@ class UsuarioController {
     }catch(err){
       res.status(400).send(err)
     }
+  } */
+  
+  static listarUsuarioPorNome = async (req, res) => {
+    const nome = req.query.nome
+    usuarios.find({'nome': nome}, {}, (err, usuarios) => {
+      res.status(200).send(usuarios);
+    });
+
   }
 
 }
