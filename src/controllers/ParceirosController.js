@@ -6,28 +6,11 @@ class ParceirosController {
   static listarParceiros = async (req, res) => {
     try{
 
-      const nome = req.query.nome;
-      const{page, perPage} = req.query;
-      const options = {
-        nome: (nome),
-        page: parseInt(page) || 1,
-        limit: parseInt(perPage) > 5 ? 5 : parseInt(perPage) || 5
-      };
-
-      if (!nome){
-        const parceiro = await parceiros.paginate({}, options);
-        return res.json(parceiro);
-      } else{
-        const parceiro = await parceiros.paginate({ nome: new RegExp(nome, 'i') }, options);
-        return res.json(parceiro);
-      }
-
-      /*const gettingParceiro = await parceiros.find({}).exec();
-      res.status(200).send(gettingParceiro); */
-
+      const gettingParceiro = await parceiros.find({}).exec();
+      res.status(200).send(gettingParceiro);
     }catch(err){
-      console.error(err);
-      return res.status(400).send(err);
+
+      res.status(400).send(err);
 
     }
     
