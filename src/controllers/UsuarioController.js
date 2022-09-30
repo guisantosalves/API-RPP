@@ -6,17 +6,31 @@ class UsuarioController {
   static listarUsuarios = async (req, res) => {
     try {
       const nome = req.query.nome;
+      const email = req.query.email;
+      const adm = req.query.adm;
+      const ativo = req.query.ativo || true
       const { page, perPage } = req.query;
       const options = { // limitar a quantidade máxima por requisição
         nome: (nome),
         page: parseInt(page) || 1,
         limit: parseInt(perPage) > 10 ? 10 : parseInt(perPage) || 10
       };
-      if (!nome) {
+      if (!email && !nome && !adm && !ativo) {
         const usuario = await usuarios.paginate({}, options);
         return res.json(usuario);
+      } else if (!email && !nome && !adm) {
+        const usuario = await usuarios.paginate({ ativo: ativo }, options)
+        return res.json(usuario)
+      }
+      else if (!email && !nome) {
+        const usuario = await usuarios.paginate({ adm: adm }, options)
+        return res.json(usuario)
+
+      } else if (!nome) {
+        const usuario = await usuarios.paginate({ login: { email: new RegExp(email, "i") } }, options)
+        return res.json(usuario)
       } else {
-        const usuario = await usuarios.paginate({  nome: new RegExp(nome, 'i')  }, options);
+        const usuario = await usuarios.paginate({ nome: new RegExp(nome, 'i') }, options);
         return res.json(usuario);
       }
     } catch (err) {
@@ -49,7 +63,7 @@ class UsuarioController {
     })
   }
 
-  
+
   /* static atualizarUsuario = async (req, res) => {
     res.setHeader('Content-Type', 'text/plain');
     const id = req.params.id;
@@ -97,7 +111,7 @@ class UsuarioController {
     })
   }
 
-  
+
   /* static listarUsuarioPorNome = (req, res) => {
     const nomefromQuery = req.query.nome;
     console.log(nomefromQuery)
@@ -113,10 +127,10 @@ class UsuarioController {
       res.status(400).send(err)
     }
   } */
-  
+
   static listarUsuarioPorNome = async (req, res) => {
     const nome = req.query.nome
-    usuarios.find({'nome': nome}, {}, (err, usuarios) => {
+    usuarios.find({ 'nome': nome }, {}, (err, usuarios) => {
       res.status(200).send(usuarios);
     });
 
