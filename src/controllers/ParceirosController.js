@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import parceiros from "../models/Parceiros.js";
+import parceiros from "../models/Parceiro.js";
 
 class ParceirosController {
   //dando certo

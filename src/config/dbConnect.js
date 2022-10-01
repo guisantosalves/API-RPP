@@ -1,6 +1,16 @@
 import mongoose from "mongoose"
+import * as dotenv from 'dotenv'
 
-mongoose.connect("mongodb+srv://admin:admin@cluster0.o9mrc.mongodb.net/OBSERVATORIO_POLITICAS_PUBLICAS");
+dotenv.config();
+
+await mongoose.connect(process.env.DB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+}).then(response => {
+  console.log("MongoDB Connection Succeeded.")
+}).catch(error => {
+  console.log("Error in db collection: " + error)
+})
 
 let db = mongoose.connection;
 

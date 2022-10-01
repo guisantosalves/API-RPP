@@ -422,8 +422,8 @@ paths:
           content:
             application/json:
               example: Conflict
-             
-  /parceiros/{id}:
+
+/parceiros/{id}:
     parameters:
       - name: id
         in: path

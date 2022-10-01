@@ -4,18 +4,19 @@ class PublicacaoController {
 static listarPublicacoes = async (req, res) => {
     try {
       const titulo = req.query.titulo;
-      const { page, perPage } = req.query;
+      const page = req.query;
+      const perPage = req.query;
       const options = { // limitar a quantidade máxima por requisição
         titulo: (titulo),
         page: parseInt(page) || 1,
-        limit: parseInt(perPage) || 10,
+        limit: parseInt(perPage)<30?parseInt(perPage):30 || 10,
       };
 
       if (!titulo) {
         const publicacao = await publicacoes.paginate({}, options);
         return res.json(publicacao);
       } else {
-        const publicacao = await publicacoes.paginate({ titulo: titulo }, options);
+        const publicacao = await publicacoes.paginate({}, options);
         return res.json(publicacao);
       }
       
@@ -28,7 +29,6 @@ static listarPublicacoes = async (req, res) => {
   static listarPublicacaoPorId = async (req, res) => {
     const id = req.params.id;
     await publicacoes.findById(id)
-    //   .populate('publicacao', ['_id', 'titulo', 'data', 'tipo', 'registro', 'usuario'])
       .exec((err, publicacoes) => {
         if (err) {
           res.status(400).send({ message: `${err.message} - Id da publicação não localizado.` })
