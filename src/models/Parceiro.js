@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from 'mongoose-paginate';
 
 const parceirosSchema = new mongoose.Schema({
     nome: {type: String, required: true, trim: true},
@@ -6,6 +7,8 @@ const parceirosSchema = new mongoose.Schema({
     caminho_logo: {type: String, required: false},
     descricao: {type: String, required: false}
 })
+
+parceirosSchema.plugin(mongoosePaginate)
 
 const parceiros = mongoose.model("parceiros", parceirosSchema);
 
