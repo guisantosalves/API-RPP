@@ -70,7 +70,15 @@ const swaggerOptions = {
                             }
                         },
                         formacao: {
-                            type: 'string'
+                            type: 'object',
+                            properties: {
+                                titulo:{
+                                    type: 'string'
+                                },
+                                curso:{
+                                    type: 'string'
+                                }
+                            }
                         },
                         nome: {
                             type: 'string'
@@ -111,8 +119,8 @@ const swaggerOptions = {
                         tipo: {
                             type: 'string'
                         },
-                        usuarioId: {
-                            type: 'integer'
+                        usuario: {
+                            $ref: '#/components/schemas/usuario'
                         },
                     }
                 },
