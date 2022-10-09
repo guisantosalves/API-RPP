@@ -1,3 +1,14 @@
+/**
+ * Retorna uma formatação dos dados informados, adicionando as informações da paginação.
+ * - Data deve ser um array de objetos, seu conteúdo é irrelevante.
+ * - Options deve possuir o padrão {
+ *   page: inteiro,
+ *   limit: inteiro
+ * }
+ * 
+ *    - Limit é o máximo que pode aparecer por página.
+ *    - Page é a página que começa a contagem.
+ */
 function paginate(data, options){
   let paginated = data
   const total = paginated.length
