@@ -1,24 +1,12 @@
 import publicacoes from "../models/Publicacao.js";
+import FiltrosPublicacao from "./filtros/FiltrosPublicacao.js";
 
 class PublicacaoController {
 static listarPublicacoes = async (req, res) => {
     try {
-      const titulo = req.query.titulo;
-      const page = req.query;
-      const perPage = req.query;
-      const options = { // limitar a quantidade máxima por requisição
-        titulo: (titulo),
-        page: parseInt(page) || 1,
-        limit: parseInt(perPage)<30?parseInt(perPage):30 || 10,
-      };
+      const publicacoes = await FiltrosPublicacao(req)
 
-      if (!titulo) {
-        const publicacao = await publicacoes.paginate({}, options);
-        return res.json(publicacao);
-      } else {
-        const publicacao = await publicacoes.paginate({}, options);
-        return res.json(publicacao);
-      }
+      return res.status(200).send(publicacoes)
       
     } catch (err) {
       console.error(err);
