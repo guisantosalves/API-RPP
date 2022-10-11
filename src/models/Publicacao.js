@@ -8,8 +8,9 @@ const publicacaoSchema = new mongoose.Schema(
         data: { type: Date, required: true },
         tipo: { type: String, required: true },
         registro: { type: String, required: true },
+        tags: { type: [String] },
         usuario: {
-            nome: { type: String, required: true},
+            nome: { type: String, required: true },
             login: {
                 email: { type: String, required: true },
                 senha: { type: String, required: true },
@@ -25,9 +26,9 @@ const publicacaoSchema = new mongoose.Schema(
             ],
             ativo: { type: Boolean, required: true },
             adm: { type: Boolean, required: true },
-            path_photo: { type: String, required: true},
+            path_photo: { type: String, required: true },
         },
-        
+
     },
     { versionKey: false }
 );

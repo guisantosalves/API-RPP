@@ -12,6 +12,30 @@ db.once("open", () => {
 await Usuario.deleteMany()
 await Publicacao.deleteMany()
 
+const generateTags = () => {
+    let tags = [];
+
+    for (let i = 0; i <= 10; i++)
+        tags.push(faker.lorem.word())
+
+    return (tags)
+}
+
+const pick = (quantity, pickFrom = []) => {
+    let result = []
+
+    while (quantity > 0){
+        const candidate = pickFrom[Math.floor(Math.random() * pickFrom.length)]
+
+        if (!result.find(res => res === candidate)){
+            result.push(candidate)
+            quantity--;
+        }
+    }
+
+    return result
+}
+
 for (let i = 1; i <= 10; i++) {
     const seedUsuarios = [
         {
@@ -36,7 +60,8 @@ for (let i = 1; i <= 10; i++) {
             data: faker.date.past(),
             tipo: Math.random <= 0.3 ? "Notícia" : Math.random() <= 0.6 ? "Projeto" : "Artigo",
             registro: faker.lorem.paragraphs(2),
-            usuario: seedUsuarios[0]
+            usuario: seedUsuarios[0],
+            tags: pick(4, generateTags())
         }
     ]
 
