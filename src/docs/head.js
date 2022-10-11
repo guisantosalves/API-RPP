@@ -116,6 +116,13 @@ const swaggerOptions = {
                         registro: {
                             type: 'string'
                         },
+                        tags: {
+                            type: 'array',
+
+                            items:{
+                                type: 'string'
+                            }
+                        },
                         tipo: {
                             type: 'string'
                         },
