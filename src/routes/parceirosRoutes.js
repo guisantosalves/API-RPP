@@ -128,11 +128,11 @@ const router = express.Router();
 
 // tudo funcionando :)
 router
-    .get("/parceirosbyName", ParceirosController.listarParceiroPorNome)
     .get("/parceiros", ParceirosController.listarParceiros)
     .get("/parceiros/:id", ParceirosController.listarParceiroPorId)
     .post("/parceiros", ParceirosController.cadastrarParceiro)
     .put("/parceiros/:id", ParceirosController.atualizarParceiro)
     .delete("/parceiros/:id", ParceirosController.excluirParceiro)
+    .patch("/parceiros/:id", ParceirosController.atualizarParceiro)
 
 export default router;

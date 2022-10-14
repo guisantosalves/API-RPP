@@ -121,11 +121,11 @@ const router = express.Router();
 
 router
   .get("/usuarios", UsuarioController.listarUsuarios)
-  .get("/usuarios/:id", UsuarioController.listarUsuarioPorId)
   .get("/usuarios/busca", UsuarioController.listarUsuarioPorNome)
   .post("/usuarios", UsuarioController.cadastrarUsuario)
   .put("/usuarios/:id", UsuarioController.atualizarUsuario)
   .delete("/usuarios/:id", UsuarioController.excluirUsuario)
+  .patch("/usuarios/:id", UsuarioController.atualizarUsuario)
 
 /* A comment. */
 export default router;

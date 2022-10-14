@@ -135,5 +135,6 @@ router
   .post("/publicacoes", PublicacaoController.cadastrarPublicacao)
   .put("/publicacoes/:id", PublicacaoController.atualizarPublicacao)
   .delete("/publicacoes/:id", PublicacaoController.excluirPublicacao)
+  .patch("/publicacoes/:id", PublicacaoController.atualizarPublicacao)
 
 export default router;
