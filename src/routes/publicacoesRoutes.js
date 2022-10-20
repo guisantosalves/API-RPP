@@ -86,7 +86,7 @@ const router = express.Router();
 *       content:
 *         application/json:
 *           schema:
-*             $ref: '#/components/schemas/publicacao_put'
+*             $ref: '#/components/schemas/publicacao'
 * 
 *     responses:
 *       '200':
