@@ -25,9 +25,9 @@ async function FiltrosPublicacao(req) {
     }
 
     if(usuario){
+      const regexUsuario = new RegExp(usuario, 'i')
+      data = data.filter((pub) => pub.usuario.nome.match(regexUsuario))
     }
-
-    console.log(data)
 
     if (dataInicial && dataFinal){
       data = data.filter((pub) => {
