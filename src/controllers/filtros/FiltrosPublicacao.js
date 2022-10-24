@@ -3,7 +3,9 @@ import publicacoes from "../../models/Publicacao.js"
 
 async function FiltrosPublicacao(req) {
     const titulo = req.query.titulo
+    const usuario = req.query.usuario
     const { page, perPage, limit } = req.query
+    const { dataInicial, dataFinal } = req.query
     const tag = req.query.tag
 
     const options = {
@@ -20,6 +22,22 @@ async function FiltrosPublicacao(req) {
 
     if(tag){
       data = data.filter((pub) => pub.tags.find(t => t === tag))
+    }
+
+    if(usuario){
+    }
+
+    console.log(data)
+
+    if (dataInicial && dataFinal){
+      data = data.filter((pub) => {
+        const date = pub.data.getTime()
+
+        const min = new Date(dataInicial).getTime()
+        const max = new Date(dataFinal).getTime()
+        
+        return(min <= date && date <= max)
+      })
     }
 
     return paginate(data, options)
