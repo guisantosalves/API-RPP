@@ -2,7 +2,7 @@ import paginate from "mongoose-paginate"
 import usuarios from "../../models/Usuario.js"
 
 async function FiltrosUsuarios(req) {
-  const ativo = req.ativo || true;
+  const ativo = req.query.ativo;
   const { page, perPage, limit } = req.query
 
   const options = {
@@ -12,7 +12,17 @@ async function FiltrosUsuarios(req) {
 
   const query = {}
 
-  query.ativo = ativo;
+  if (ativo){
+    if (ativo == 'false')
+      query.ativo = false
+
+    else if (ativo == 'true')
+      query.ativo = true
+  }
+
+  else{
+    query.ativo = true
+  }
   
   const data = await usuarios.paginate(query, options)
 
