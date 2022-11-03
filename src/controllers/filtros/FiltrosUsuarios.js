@@ -3,6 +3,7 @@ import usuarios from "../../models/Usuario.js"
 
 async function FiltrosUsuarios(req) {
   const ativo = req.query.ativo;
+  const nome = req.query.nome
   const { page, perPage, limit } = req.query
 
   const options = {
@@ -22,6 +23,12 @@ async function FiltrosUsuarios(req) {
 
   else{
     query.ativo = true
+  }
+
+  if (nome){
+    const regexNome = new RegExp(nome, 'i')
+
+    query.nome = regexNome
   }
   
   const data = await usuarios.paginate(query, options)
