@@ -7,6 +7,7 @@ async function FiltrosUsuarios(req) {
   const email = req.query.email
   const tituloFormacao = req.query.tituloFormacao
   const cursoFormacao = req.query.cursoFormacao
+  const adm = req.query.adm
   const { page, perPage, limit } = req.query
 
   const options = {
@@ -50,6 +51,14 @@ async function FiltrosUsuarios(req) {
     const regexFormacao = new RegExp(cursoFormacao, 'i')
 
     query["formacao.curso"] = regexFormacao
+  }
+
+  if (adm){
+    if (adm == 'false')
+      query.adm = false
+
+    else if (adm == 'true')
+      query.adm = true
   }
   
   const data = await usuarios.paginate(query, options)
