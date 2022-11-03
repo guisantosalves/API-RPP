@@ -1,38 +1,14 @@
 import usuarios from "../models/Usuario.js";
+import FiltrosUsuarios from "./filtros/FiltrosUsuarios.js";
 
 class UsuarioController {
 
   //dando certo
   static listarUsuarios = async (req, res) => {
     try {
-      const nome = req.query.nome;
-      const email = req.query.email;
-      const adm = req.query.adm;
-      const ativo = req.query.ativo || true
-      const { page, perPage } = req.query;
-      const options = { // limitar a quantidade máxima por requisição
-        nome: (nome),
-        page: parseInt(page) || 1,
-        limit: parseInt(perPage) > 10 ? 10 : parseInt(perPage) || 10
-      };
-      if (!email && !nome && !adm && !ativo) {
-        const usuario = await usuarios.paginate({}, options);
-        return res.json(usuario);
-      } else if (!email && !nome && !adm) {
-        const usuario = await usuarios.paginate({ ativo: ativo }, options)
-        return res.json(usuario)
-      }
-      else if (!email && !nome) {
-        const usuario = await usuarios.paginate({ adm: adm }, options)
-        return res.json(usuario)
+      const data = await FiltrosUsuarios(req)
 
-      } else if (!nome) {
-        const usuario = await usuarios.paginate({ login: { email: new RegExp(email, "i") } }, options)
-        return res.json(usuario)
-      } else {
-        const usuario = await usuarios.paginate({ nome: new RegExp(nome, 'i') }, options);
-        return res.json(usuario);
-      }
+      return res.json(data)
     } catch (err) {
       console.error(err);
       return res.status(500).send(err);
