@@ -24,10 +24,10 @@ const generateTags = () => {
 const pick = (quantity, pickFrom = []) => {
     let result = []
 
-    while (quantity > 0){
+    while (quantity > 0) {
         const candidate = pickFrom[Math.floor(Math.random() * pickFrom.length)]
 
-        if (!result.find(res => res === candidate)){
+        if (!result.find(res => res === candidate)) {
             result.push(candidate)
             quantity--;
         }
@@ -36,7 +36,9 @@ const pick = (quantity, pickFrom = []) => {
     return result
 }
 
-for (let i = 1; i <= 10; i++) {
+//Gera e insere usuários
+
+for (let i = 1; i <= 20; i++) {
     const seedUsuarios = [
         {
             nome: faker.name.findName(),
@@ -54,24 +56,31 @@ for (let i = 1; i <= 10; i++) {
         }
     ]
 
+    await Usuario.insertMany(seedUsuarios)
+}
+
+//Pega usuarios e insere em publicacoes
+
+const usuarios = await Usuario.find()
+
+for (let i = 0; i < 100; i++) {
     const seedPublicacoes = [
         {
             titulo: faker.lorem.sentence(),
             data: faker.date.past(),
             tipo: Math.random <= 0.3 ? "Notícia" : Math.random() <= 0.6 ? "Projeto" : "Artigo",
             registro: faker.lorem.paragraphs(2),
-            usuario: seedUsuarios[0],
+            usuario: usuarios[Math.floor(Math.random() * usuarios.length)],
             tags: pick(4, generateTags())
         }
     ]
 
-    await Usuario.insertMany(seedUsuarios)
     await Publicacao.insertMany(seedPublicacoes)
 }
 
 await Parceiro.deleteMany()
 
-for (let i = 1; i <= 3; i++){
+for (let i = 1; i <= 3; i++) {
     const seedParceiros = [{
         nome: faker.company.companyName(),
         ativo: faker.random.boolean(),
