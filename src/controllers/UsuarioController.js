@@ -1,24 +1,14 @@
 import usuarios from "../models/Usuario.js";
+import FiltrosUsuarios from "./filtros/FiltrosUsuarios.js";
 
 class UsuarioController {
 
   //dando certo
   static listarUsuarios = async (req, res) => {
     try {
-      const nome = req.query.nome;
-      const { page, perPage } = req.query;
-      const options = { // limitar a quantidade máxima por requisição
-        nome: (nome),
-        page: parseInt(page) || 1,
-        limit: parseInt(perPage) > 10 ? 10 : parseInt(perPage) || 10
-      };
-      if (!nome) {
-        const usuario = await usuarios.paginate({}, options);
-        return res.json(usuario);
-      } else {
-        const usuario = await usuarios.paginate({  nome: new RegExp(nome, 'i')  }, options);
-        return res.json(usuario);
-      }
+      const data = await FiltrosUsuarios(req)
+
+      return res.json(data)
     } catch (err) {
       console.error(err);
       return res.status(500).send(err);
@@ -49,7 +39,7 @@ class UsuarioController {
     })
   }
 
-  
+
   /* static atualizarUsuario = async (req, res) => {
     res.setHeader('Content-Type', 'text/plain');
     const id = req.params.id;
@@ -97,7 +87,7 @@ class UsuarioController {
     })
   }
 
-  
+
   /* static listarUsuarioPorNome = (req, res) => {
     const nomefromQuery = req.query.nome;
     console.log(nomefromQuery)
@@ -113,10 +103,10 @@ class UsuarioController {
       res.status(400).send(err)
     }
   } */
-  
+
   static listarUsuarioPorNome = async (req, res) => {
     const nome = req.query.nome
-    usuarios.find({'nome': nome}, {}, (err, usuarios) => {
+    usuarios.find({ 'nome': nome }, {}, (err, usuarios) => {
       res.status(200).send(usuarios);
     });
 
