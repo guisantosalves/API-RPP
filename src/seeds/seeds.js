@@ -64,11 +64,13 @@ for (let i = 1; i <= 20; i++) {
 const usuarios = await Usuario.find()
 
 for (let i = 0; i < 100; i++) {
+    const randNum = Math.random()
+
     const seedPublicacoes = [
         {
             titulo: faker.lorem.sentence(),
             data: faker.date.past(),
-            tipo: Math.random <= 0.3 ? "Notícia" : Math.random() <= 0.6 ? "Projeto" : "Artigo",
+            tipo: randNum <= 0.3 ? "Notícia" : randNum <= 0.6 ? "Projeto" : "Artigo",
             registro: faker.lorem.paragraphs(2),
             usuario: usuarios[Math.floor(Math.random() * usuarios.length)],
             tags: pick(4, generateTags())
