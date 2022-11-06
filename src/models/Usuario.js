@@ -34,3 +34,4 @@ usuarioSchema.plugin(mongoosePaginate);
 const usuarios = mongoose.model('usuarios', usuarioSchema);
 
 export default usuarios;
+export {usuarioSchema}
