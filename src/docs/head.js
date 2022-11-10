@@ -61,25 +61,28 @@ const swaggerOptions = {
                         login: {
                             type: 'object',
                             properties: {
-                                email:{
+                                email: {
                                     type: 'string'
                                 },
-                                senha:{
+                                senha: {
                                     type: 'string'
                                 }
                             }
                         },
-                        formacao: {
-                            type: 'object',
-                            properties: {
-                                titulo:{
-                                    type: 'string'
-                                },
-                                curso:{
-                                    type: 'string'
+                        formacao: [{
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    titulo: {
+                                        type: 'string'
+                                    },
+                                    curso: {
+                                        type: 'string'
+                                    }
                                 }
                             }
-                        },
+                        }],
                         nome: {
                             type: 'string'
                         },
@@ -119,7 +122,7 @@ const swaggerOptions = {
                         tags: {
                             type: 'array',
 
-                            items:{
+                            items: {
                                 type: 'string'
                             }
                         },
@@ -131,9 +134,9 @@ const swaggerOptions = {
                         },
                     }
                 },
-                publicacoes:{
+                publicacoes: {
                     type: 'array',
-                    items:{
+                    items: {
                         $ref: '#/components/schemas/publicacao'
                     }
                 },
