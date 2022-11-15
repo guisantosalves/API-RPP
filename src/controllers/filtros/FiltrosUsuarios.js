@@ -38,7 +38,7 @@ async function FiltrosUsuarios(req) {
   if (email){
     const regexEmail = new RegExp(email, 'i')
 
-    query["login.email"] = regexEmail
+    query.email= regexEmail
   }
 
   /*if (tituloFormacao){
