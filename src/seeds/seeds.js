@@ -51,11 +51,13 @@ const generateHash = () => {
 await usuarios.deleteMany()
 
 const generateUsuarios = async (qtdUsuarios) => {
+    const usuariosArray = []
+
     for (let i = 0; i < qtdUsuarios; i++){
         const nome = faker.name.findName();
         const email = nome.toLowerCase().replaceAll(" ", "") + getRandomInt(99) + "@gmail.com";
 
-        const usuario = [{
+        const usuario = {
             nome: nome,
             email: email,
             senha: generateHash(),
@@ -66,10 +68,12 @@ const generateUsuarios = async (qtdUsuarios) => {
             ativo: getRandomInt(2) > 1,
             adm: getRandomInt(2) > 1,
             path_photo: "unknown.png"
-        }]
+        }
 
-        await usuarios.insertMany(usuario)
+        usuariosArray.push(usuario)
     }
+
+    await usuarios.insertMany(usuariosArray)
 }
 
 await generateUsuarios(20)
