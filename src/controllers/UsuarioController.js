@@ -4,7 +4,9 @@ import FiltrosUsuarios from "./filtros/FiltrosUsuarios.js";
 class UsuarioController {
   static listarUsuarios = async (req, res) => {
     try {
-      const data = await FiltrosUsuarios(req)
+      const {query, options} = FiltrosUsuarios(req)
+
+      const data = await usuarios.paginate(query, options)
 
       return res.json(data)
     } catch (err) {
