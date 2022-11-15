@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import mongoosePaginate from 'mongoose-paginate';
-import { usuarioSchema } from "./Usuario.js";
 
 const publicacaoSchema = new mongoose.Schema(
     {
@@ -10,7 +9,7 @@ const publicacaoSchema = new mongoose.Schema(
         tipo: { type: String, required: true },
         registro: { type: String, required: true },
         tags: { type: [String] },
-        usuario: {type: usuarioSchema},
+        usuarioId: {type: mongoose.Schema.Types.ObjectId},
 
     },
     { versionKey: false }
