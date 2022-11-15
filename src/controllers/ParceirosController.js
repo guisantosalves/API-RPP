@@ -4,8 +4,10 @@ import FiltrosParceiros from "./filtros/FiltrosParceiros.js";
 class ParceirosController {
   static listarParceiros = async (req, res) => {
     try {
-      const data = await FiltrosParceiros(req)
+      const {query, options} = FiltrosParceiros(req)
 
+      const data = await parceiros.paginate(query, options)
+      
       return res.json(data)
     } catch (err) {
       console.error(err);

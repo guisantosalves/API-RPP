@@ -1,6 +1,6 @@
 import parceiros from "../../models/Parceiro.js"
 
-async function FiltrosParceiros(req) {
+function FiltrosParceiros(req) {
   const nome = req.query.nome
   const page = req.query.page
   const limit = req.query.perPage || req.query.limit
@@ -17,7 +17,12 @@ async function FiltrosParceiros(req) {
     query.nome = regexNome
   }
 
-  return await parceiros.paginate(query, options)
+  const filters = {
+    query: query,
+    options: options
+  }
+
+  return filters
 }
 
 export default FiltrosParceiros
