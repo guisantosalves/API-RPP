@@ -1,57 +1,32 @@
 import mongoose from "mongoose";
 import paginate from "../library/paginate.js";
 import parceiros from "../models/Parceiro.js";
+import FiltrosParceiros from "./filtros/FiltrosParceiros.js";
 
 class ParceirosController {
-  //dando certo
   static listarParceiros = async (req, res) => {
     try {
-      const nome = req.query.nome
-      const page = req.query.page
-      const limit = req.query.perPage || req.query.limit
-      const options = {
-        nome: (nome),
-        page: parseInt(page) || 1,
-        limit: parseInt(limit) > 5 ? 5 : parseInt(limit) || 5
-      }
+      const data = await FiltrosParceiros(req)
 
-      if (!nome) {
-        const data = await parceiros.find()
-        console.log(data)
-        const parceiro = paginate(data, options);
-        return res.json(parceiro)
-      } else {
-        const data = await parceiros.find()
-        console.log(data)
-        const parceiro = paginate(data, options);
-        return res.json(parceiro)
-      }
+      return res.status(200).send(data)
     } catch (err) {
       console.error(err);
       return res.status(400).send(err)
-
     }
-
   }
 
-  // dando certo
   static listarParceiroPorId = async (req, res) => {
     const id = req.params.id;
     try {
-
       const gettingParceiroByID = await parceiros.findById(id).exec();
       res.status(200).send(gettingParceiroByID)
     } catch (err) {
-
       res.status(400).send(err)
-
     }
 
   }
 
-  // dando certo
   static cadastrarParceiro = async (req, res) => {
-
     try {
       const myNewSave = new parceiros({
         nome: req.body.nome,
@@ -61,18 +36,14 @@ class ParceirosController {
       })
 
       myNewSave.save((err, data) => {
-
         res.status(201).send(data)
-
       })
-
     } catch (err) {
       res.status(400).send(err)
     }
 
   }
 
-  // dando certo
   static atualizarParceiro = async (req, res) => {
     res.setHeader('Content-Type', 'text/plain');
     const id = req.params.id;
@@ -88,12 +59,9 @@ class ParceirosController {
         res.status(400);
         return res.send(err);
       }
-
     })
-
   }
 
-  // dando certo
   static excluirParceiro = (req, res) => {
     try {
       const id = req.params.id;
@@ -106,7 +74,6 @@ class ParceirosController {
 
   }
 
-  //dando certo
   static listarParceiroPorNome = (req, res) => {
     const nomefromQuery = req.query.nome;
     console.log(nomefromQuery)
