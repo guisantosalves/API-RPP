@@ -1,17 +1,17 @@
 import faker from 'faker-br';
 import db from '../config/dbConnect.js'
 import bcrypt from 'bcrypt'
-import Publicacao from '../models/Publicacao.js'
 import Parceiro from '../models/Parceiro.js'
 import usuarios from '../models/Usuario.js';
+import publicacoes from '../models/Publicacao.js';
 
 db.on("error", console.log.bind(console, "Conexão com o banco falhou!"));
 db.once("open", () => {
     console.log("Conexão com o banco estabelecida!")
 })
 
-await usuarios.deleteMany()
-await Publicacao.deleteMany()
+
+
 
 const getRandomInt = (max) => (
     Math.floor(Math.random() * max + 1)
@@ -26,9 +26,29 @@ const generateTags = () => {
     return (tags)
 }
 
+const pick = (quantity, pickFrom = []) => {
+    let result = []
+
+    while (quantity > 0) {
+        const candidate = pickFrom[Math.floor(Math.random() * pickFrom.length)]
+
+        if (!result.find(res => res === candidate)) {
+            result.push(candidate)
+            quantity--;
+        }
+    }
+
+    return result
+}
+
 const generateHash = () => {
     return bcrypt.hashSync("12345678", 8)
 }
+
+
+
+
+await usuarios.deleteMany()
 
 const generateUsuarios = async (qtdUsuarios) => {
     for (let i = 0; i < qtdUsuarios; i++){
@@ -53,6 +73,38 @@ const generateUsuarios = async (qtdUsuarios) => {
 }
 
 await generateUsuarios(20)
+
+
+await publicacoes.deleteMany()
+
+const getUsuarios = async () => {
+    return await usuarios.find()
+}
+
+const generatePublicacoes = async (qtd) => {
+    const users = await getUsuarios()
+    const publicacoesArray = []
+
+    for (let i = 0; i < qtd; i++){
+        const userId = users[Math.floor(Math.random() * usuarios.length)]
+        const randNum = Math.random()
+
+        const publicacao = {
+            titulo: faker.lorem.sentence(),
+            data: faker.date.past(),
+            tipo: randNum <= 0.3 ? "Notícia" : randNum <= 0.6 ? "Projeto" : "Artigo",
+            registro: faker.lorem.paragraphs(2),
+            usuarioId: userId,
+            tags: pick(4, generateTags())
+        }
+
+        publicacoesArray.push(publicacao)
+    }
+
+    await publicacoes.insertMany(publicacoesArray)
+}
+
+await generatePublicacoes(40)
 
 /*
 const generateTags = () => {
