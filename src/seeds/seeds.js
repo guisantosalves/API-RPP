@@ -1,5 +1,6 @@
 import faker from 'faker-br';
 import db from '../config/dbConnect.js'
+import bcrypt from 'bcrypt'
 import Publicacao from '../models/Publicacao.js'
 import Parceiro from '../models/Parceiro.js'
 import usuarios from '../models/Usuario.js';
@@ -25,6 +26,10 @@ const generateTags = () => {
     return (tags)
 }
 
+const generateHash = () => {
+    return bcrypt.hashSync("12345678", 8)
+}
+
 const generateUsuarios = async (qtdUsuarios) => {
     for (let i = 0; i < qtdUsuarios; i++){
         const nome = faker.name.findName();
@@ -33,7 +38,7 @@ const generateUsuarios = async (qtdUsuarios) => {
         const usuario = [{
             nome: nome,
             email: email,
-            senha: faker.internet.password(),
+            senha: generateHash(),
             formacao: [{
                 titulo: getRandomInt(2) > 1 ? "Graduação":  "Mestrado",
                 curso: getRandomInt(2) > 1 ? "Ciências Sociais": "Ciências da computação"
