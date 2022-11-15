@@ -58,16 +58,11 @@ const swaggerOptions = {
                         id: {
                             type: 'string'
                         },
-                        login: {
-                            type: 'object',
-                            properties: {
-                                email: {
-                                    type: 'string'
-                                },
-                                senha: {
-                                    type: 'string'
-                                }
-                            }
+                        email: {
+                            type: 'string'
+                        },
+                        senha: {
+                            type: 'string'
                         },
                         formacao: {
                             type: 'object',
@@ -141,8 +136,7 @@ const swaggerOptions = {
                     type: 'object',
                     properties: {
                         id: {
-
-                            type: 'integer'
+                            type: 'string'
                         },
                         nome: {
 
