@@ -1,4 +1,4 @@
-import parceiros from "../../models/Parceiro"
+import parceiros from "../../models/Parceiro.js"
 
 async function FiltrosParceiros(req) {
   const nome = req.query.nome

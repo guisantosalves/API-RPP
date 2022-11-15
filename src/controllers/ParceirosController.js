@@ -1,5 +1,3 @@
-import mongoose from "mongoose";
-import paginate from "../library/paginate.js";
 import parceiros from "../models/Parceiro.js";
 import FiltrosParceiros from "./filtros/FiltrosParceiros.js";
 
@@ -8,7 +6,7 @@ class ParceirosController {
     try {
       const data = await FiltrosParceiros(req)
 
-      return res.status(200).send(data)
+      return res.json(data)
     } catch (err) {
       console.error(err);
       return res.status(400).send(err)
