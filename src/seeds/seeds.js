@@ -1,17 +1,55 @@
 import faker from 'faker-br';
 import db from '../config/dbConnect.js'
-import Usuario from '../models/Usuario.js';
 import Publicacao from '../models/Publicacao.js'
 import Parceiro from '../models/Parceiro.js'
+import usuarios from '../models/Usuario.js';
 
 db.on("error", console.log.bind(console, "Conexão com o banco falhou!"));
 db.once("open", () => {
     console.log("Conexão com o banco estabelecida!")
 })
 
-await Usuario.deleteMany()
+await usuarios.deleteMany()
 await Publicacao.deleteMany()
 
+const getRandomInt = (max) => (
+    Math.floor(Math.random() * max + 1)
+)
+
+const generateTags = () => {
+    let tags = [];
+
+    for (let i = 0; i <= 10; i++)
+        tags.push(faker.lorem.word())
+
+    return (tags)
+}
+
+const generateUsuarios = async (qtdUsuarios) => {
+    for (let i = 0; i < qtdUsuarios; i++){
+        const nome = faker.name.findName();
+        const email = nome.toLowerCase().replaceAll(" ", "") + getRandomInt(99) + "@gmail.com";
+
+        const usuario = [{
+            nome: nome,
+            email: email,
+            senha: faker.internet.password(),
+            formacao: [{
+                titulo: getRandomInt(2) > 1 ? "Graduação":  "Mestrado",
+                curso: getRandomInt(2) > 1 ? "Ciências Sociais": "Ciências da computação"
+            }],
+            ativo: getRandomInt(2) > 1,
+            adm: getRandomInt(2) > 1,
+            path_photo: "unknown.png"
+        }]
+
+        await usuarios.insertMany(usuario)
+    }
+}
+
+await generateUsuarios(20)
+
+/*
 const generateTags = () => {
     let tags = [];
 
@@ -91,7 +129,7 @@ for (let i = 1; i <= 3; i++) {
     }]
 
     await Parceiro.insertMany(seedParceiros)
-}
+}*/
 
 console.log("Dados inseridos!")
 
