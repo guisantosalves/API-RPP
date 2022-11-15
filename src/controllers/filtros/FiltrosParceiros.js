@@ -6,15 +6,16 @@ async function FiltrosParceiros(req) {
   const limit = req.query.perPage || req.query.limit
 
   const options = {
-    nome: (nome),
     page: parseInt(page) || 1,
     limit: parseInt(limit) > 5 ? 5 : parseInt(limit) || 5
   }
 
   const query = {}
 
-  if(nome)
-    query.nome = nome
+  if(nome){
+    const regexNome = new RegExp(nome, 'i')
+    query.nome = regexNome
+  }
 
   return await parceiros.paginate(query, options)
 }
