@@ -5,13 +5,12 @@ import mongoosePaginate from 'mongoose-paginate';
 const usuarioSchema = new mongoose.Schema(
     {
         nome: { type: String, required: true},
-        login: {
-            email: { type: String, required: true },
-            senha: { type: String, required: true },
-            _id: {
-                required: false
-            }
+        email: { 
+            type: String, 
+            required: true,
+            match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
         },
+        senha: { type: String, required: true},
         formacao: [
             {
                 titulo: { type: String, required: true },
