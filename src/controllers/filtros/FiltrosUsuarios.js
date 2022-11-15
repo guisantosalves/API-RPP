@@ -41,7 +41,7 @@ async function FiltrosUsuarios(req) {
     query["login.email"] = regexEmail
   }
 
-  if (tituloFormacao){
+  /*if (tituloFormacao){
     const regexFormacao = new RegExp(tituloFormacao, 'i')
 
     query["formacao.titulo"] = regexFormacao
@@ -51,7 +51,7 @@ async function FiltrosUsuarios(req) {
     const regexFormacao = new RegExp(cursoFormacao, 'i')
 
     query["formacao.curso"] = regexFormacao
-  }
+  }*/
 
   if (adm){
     if (adm == 'false')
