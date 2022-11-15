@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt'
 import Parceiro from '../models/Parceiro.js'
 import usuarios from '../models/Usuario.js';
 import publicacoes from '../models/Publicacao.js';
+import parceiros from '../models/Parceiro.js';
 
 db.on("error", console.log.bind(console, "Conexão com o banco falhou!"));
 db.once("open", () => {
@@ -53,7 +54,7 @@ await usuarios.deleteMany()
 const generateUsuarios = async (qtdUsuarios) => {
     const usuariosArray = []
 
-    for (let i = 0; i < qtdUsuarios; i++){
+    for (let i = 0; i < qtdUsuarios; i++) {
         const nome = faker.name.findName();
         const email = nome.toLowerCase().replaceAll(" ", "") + getRandomInt(99) + "@gmail.com";
 
@@ -62,8 +63,8 @@ const generateUsuarios = async (qtdUsuarios) => {
             email: email,
             senha: generateHash(),
             formacao: [{
-                titulo: getRandomInt(2) > 1 ? "Graduação":  "Mestrado",
-                curso: getRandomInt(2) > 1 ? "Ciências Sociais": "Ciências da computação"
+                titulo: getRandomInt(2) > 1 ? "Graduação" : "Mestrado",
+                curso: getRandomInt(2) > 1 ? "Ciências Sociais" : "Ciências da computação"
             }],
             ativo: getRandomInt(2) > 1,
             adm: getRandomInt(2) > 1,
@@ -89,7 +90,7 @@ const generatePublicacoes = async (qtd) => {
     const users = await getUsuarios()
     const publicacoesArray = []
 
-    for (let i = 0; i < qtd; i++){
+    for (let i = 0; i < qtd; i++) {
         const userId = users[Math.floor(Math.random() * usuarios.length)]
         const randNum = Math.random()
 
@@ -109,6 +110,26 @@ const generatePublicacoes = async (qtd) => {
 }
 
 await generatePublicacoes(40)
+
+
+const generateParceiros = async (qtd) => {
+    const parceirosArray = []
+
+    for (let i = 0; i < qtd; i++) {
+        const parceiro = {
+            nome: faker.company.companyName(),
+            ativo: faker.random.boolean(),
+            caminho_logo: 'arb.png',
+            descricao: faker.lorem.paragraphs()
+        }
+
+        parceirosArray.push(parceiro)
+    }
+
+    await parceiros.insertMany(parceirosArray)
+}
+
+generateParceiros(10)
 
 /*
 const generateTags = () => {
