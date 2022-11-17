@@ -4,10 +4,11 @@ import FiltrosPublicacao from "./filtros/FiltrosPublicacao.js";
 class PublicacaoController {
 static listarPublicacoes = async (req, res) => {
     try {
-      const publicacoes = await FiltrosPublicacao(req)
+      const {query, options} = FiltrosPublicacao(req)
 
-      return res.status(200).send(publicacoes)
-      
+      const data = await publicacoes.paginate(query, options)
+
+      return res.json(data)
     } catch (err) {
       console.error(err);
       return res.status(500).send(err);

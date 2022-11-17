@@ -2,6 +2,7 @@ import express from "express";
 import usuarios from "./usuariosRoutes.js";
 import publicacoes from "./publicacoesRoutes.js";
 import parceiros from "./parceirosRoutes.js";
+import login from './loginRoutes.js'
 // import parceiros from "./parceirosRoutes.js";
 
 const routes = (app) => {
@@ -13,7 +14,8 @@ const routes = (app) => {
     express.json(),
     usuarios,
     publicacoes,
-    parceiros
+    parceiros,
+    login
   )
 }
 
