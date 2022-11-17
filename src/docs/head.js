@@ -58,22 +58,25 @@ const swaggerOptions = {
                         id: {
                             type: 'string'
                         },
+                        formacao: {
+                            type: 'array',
+                            items: {
+                                type: 'object',
+                                properties: {
+                                    titulo: {
+                                        type: 'string'
+                                    },
+                                    curso: {
+                                        type: 'string'
+                                    }
+                                }
+                            }
+                        },
                         email: {
                             type: 'string'
                         },
                         senha: {
                             type: 'string'
-                        },
-                        formacao: {
-                            type: 'object',
-                            properties: {
-                                titulo: {
-                                    type: 'string'
-                                },
-                                curso: {
-                                    type: 'string'
-                                }
-                            }
                         },
                         nome: {
                             type: 'string'
