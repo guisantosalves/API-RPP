@@ -5,13 +5,12 @@ import mongoosePaginate from 'mongoose-paginate';
 const usuarioSchema = new mongoose.Schema(
     {
         nome: { type: String, required: true},
-        login: {
-            email: { type: String, required: true },
-            senha: { type: String, required: true },
-            _id: {
-                required: false
-            }
+        email: { 
+            type: String, 
+            required: true,
+            match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
         },
+        senha: { type: String, required: true},
         formacao: [
             {
                 titulo: { type: String, required: true },
@@ -22,8 +21,13 @@ const usuarioSchema = new mongoose.Schema(
             },
         ],
         ativo: { type: Boolean, required: true },
-        adm: { type: Boolean, required: true },
+        adm: { type: Boolean, required: true }, //Remover adm posteriormente
         path_photo: { type: String, required: true},
+        /*
+        rotas: {
+
+        }
+        */
     },
     
     { versionKey: false }
@@ -34,4 +38,3 @@ usuarioSchema.plugin(mongoosePaginate);
 const usuarios = mongoose.model('usuarios', usuarioSchema);
 
 export default usuarios;
-export {usuarioSchema}

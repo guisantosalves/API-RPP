@@ -2,11 +2,11 @@ import usuarios from "../models/Usuario.js";
 import FiltrosUsuarios from "./filtros/FiltrosUsuarios.js";
 
 class UsuarioController {
-
-  //dando certo
   static listarUsuarios = async (req, res) => {
     try {
-      const data = await FiltrosUsuarios(req)
+      const {query, options} = FiltrosUsuarios(req)
+
+      const data = await usuarios.paginate(query, options)
 
       return res.json(data)
     } catch (err) {
@@ -27,7 +27,6 @@ class UsuarioController {
       })
   }
 
-
   static cadastrarUsuario = async (req, res) => {
     let usuarios = new usuarios(req.body);
     usuarios.save((err) => {
@@ -38,31 +37,6 @@ class UsuarioController {
       }
     })
   }
-
-
-  /* static atualizarUsuario = async (req, res) => {
-    res.setHeader('Content-Type', 'text/plain');
-    const id = req.params.id;
-      usuarios.findByIdAndUpdate({_id:id}, { 
-        login: req.body.login,
-        senha: req.body.senha,
-        nomeCompleto: req.body.nomeCompleto,
-        formacao: req.body.formacao,
-        email: req.body.email,
-        ativo: req.body.ativo,
-        adm: req.body.adm,
-        path_foto: req.body.path_foto,
-      }, { new: true }).then((data, err) => {
-        if(data){
-          return res.status(200).send(data);
-        }else{
-          res.status(400);
-          return res.send(err);
-        }
-
-      })
-
-  } */
 
   static atualizarUsuario = async (req, res) => {
     const id = req.params.id;
@@ -87,31 +61,12 @@ class UsuarioController {
     })
   }
 
-
-  /* static listarUsuarioPorNome = (req, res) => {
-    const nomefromQuery = req.query.nome;
-    console.log(nomefromQuery)
-    try{
-
-      usuarios.find({nomeCompleto: nomefromQuery}).then(result=>{
-        res.status(200)
-        res.send(result)
-      });
-      
-
-    }catch(err){
-      res.status(400).send(err)
-    }
-  } */
-
   static listarUsuarioPorNome = async (req, res) => {
     const nome = req.query.nome
     usuarios.find({ 'nome': nome }, {}, (err, usuarios) => {
       res.status(200).send(usuarios);
     });
-
   }
-
 }
 
 export default UsuarioController;

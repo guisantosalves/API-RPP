@@ -1,7 +1,7 @@
 import paginate from "mongoose-paginate"
 import usuarios from "../../models/Usuario.js"
 
-async function FiltrosUsuarios(req) {
+function FiltrosUsuarios(req) {
   const ativo = req.query.ativo;
   const nome = req.query.nome
   const email = req.query.email
@@ -38,10 +38,10 @@ async function FiltrosUsuarios(req) {
   if (email){
     const regexEmail = new RegExp(email, 'i')
 
-    query["login.email"] = regexEmail
+    query.email= regexEmail
   }
 
-  if (tituloFormacao){
+  /*if (tituloFormacao){
     const regexFormacao = new RegExp(tituloFormacao, 'i')
 
     query["formacao.titulo"] = regexFormacao
@@ -51,7 +51,7 @@ async function FiltrosUsuarios(req) {
     const regexFormacao = new RegExp(cursoFormacao, 'i')
 
     query["formacao.curso"] = regexFormacao
-  }
+  }*/
 
   if (adm){
     if (adm == 'false')
@@ -61,9 +61,12 @@ async function FiltrosUsuarios(req) {
       query.adm = true
   }
   
-  const data = await usuarios.paginate(query, options)
+  const filters = {
+    query: query,
+    options: options
+  }
 
-  return data
+  return filters
 }
 
 export default FiltrosUsuarios;

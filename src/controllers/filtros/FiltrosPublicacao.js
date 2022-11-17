@@ -1,7 +1,7 @@
 import paginate from "../../library/paginate.js"
 import publicacoes from "../../models/Publicacao.js"
 
-async function FiltrosPublicacao(req) {
+function FiltrosPublicacao(req) {
     const titulo = req.query.titulo
     const nomeUsuario = req.query.nomeUsuario
     const idUsuario = req.query.idUsuario
@@ -14,9 +14,9 @@ async function FiltrosPublicacao(req) {
         limit: parseInt(perPage || limit) < 10 ? parseInt(perPage || limit) : 10 || 10,
     }
 
-    let data = await publicacoes.find()
+    const query = {}
 
-    if(titulo){
+    /*if(titulo){
       const regexTitulo = new RegExp(titulo, 'i')
       data = data.filter((pub) => pub.titulo.match(regexTitulo));
     }
@@ -44,9 +44,14 @@ async function FiltrosPublicacao(req) {
         
         return(min <= date && date <= max)
       })
+    }*/
+
+    const filters = {
+      query: query,
+      options: options
     }
 
-    return paginate(data, options)
+    return filters
 }
 
 export default FiltrosPublicacao

@@ -1,16 +1,19 @@
 import faker from 'faker-br';
 import db from '../config/dbConnect.js'
-import Usuario from '../models/Usuario.js';
-import Publicacao from '../models/Publicacao.js'
+import bcrypt from 'bcrypt'
 import Parceiro from '../models/Parceiro.js'
+import usuarios from '../models/Usuario.js';
+import publicacoes from '../models/Publicacao.js';
+import parceiros from '../models/Parceiro.js';
 
 db.on("error", console.log.bind(console, "Conexão com o banco falhou!"));
 db.once("open", () => {
     console.log("Conexão com o banco estabelecida!")
 })
 
-await Usuario.deleteMany()
-await Publicacao.deleteMany()
+const getRandomInt = (max) => (
+    Math.floor(Math.random() * max + 1)
+)
 
 const generateTags = () => {
     let tags = [];
@@ -36,62 +39,89 @@ const pick = (quantity, pickFrom = []) => {
     return result
 }
 
-//Gera e insere usuários
-
-for (let i = 1; i <= 20; i++) {
-    const seedUsuarios = [
-        {
-            nome: faker.name.findName(),
-            login: {
-                email: faker.internet.email(),
-                senha: faker.internet.password()
-            },
-            formacao: {
-                titulo: "Graduação",
-                curso: "Ciências Sociais"
-            },
-            ativo: Math.random() <= 0.5,
-            adm: Math.random() <= 0.5,
-            path_photo: 'arb.png'
-        }
-    ]
-
-    await Usuario.insertMany(seedUsuarios)
+const generateHash = () => {
+    return bcrypt.hashSync("12345678", 8)
 }
 
-//Pega usuarios e insere em publicacoes
+await usuarios.deleteMany()
+await publicacoes.deleteMany()
 
-const usuarios = await Usuario.find()
+const generateUsuarios = async (qtdUsuarios) => {
+    const usuariosArray = []
 
-for (let i = 0; i < 100; i++) {
-    const randNum = Math.random()
+    for (let i = 0; i < qtdUsuarios; i++) {
+        const nome = faker.name.findName();
+        const email = nome.toLowerCase().replaceAll(" ", "") + getRandomInt(99) + "@gmail.com";
 
-    const seedPublicacoes = [
-        {
+        const usuario = {
+            nome: nome,
+            email: email,
+            senha: generateHash(),
+            formacao: [{
+                titulo: getRandomInt(2) > 1 ? "Graduação" : "Mestrado",
+                curso: getRandomInt(2) > 1 ? "Ciências Sociais" : "Ciências da computação"
+            }],
+            ativo: getRandomInt(2) > 1,
+            adm: getRandomInt(2) > 1,
+            path_photo: "unknown.png"
+        }
+        usuariosArray.push(usuario)
+    }
+
+    await usuarios.insertMany(usuariosArray)
+}
+
+await generateUsuarios(20)
+
+const getUsuarios = async () => {
+    return await usuarios.find()
+}
+
+const generatePublicacoes = async (qtd) => {
+    const users = await getUsuarios()
+    const publicacoesArray = []
+
+    for (let i = 0; i < qtd; i++) {
+        const userId = users[Math.floor(Math.random() * usuarios.length)]
+        const randNum = Math.random()
+
+        const publicacao = {
             titulo: faker.lorem.sentence(),
             data: faker.date.past(),
             tipo: randNum <= 0.3 ? "Notícia" : randNum <= 0.6 ? "Projeto" : "Artigo",
             registro: faker.lorem.paragraphs(2),
-            usuario: usuarios[Math.floor(Math.random() * usuarios.length)],
+            usuarioId: userId,
             tags: pick(4, generateTags())
         }
-    ]
 
-    await Publicacao.insertMany(seedPublicacoes)
+        publicacoesArray.push(publicacao)
+    }
+
+    await publicacoes.insertMany(publicacoesArray)
 }
 
-await Parceiro.deleteMany()
+await generatePublicacoes(40)
 
-for (let i = 1; i <= 3; i++) {
-    const seedParceiros = [{
-        nome: faker.company.companyName(),
-        ativo: faker.random.boolean(),
-        caminho_logo: 'arb.png',
-        descricao: faker.lorem.paragraphs()
-    }]
 
-    await Parceiro.insertMany(seedParceiros)
+const generateParceiros = async (qtd) => {
+    const parceirosArray = []
+
+    for (let i = 0; i < qtd; i++) {
+        const parceiro = {
+            nome: faker.company.companyName(),
+            ativo: faker.random.boolean(),
+            caminho_logo: 'arb.png',
+            descricao: faker.lorem.paragraphs()
+        }
+
+        parceirosArray.push(parceiro)
+    }
+
+    await parceiros.insertMany(parceirosArray)
 }
+
+await generateParceiros(10)
+
 
 console.log("Dados inseridos!")
 
