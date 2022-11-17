@@ -11,9 +11,6 @@ db.once("open", () => {
     console.log("Conexão com o banco estabelecida!")
 })
 
-
-
-
 const getRandomInt = (max) => (
     Math.floor(Math.random() * max + 1)
 )
@@ -46,10 +43,8 @@ const generateHash = () => {
     return bcrypt.hashSync("12345678", 8)
 }
 
-
-
-
 await usuarios.deleteMany()
+await publicacoes.deleteMany()
 
 const generateUsuarios = async (qtdUsuarios) => {
     const usuariosArray = []
@@ -70,7 +65,6 @@ const generateUsuarios = async (qtdUsuarios) => {
             adm: getRandomInt(2) > 1,
             path_photo: "unknown.png"
         }
-
         usuariosArray.push(usuario)
     }
 
@@ -78,9 +72,6 @@ const generateUsuarios = async (qtdUsuarios) => {
 }
 
 await generateUsuarios(20)
-
-
-await publicacoes.deleteMany()
 
 const getUsuarios = async () => {
     return await usuarios.find()
