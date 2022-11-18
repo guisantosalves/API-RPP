@@ -81,11 +81,34 @@ const swaggerOptions = {
                         ativo: {
                             type: 'boolean'
                         },
-                        adm: {
-                            type: 'boolean'
-                        },
                         path_photo: {
                             type: 'string'
+                        },
+                        rotas: {
+                            type: 'array',
+                            items: {
+                                nome: {
+                                    type: 'string'
+                                },
+                                rota: {
+                                    type: 'string'
+                                },
+                                verbo_get: {
+                                    type: 'boolean'
+                                },
+                                verbo_put: {
+                                    type: 'boolean'
+                                },
+                                verbo_patch: {
+                                    type: 'boolean'
+                                },
+                                verbo_delete: {
+                                    type: 'boolean'
+                                },
+                                verbo_post: {
+                                    type: 'boolean'
+                                }                                
+                            }
                         }
                     }
                 },
