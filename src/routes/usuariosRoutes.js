@@ -137,6 +137,29 @@ const router = express.Router();
  *         content:
  *           application/json:
  *             example: Not Found
+ *   patch:
+ *     tags:
+ *       - Usuários
+ *     summary: Atualiza um usuário pelo ID (Um ou vários campos)
+ *     requestBody: 
+ *       description: Atualiza um usuário pelo ID (Um ou vários campos)
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/usuario'
+ *     responses:
+ *       '200':
+ *         description: Sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/usuario'
+ *               
+ *       '404':
+ *         description: Nenhum usuário encontrado
+ *         content:
+ *           application/json:
+ *             example: Not Foundg
  *   delete:
  *     tags:
  *       - Usuários
