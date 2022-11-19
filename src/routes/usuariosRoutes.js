@@ -108,6 +108,14 @@ const router = express.Router();
  *           application/json: 
  *             schema:
  *               $ref: '#/components/schemas/usuario'
+ *                
+ *       '204':
+ *         description: "Sem alteração"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/usuario'
+ * 
  *       '404':
  *         description: Usuário não encontrado
  *         content:
@@ -119,7 +127,6 @@ const router = express.Router();
  *       - Usuários
  *     summary: Atualiza um usuário pelo ID (todos os campos)
  *     requestBody:
- *       description: Atualiza um usuário pelo ID (todos os campos)
  *       content:
  *         application/json:
  *           schema:
@@ -127,6 +134,13 @@ const router = express.Router();
  *     responses:
  *       '200':
  *         description: Sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/usuario'
+ *                
+ *       '204':
+ *         description: "Sem alteração"
  *         content:
  *           application/json:
  *             schema:
@@ -142,7 +156,6 @@ const router = express.Router();
  *       - Usuários
  *     summary: Atualiza um usuário pelo ID (Um ou vários campos)
  *     requestBody: 
- *       description: Atualiza um usuário pelo ID (Um ou vários campos)
  *       content:
  *         application/json:
  *           schema:
@@ -177,7 +190,7 @@ const router = express.Router();
  *           application/json:
  *             example: Not Found
  *    
- */   
+ */
 
 router
   .get("/usuarios", UsuarioController.listarUsuarios)
