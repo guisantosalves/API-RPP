@@ -117,9 +117,9 @@ const router = express.Router();
  *   put:
  *     tags:
  *       - Usuários
- *     summary: Atualiza um usuário pelo ID
+ *     summary: Atualiza um usuário pelo ID (todos os campos)
  *     requestBody:
- *       description: Atualiza um usuário pelo ID
+ *       description: Atualiza um usuário pelo ID (todos os campos)
  *       content:
  *         application/json:
  *           schema:
@@ -153,8 +153,8 @@ const router = express.Router();
  *         content:
  *           application/json:
  *             example: Not Found
- * 
- */
+ *    
+ */   
 
 router
   .get("/usuarios", UsuarioController.listarUsuarios)
