@@ -1,4 +1,4 @@
-import usuarios from "../models/Usuario.js";
+import Usuario from "../models/Usuario.js";
 import FiltrosUsuarios from "./filtros/FiltrosUsuarios.js";
 
 class UsuarioController {
@@ -6,7 +6,7 @@ class UsuarioController {
     try {
       const {query, options} = FiltrosUsuarios(req)
 
-      const data = await usuarios.paginate(query, options)
+      const data = await Usuario.paginate(query, options)
 
       return res.json(data)
     } catch (err) {
@@ -17,7 +17,7 @@ class UsuarioController {
 
   static listarUsuarioPorId = async (req, res) => {
     const id = req.params.id;
-    await usuarios.findById(id)
+    await Usuario.findById(id)
       .exec((err, usuarios) => {
         if (err) {
           res.status(400).send({ message: `${err.message} - Usuário não localizado.` })
@@ -28,19 +28,19 @@ class UsuarioController {
   }
 
   static cadastrarUsuario = async (req, res) => {
-    let usuarios = new usuarios(req.body);
-    usuarios.save((err) => {
+    let usuario = new Usuario(req.body);
+    usuario.save((err) => {
       if (err) {
         res.status(500).send({ message: `${err.message} - Falha ao cadastrar usuário.` })
       } else {
-        res.status(201).send(usuarios.toJSON())
+        res.status(201).send(usuario.toJSON())
       }
     })
   }
 
   static atualizarUsuario = async (req, res) => {
     const id = req.params.id;
-    usuarios.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    Usuario.findByIdAndUpdate(id, { $set: req.body }, (err) => {
       if (!err) {
         res.status(200).send({ message: 'Usuário atualizado com sucesso' })
       } else {
@@ -52,7 +52,7 @@ class UsuarioController {
 
   static excluirUsuario = async (req, res) => {
     const id = req.params.id;
-    usuarios.findByIdAndDelete(id, (err) => {
+    Usuario.findByIdAndDelete(id, (err) => {
       if (!err) {
         res.status(200).send({ message: 'Usuário removido com sucesso' })
       } else {
@@ -63,7 +63,7 @@ class UsuarioController {
 
   static listarUsuarioPorNome = async (req, res) => {
     const nome = req.query.nome
-    usuarios.find({ 'nome': nome }, {}, (err, usuarios) => {
+    Usuario.find({ 'nome': nome }, {}, (err, usuarios) => {
       res.status(200).send(usuarios);
     });
   }

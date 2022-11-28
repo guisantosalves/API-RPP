@@ -1,4 +1,4 @@
-import publicacoes from "../models/Publicacao.js";
+import Publicacao from "../models/Publicacao.js";
 import FiltrosPublicacao from "./filtros/FiltrosPublicacao.js";
 
 class PublicacaoController {
@@ -6,7 +6,7 @@ static listarPublicacoes = async (req, res) => {
     try {
       const {query, options} = FiltrosPublicacao(req)
 
-      const data = await publicacoes.paginate(query, options)
+      const data = await Publicacao.paginate(query, options)
 
       return res.json(data)
     } catch (err) {
@@ -17,7 +17,7 @@ static listarPublicacoes = async (req, res) => {
 
   static listarPublicacaoPorId = async (req, res) => {
     const id = req.params.id;
-    await publicacoes.findById(id)
+    await Publicacao.findById(id)
       .exec((err, publicacoes) => {
         if (err) {
           res.status(400).send({ message: `${err.message} - Id da publicação não localizado.` })
@@ -28,7 +28,7 @@ static listarPublicacoes = async (req, res) => {
   }
 
   static cadastrarPublicacao = async (req, res) => {
-    let publicacao = new publicacoes(req.body);
+    let publicacao = new Publicacao(req.body);
     await publicacao.save((err) => {
       if (err) {
         res.status(500).send({ message: `${err.message} - Falha ao cadastrar publicação.` })
@@ -40,7 +40,7 @@ static listarPublicacoes = async (req, res) => {
 
   static atualizarPublicacao = async (req, res) => {
     const id = req.params.id;
-    await publicacoes.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    await Publicacao.findByIdAndUpdate(id, { $set: req.body }, (err) => {
       if (!err) {
         res.status(200).send({ message: 'Publicação atualizada com sucesso' })
       } else {
@@ -51,7 +51,7 @@ static listarPublicacoes = async (req, res) => {
 
   static excluirPublicacao = async (req, res) => {
     const id = req.params.id;
-    await publicacoes.findByIdAndDelete(id, (err) => {
+    await Publicacao.findByIdAndDelete(id, (err) => {
       if (!err) {
         res.status(200).send({ message: 'Publicação removida com sucesso' })
       } else {
