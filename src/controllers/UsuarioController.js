@@ -1,20 +1,27 @@
 import usuarios from "../models/Usuario.js";
 import FiltrosUsuarios from "./filtros/FiltrosUsuarios.js";
+import bcrypt from 'bcrypt';
+import validatingUser from "../../validation/userValidation.js";
 
 class UsuarioController {
+
+  // permissão implementada
   static listarUsuarios = async (req, res) => {
     try {
-      const {query, options} = FiltrosUsuarios(req)
+      validatingUser(req, res, "GET", usuarios, async () => {
+        const { query, options } = FiltrosUsuarios(req)
 
-      const data = await usuarios.paginate(query, options)
+        const data = await usuarios.paginate(query, options)
 
-      return res.json(data)
+        return res.json(data)
+      })
+
     } catch (err) {
       console.error(err);
       return res.status(500).send(err);
     }
   }
-
+  
   static listarUsuarioPorId = async (req, res) => {
     const id = req.params.id;
     await usuarios.findById(id)
@@ -28,14 +35,48 @@ class UsuarioController {
   }
 
   static cadastrarUsuario = async (req, res) => {
-    let usuarios = new usuarios(req.body);
-    usuarios.save((err) => {
-      if (err) {
-        res.status(500).send({ message: `${err.message} - Falha ao cadastrar usuário.` })
-      } else {
-        res.status(201).send(usuarios.toJSON())
-      }
-    })
+    res.setHeader('Content-Type', 'application/json')
+
+    try {
+      let userToInsert = req.body;
+      const formacao = userToInsert.formacao.map((item, index) => (
+        {
+          titulo: item.titulo,
+          curso: item.curso
+        }
+      ))
+
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(userToInsert.senha, salt, (err, hash) => {
+
+          // para passar valores default no model, precisa, necessariamente colocar,
+          // undefined na inserção, se n nao vem
+          usuarios.create({
+            nome: userToInsert.nome,
+            email: userToInsert.email,
+            senha: hash,
+            formacao: formacao,
+            ativo: userToInsert.ativo,
+            adm: userToInsert.adm,
+            path_photo: userToInsert.path_photo,
+            permissions:[
+              {
+                get: undefined,
+                post: undefined,
+                put: undefined,
+                patch: undefined,
+                delete: undefined
+              }
+            ]
+          })
+
+        })
+      })
+
+      res.status(200).json({ message: "Cadastrado com sucesso" })
+    } catch (err) {
+      return res.status(400).json({ message: err })
+    }
   }
 
   static atualizarUsuario = async (req, res) => {
@@ -50,14 +91,17 @@ class UsuarioController {
   }
 
 
+  // permissão implementada
   static excluirUsuario = async (req, res) => {
     const id = req.params.id;
-    usuarios.findByIdAndDelete(id, (err) => {
-      if (!err) {
-        res.status(200).send({ message: 'Usuário removido com sucesso' })
-      } else {
-        res.status(500).send({ message: err.message })
-      }
+    validatingUser(req, res, 'DELETE', usuarios, () => {
+      usuarios.findByIdAndDelete(id, (err) => {
+        if (!err) {
+          res.status(200).send({ message: 'Usuário removido com sucesso' })
+        } else {
+          res.status(500).send({ message: err.message })
+        }
+      })
     })
   }
 

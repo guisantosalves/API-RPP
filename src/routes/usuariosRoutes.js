@@ -1,6 +1,7 @@
 import express from "express";
 import UsuarioController from "../controllers/UsuarioController.js";
 //import usuarios from "../models/Usuario.js";
+import authMiddleware from "../middlewares/AuthMidleware.js";
 
 const router = express.Router();
 
@@ -157,12 +158,12 @@ const router = express.Router();
  */   
 
 router
-  .get("/usuarios", UsuarioController.listarUsuarios)
-  .get("/usuarios/busca", UsuarioController.listarUsuarioPorNome)
-  .post("/usuarios", UsuarioController.cadastrarUsuario)
-  .put("/usuarios/:id", UsuarioController.atualizarUsuario)
-  .delete("/usuarios/:id", UsuarioController.excluirUsuario)
-  .patch("/usuarios/:id", UsuarioController.atualizarUsuario)
+  .get("/usuarios", authMiddleware, UsuarioController.listarUsuarios)
+  .get("/usuarios/busca", authMiddleware, UsuarioController.listarUsuarioPorNome)
+  .post("/usuarios",  UsuarioController.cadastrarUsuario) // nao precisa do token para cadastrar um usuário
+  .put("/usuarios/:id", authMiddleware, UsuarioController.atualizarUsuario)
+  .delete("/usuarios/:id", authMiddleware, UsuarioController.excluirUsuario)
+  .patch("/usuarios/:id", authMiddleware, UsuarioController.atualizarUsuario)
 
 /* A comment. */
 export default router;
