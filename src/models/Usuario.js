@@ -23,13 +23,15 @@ const usuarioSchema = new mongoose.Schema(
         ativo: { type: Boolean, required: true },
         path_photo: { type: String, required: true},
         rotas: [
-            { nome: { type: String, required: true, minlength: 4, maxlength: 200, trim: true } },
-            { rota: { type: String, required: true, trim: true, unique: true } },
-            { verbo_get: { type: Boolean } },
-            { verbo_put: { type: Boolean } },
-            { verbo_patch: { type: Boolean } },
-            { verbo_delete: { type: Boolean } },
-            { verbo_post: { type: Boolean } }
+            { 
+                nome: { type: String, required: true, minlength: 4, maxlength: 200, trim: true },
+                rota: { type: String, required: true, trim: true, unique: true } ,
+                verbo_get: { type: Boolean } ,
+                verbo_put: { type: Boolean } ,
+                verbo_patch: { type: Boolean } ,
+                verbo_delete: { type: Boolean } ,
+                verbo_post: { type: Boolean } 
+            }
         ]
     },
     
