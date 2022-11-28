@@ -7,8 +7,10 @@ class UsuarioController {
 
   // permissão implementada
   static listarUsuarios = async (req, res) => {
+    res.setHeader('Content-Type', 'application/json')
     try {
-      validatingUser(req, res, "GET", usuarios, async () => {
+      const Method = req.method
+      validatingUser(req, res, Method, usuarios, async () => {
         const { query, options } = FiltrosUsuarios(req)
 
         const data = await usuarios.paginate(query, options)
@@ -21,17 +23,29 @@ class UsuarioController {
       return res.status(500).send(err);
     }
   }
-  
+
   static listarUsuarioPorId = async (req, res) => {
-    const id = req.params.id;
-    await usuarios.findById(id)
-      .exec((err, usuarios) => {
-        if (err) {
-          res.status(400).send({ message: `${err.message} - Usuário não localizado.` })
-        } else {
-          res.status(200).send(usuarios);
-        }
+    res.setHeader('Content-Type', 'application/json')
+
+    try {
+      const id = req.params.id;
+      const method = req.method
+
+      validatingUser(req, res, method, usuarios, async () => {
+        usuarios.findById(id)
+          .exec((err, usuarios) => {
+            if (err) {
+              res.status(400).send({ message: `${err.message} - Usuário não localizado.` });
+            } else {
+              res.status(200).send(usuarios);
+            }
+          })
       })
+
+    } catch (err) {
+      return res.status(400).json({ mensagem: err })
+    }
+
   }
 
   static cadastrarUsuario = async (req, res) => {
@@ -59,7 +73,7 @@ class UsuarioController {
             ativo: userToInsert.ativo,
             adm: userToInsert.adm,
             path_photo: userToInsert.path_photo,
-            permissions:[
+            permissions: [
               {
                 get: undefined,
                 post: undefined,
@@ -80,36 +94,69 @@ class UsuarioController {
   }
 
   static atualizarUsuario = async (req, res) => {
-    const id = req.params.id;
-    usuarios.findByIdAndUpdate(id, { $set: req.body }, (err) => {
-      if (!err) {
-        res.status(200).send({ message: 'Usuário atualizado com sucesso' })
-      } else {
-        res.status(500).send({ message: err.message })
-      }
-    })
+    res.setHeader('Content-Type', 'application/json')
+
+    try {
+      const id = req.params.id;
+      const Method = req.method;
+
+      validatingUser(req, res, Method, usuarios, async () => {
+        usuarios.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+          if (!err) {
+            res.status(200).send({ message: 'Usuário atualizado com sucesso' })
+          } else {
+            res.status(500).send({ message: err.message })
+          }
+        })
+      })
+
+    } catch (err) {
+      return res.status(400).json({ mensagem: err })
+    }
+
   }
 
 
   // permissão implementada
   static excluirUsuario = async (req, res) => {
-    const id = req.params.id;
-    validatingUser(req, res, 'DELETE', usuarios, () => {
-      usuarios.findByIdAndDelete(id, (err) => {
-        if (!err) {
-          res.status(200).send({ message: 'Usuário removido com sucesso' })
-        } else {
-          res.status(500).send({ message: err.message })
-        }
+    res.setHeader('Content-Type', 'application/json')
+    try {
+      const id = req.params.id;
+      const method = req.method
+
+      validatingUser(req, res, method, usuarios, async () => {
+        usuarios.findByIdAndDelete(id, (err) => {
+          if (!err) {
+            res.status(200).send({ message: 'Usuário removido com sucesso' })
+          } else {
+            res.status(500).send({ message: err.message })
+          }
+        })
       })
-    })
+    } catch (err) {
+      return res.status(400).json({ mensagem: err })
+    }
+
   }
 
   static listarUsuarioPorNome = async (req, res) => {
-    const nome = req.query.nome
-    usuarios.find({ 'nome': nome }, {}, (err, usuarios) => {
-      res.status(200).send(usuarios);
-    });
+    res.setHeader('Content-Type', 'application/json')
+
+    try {
+
+      const nome = req.query.nome
+      const method = req.method
+
+      validatingUser(req, res, method, usuarios, async () => {
+        usuarios.find(
+          { 'nome': { "$regex": nome, "$options": "i" } }, {}, (err, users) => {
+          res.status(200).send(users);
+        });
+      })
+    } catch (err) {
+      return res.status(400).json({ mensagem: err })
+    }
+
   }
 }
 
