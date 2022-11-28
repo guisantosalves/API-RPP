@@ -60,6 +60,7 @@ class UsuarioController {
         }
       ))
 
+      console.log(userToInsert.permissions[0])
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(userToInsert.senha, salt, (err, hash) => {
 
@@ -75,11 +76,11 @@ class UsuarioController {
             path_photo: userToInsert.path_photo,
             permissions: [
               {
-                get: undefined,
-                post: undefined,
-                put: undefined,
-                patch: undefined,
-                delete: undefined
+                get: userToInsert.permissions[0].get || undefined,
+                post: userToInsert.permissions[0].post || undefined,
+                put: userToInsert.permissions[0].put || undefined,
+                patch: userToInsert.permissions[0].patch || undefined,
+                delete: userToInsert.permissions[0].delete || undefined
               }
             ]
           })
