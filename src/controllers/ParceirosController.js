@@ -7,14 +7,11 @@ class ParceirosController {
   static listarParceiros = async (req, res) => {
     res.setHeader('Content-Type', 'application/json')
     try {
+      const { query, options } = FiltrosParceiros(req)
 
-      validatingUser(req, res, req.method, usuarios, async () => {
-        const { query, options } = FiltrosParceiros(req)
+      const data = await parceiros.paginate(query, options)
 
-        const data = await parceiros.paginate(query, options)
-
-        return res.json(data)
-      })
+      return res.json(data)
 
     } catch (err) {
       console.error(err);
@@ -27,10 +24,8 @@ class ParceirosController {
 
     try {
       const id = req.params.id;
-      validatingUser(req, res, req.method, usuarios, async () => {
-        const gettingParceiroByID = await parceiros.findById(id).exec();
-        res.status(200).send(gettingParceiroByID)
-      })
+      const gettingParceiroByID = await parceiros.findById(id).exec();
+      res.status(200).send(gettingParceiroByID)
 
     } catch (err) {
       console.error(err);
