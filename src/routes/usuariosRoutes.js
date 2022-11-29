@@ -195,8 +195,8 @@ const router = express.Router();
 
 router
   .get("/usuarios", authMiddleware, UsuarioController.listarUsuarios)
-  .get("/usuarios/busca", authMiddleware, UsuarioController.listarUsuarioPorNome)
-  .post("/usuarios",  UsuarioController.cadastrarUsuario) // nao precisa do token para cadastrar um usuário
+  .get("/usuarios/busca", UsuarioController.listarUsuarioPorNome)
+  .post("/usuarios",  UsuarioController.cadastrarUsuario)
   .put("/usuarios/:id", authMiddleware, UsuarioController.atualizarUsuario)
   .delete("/usuarios/:id", authMiddleware, UsuarioController.excluirUsuario)
   .patch("/usuarios/:id", authMiddleware, UsuarioController.atualizarUsuario)

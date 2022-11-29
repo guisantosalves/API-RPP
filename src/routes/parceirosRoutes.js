@@ -129,8 +129,8 @@ const router = express.Router();
 
 // tudo funcionando :)
 router
-    .get("/parceiros", authMiddleware, ParceirosController.listarParceiros)
-    .get("/parceiros/:id", authMiddleware, ParceirosController.listarParceiroPorId)
+    .get("/parceiros", ParceirosController.listarParceiros)
+    .get("/parceiros/:id", ParceirosController.listarParceiroPorId)
     .post("/parceiros", authMiddleware, ParceirosController.cadastrarParceiro)
     .put("/parceiros/:id", authMiddleware, ParceirosController.atualizarParceiro)
     .delete("/parceiros/:id", authMiddleware, ParceirosController.excluirParceiro)

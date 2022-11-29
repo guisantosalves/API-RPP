@@ -162,8 +162,8 @@ const router = express.Router();
 
 
 router
-  .get("/publicacoes", authMiddleware, PublicacaoController.listarPublicacoes)
-  .get("/publicacoes/:id", authMiddleware, PublicacaoController.listarPublicacaoPorId)
+  .get("/publicacoes", PublicacaoController.listarPublicacoes)
+  .get("/publicacoes/:id", PublicacaoController.listarPublicacaoPorId)
   .post("/publicacoes", authMiddleware, PublicacaoController.cadastrarPublicacao)
   .put("/publicacoes/:id", authMiddleware, PublicacaoController.atualizarPublicacao)
   .delete("/publicacoes/:id", authMiddleware, PublicacaoController.excluirPublicacao)
