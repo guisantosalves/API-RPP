@@ -7,6 +7,43 @@ const router = express.Router();
  * @swagger
  * /publicacoes:
  *   get:
+ *     parameters:
+ *      - name: titulo
+ *        description: Filtra publicações cujo titulo corresponda ao parâmetro informado.
+ *        in: path
+ *        schema: 
+ *          type: String
+ *        required: false
+ *      - name: data
+ *        description: Filtra publicações cuja data corresponda ao parâmetro informado.
+ *        in: path
+ *        schema:
+ *          type: Date
+ *        required: false
+ *      - name: tipo
+ *        description: Filtra publicações cujo tipo corresponda ao parâmetro informado.
+ *        in: path
+ *        schema: 
+ *          type: String
+ *        required: false
+ *      - name: registro 
+ *        description: Filtra publicações cujo registro corresponda ao parâmetro informado.
+ *        in: path
+ *        schema:  
+ *          type: String
+ *        required: false
+ *      - name: tags
+ *        description: Filtra publicações cujo tags corresponda ao parâmetro informado.
+ *        in: path
+ *        schema:
+ *          type: String
+ *        required: false
+ *      - name: usuarioId
+ *        description: Filtra publicações cujo usuário corresponda ao parâmetro informado.
+ *        in: path
+ *        required: false
+ * 
+ * 
  *     tags:
  *       - Publicações
  *     summary: Recupera todas as publicações
