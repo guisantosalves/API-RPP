@@ -195,7 +195,7 @@ const router = express.Router();
 
 router
   .get("/usuarios", UsuarioController.listarUsuarios)
-  .get("/usuarios/busca", UsuarioController.listarUsuarioPorNome)
+  .get("/usuarios/:id", UsuarioController.listarUsuarioPorId)
   .post("/usuarios",  UsuarioController.cadastrarUsuario)
   .put("/usuarios/:id", authMiddleware, UsuarioController.atualizarUsuario)
   .delete("/usuarios/:id", authMiddleware, UsuarioController.excluirUsuario)

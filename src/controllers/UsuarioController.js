@@ -132,26 +132,6 @@ class UsuarioController {
     }
 
   }
-
-  static listarUsuarioPorNome = async (req, res) => {
-    res.setHeader('Content-Type', 'application/json')
-
-    try {
-
-      const nome = req.query.nome
-      const method = req.method
-
-      validatingUser(req, res, method, usuarios, async () => {
-        usuarios.find(
-          { 'nome': { "$regex": nome, "$options": "i" } }, {}, (err, users) => {
-            res.status(200).send(users);
-          });
-      })
-    } catch (err) {
-      return res.status(400).json({ mensagem: err })
-    }
-
-  }
 }
 
 export default UsuarioController;
