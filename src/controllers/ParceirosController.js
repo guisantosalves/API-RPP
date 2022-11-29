@@ -24,9 +24,16 @@ class ParceirosController {
 
     try {
       const id = req.params.id;
-      const gettingParceiroByID = await parceiros.findById(id).exec();
-      res.status(200).send(gettingParceiroByID)
 
+      parceiros.findById(id).exec(
+        (err, parceiro) => {
+          if (err){
+            return res.status(400).send({message: `${err.message} - O parceiro com esse ID não pode ser localizado`})
+          }
+          
+          return res.status(200).send(parceiro)
+        }
+      );
     } catch (err) {
       console.error(err);
       return res.status(400).send(err)
