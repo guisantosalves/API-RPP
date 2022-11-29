@@ -67,7 +67,7 @@ class PublicacaoController {
     try {
       const id = req.params.id;
       validatingUser(req, res, req.method, usuarios, async () => {
-        await publicacoes.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+        publicacoes.findByIdAndUpdate(id, { $set: req.body }, (err) => {
           if (!err) {
             res.status(200).send({ message: 'Publicação atualizada com sucesso' })
           } else {
@@ -87,7 +87,7 @@ class PublicacaoController {
     try {
       const id = req.params.id;
       validatingUser(req, res, req.method, usuarios, async () => {
-        await publicacoes.findByIdAndDelete(id, (err) => {
+        publicacoes.findByIdAndDelete(id, (err) => {
           if (!err) {
             res.status(200).send({ message: 'Publicação removida com sucesso' })
           } else {
