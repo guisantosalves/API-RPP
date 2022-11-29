@@ -28,10 +28,10 @@ class ParceirosController {
       parceiros.findById(id).exec(
         (err, parceiro) => {
           if (err){
-            return res.status(400).send({message: `${err.message} - O parceiro com esse ID não pode ser localizado`})
+            res.status(400).send({message: `${err.message} - O parceiro com esse ID não pode ser localizado`})
+          } else {
+            res.status(200).send(parceiro)
           }
-          
-          return res.status(200).send(parceiro)
         }
       );
     } catch (err) {
