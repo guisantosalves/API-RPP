@@ -21,13 +21,17 @@ const usuarioSchema = new mongoose.Schema(
             },
         ],
         ativo: { type: Boolean, required: true },
-        adm: { type: Boolean, required: true }, //Remover adm posteriormente
         path_photo: { type: String, required: true},
-        /*
-        rotas: {
-
-        }
-        */
+        rotas: [
+            {
+                rota: { type: String, required: true, trim: true, unique: true } ,
+                verbo_get: { type: Boolean } ,
+                verbo_put: { type: Boolean } ,
+                verbo_patch: { type: Boolean } ,
+                verbo_delete: { type: Boolean } ,
+                verbo_post: { type: Boolean } 
+            }
+        ]
     },
     
     { versionKey: false }
