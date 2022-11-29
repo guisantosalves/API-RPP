@@ -92,9 +92,6 @@ const swaggerOptions = {
                             items: {
                                 type: 'object',
                                 properties: {
-                                    nome: {
-                                        type: 'string'
-                                    },
                                     rota: {
                                         type: 'string'
                                     },
