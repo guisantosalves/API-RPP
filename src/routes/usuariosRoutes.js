@@ -109,6 +109,14 @@ const router = express.Router();
  *           application/json: 
  *             schema:
  *               $ref: '#/components/schemas/usuario'
+ *                
+ *       '204':
+ *         description: "Sem alteração"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/usuario'
+ * 
  *       '404':
  *         description: Usuário não encontrado
  *         content:
@@ -120,7 +128,35 @@ const router = express.Router();
  *       - Usuários
  *     summary: Atualiza um usuário pelo ID (todos os campos)
  *     requestBody:
- *       description: Atualiza um usuário pelo ID (todos os campos)
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/usuario'
+ *     responses:
+ *       '200':
+ *         description: Sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/usuario'
+ *                
+ *       '204':
+ *         description: "Sem alteração"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/usuario'
+ *               
+ *       '404':
+ *         description: Nenhum usuário encontrado
+ *         content:
+ *           application/json:
+ *             example: Not Found
+ *   patch:
+ *     tags:
+ *       - Usuários
+ *     summary: Atualiza um usuário pelo ID (Um ou vários campos)
+ *     requestBody: 
  *       content:
  *         application/json:
  *           schema:
@@ -137,7 +173,7 @@ const router = express.Router();
  *         description: Nenhum usuário encontrado
  *         content:
  *           application/json:
- *             example: Not Found
+ *             example: Not Foundg
  *   delete:
  *     tags:
  *       - Usuários
@@ -155,7 +191,7 @@ const router = express.Router();
  *           application/json:
  *             example: Not Found
  *    
- */   
+ */
 
 router
   .get("/usuarios", authMiddleware, UsuarioController.listarUsuarios)
