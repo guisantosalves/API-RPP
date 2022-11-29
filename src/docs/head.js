@@ -5,7 +5,6 @@ const swaggerOptions = {
             title: "API do Observatório de Políticas Públicas",
             description: "API para controlar a lógica de negócio do site",
             version: "0.0.1",
-            termsOfService: "http://localhost:3030",
             contact: {
                 name: "developer",
                 email: "observatorio@gmail.com",
@@ -16,12 +15,12 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: 'http://localhost:3030',
-                description: "API em desenvovlvimento no FSLAB",
+                url: 'http://localhost:3010',
+                description: "API de desenvovlvimento no FSLAB",
             },
             {
-                url: 'http://localhost:3030',
-                description: "API em produução no FSLAB",
+                url: 'https://api.opp.fslab.dev',
+                description: "API de produção no FSLAB",
             },
         ],
         tags: [
