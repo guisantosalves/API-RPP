@@ -15,7 +15,7 @@ const router = express.Router();
  *        description: Filtra por usuários cujo ativo seja igual ao informado. É true por padrão. Se não for nem true nem false, retorna todos os tipos de ativo.
  *        in: path
  *        schema: 
- *           type: boolean
+ *          type: boolean
  *        required: false
  *      - name: nome
  *        description: Filtra por usuários cujo o nome contenha o parâmetro informado.
