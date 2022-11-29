@@ -9,15 +9,11 @@ class PublicacaoController {
   static listarPublicacoes = async (req, res) => {
     res.setHeader('Content-Type', 'application/json')
     try {
+      const { query, options } = FiltrosPublicacao(req)
 
-      validatingUser(req, res, req.method, usuarios, async () => {
-        const { query, options } = FiltrosPublicacao(req)
+      const data = await publicacoes.paginate(query, options)
 
-        const data = await publicacoes.paginate(query, options)
-
-        return res.json(data)
-      })
-
+      return res.json(data)
     } catch (err) {
       console.error(err);
       return res.status(500).send(err);
@@ -29,18 +25,14 @@ class PublicacaoController {
     res.setHeader('Content-Type', 'application/json')
     try {
       const id = req.params.id;
-
-      validatingUser(req, res, req.method, usuarios, async () => {
-        publicacoes.findById(id)
-          .exec((err, publicacoes) => {
-            if (err) {
-              res.status(400).send({ message: `${err.message} - Id da publicação não localizado.` })
-            } else {
-              res.status(200).send(publicacoes);
-            }
-          })
-      })
-
+      publicacoes.findById(id)
+        .exec((err, publicacoes) => {
+          if (err) {
+            res.status(400).send({ message: `${err.message} - Id da publicação não localizado.` })
+          } else {
+            res.status(200).send(publicacoes);
+          }
+        })
     } catch (err) {
       console.error(err);
       return res.status(500).send(err);

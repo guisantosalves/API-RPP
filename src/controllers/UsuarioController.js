@@ -9,14 +9,11 @@ class UsuarioController {
   static listarUsuarios = async (req, res) => {
     res.setHeader('Content-Type', 'application/json')
     try {
-      const Method = req.method
-      validatingUser(req, res, Method, usuarios, async () => {
-        const { query, options } = FiltrosUsuarios(req)
+      const { query, options } = FiltrosUsuarios(req)
 
-        const data = await usuarios.paginate(query, options)
+      const data = await usuarios.paginate(query, options)
 
-        return res.json(data)
-      })
+      return res.json(data)
 
     } catch (err) {
       console.error(err);
@@ -29,18 +26,14 @@ class UsuarioController {
 
     try {
       const id = req.params.id;
-      const method = req.method
-
-      validatingUser(req, res, method, usuarios, async () => {
-        usuarios.findById(id)
-          .exec((err, usuarios) => {
-            if (err) {
-              res.status(400).send({ message: `${err.message} - Usuário não localizado.` });
-            } else {
-              res.status(200).send(usuarios);
-            }
-          })
-      })
+      usuarios.findById(id)
+        .exec((err, usuarios) => {
+          if (err) {
+            res.status(400).send({ message: `${err.message} - Usuário não localizado.` });
+          } else {
+            res.status(200).send(usuarios);
+          }
+        })
 
     } catch (err) {
       return res.status(400).json({ mensagem: err })
@@ -151,8 +144,8 @@ class UsuarioController {
       validatingUser(req, res, method, usuarios, async () => {
         usuarios.find(
           { 'nome': { "$regex": nome, "$options": "i" } }, {}, (err, users) => {
-          res.status(200).send(users);
-        });
+            res.status(200).send(users);
+          });
       })
     } catch (err) {
       return res.status(400).json({ mensagem: err })

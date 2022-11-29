@@ -194,7 +194,7 @@ const router = express.Router();
  */
 
 router
-  .get("/usuarios", authMiddleware, UsuarioController.listarUsuarios)
+  .get("/usuarios", UsuarioController.listarUsuarios)
   .get("/usuarios/busca", UsuarioController.listarUsuarioPorNome)
   .post("/usuarios",  UsuarioController.cadastrarUsuario)
   .put("/usuarios/:id", authMiddleware, UsuarioController.atualizarUsuario)
