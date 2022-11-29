@@ -8,13 +8,13 @@ class LoginController {
   static logar = async (req, res) => {
     const { email, senha } = req.body;
 
-    const userExist = await usuarios.findOne({ email });
+    const userExist = await usuarios.findOne({ email }).select('+senha')
 
     // se o usuário não existir
     if (!userExist) {
       return res.status(400).json({ code: 400, message: "Usuário inexistente!" })
     }
-    console.log(userExist)
+
     // se a senha não bater
     if (!(await bcrypt.compare(senha, userExist.senha))) {
       return res.status(400).json({ code: 400, message: "Senha inválida!" })

@@ -2,11 +2,13 @@ import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 
 const authMiddleware = async (req, res, next) => {
-  const token = req.headers.authorization;
+  const auth = req.headers.authorization;
 
-  if (!token) {
+  if (!auth) {
     return res.status(498).json({code: 498, message: "O token de autenticação não existe!" })
   }
+
+  const [, token] = auth.split(" ")
 
   try {
     // promisify converte uma função de callback para uma função async/await

@@ -12,7 +12,7 @@ const validatingUser = async (req, res, verbo, model, callback) => {
     }
 
     console.log(resultUserId)
-    const verifyingVerb = resultUserId.permissions.map((item, index) => {
+    const verifyingVerb = resultUserId.rotas.map((item, index) => {
         switch (verbo) {
             case 'GET':
                 if (item.get == true) {
