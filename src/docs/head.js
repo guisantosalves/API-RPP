@@ -16,7 +16,7 @@ const swaggerOptions = {
         servers: [
             {
                 url: 'http://localhost:3010',
-                description: "API de desenvovlvimento no FSLAB",
+                description: "API de desenvolvimento no FSLAB",
             },
             {
                 url: 'https://api.opp.fslab.dev',
@@ -47,10 +47,28 @@ const swaggerOptions = {
                     description: "Leia mais",
                     url: "http://swagger.io"
                 }
+            },
+            {
+                name: "Login",
+                description: "Rota de login"
             }],
         paths: {},
         components: {
             schemas: {
+                formacao: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        properties: {
+                            titulo: {
+                                type: 'string'
+                            },
+                            curso: {
+                                type: 'string'
+                            }
+                        }
+                    }
+                },
                 usuario: {
                     type: 'object',
                     properties: {
@@ -58,18 +76,7 @@ const swaggerOptions = {
                             type: 'string'
                         },
                         formacao: {
-                            type: 'array',
-                            items: {
-                                type: 'object',
-                                properties: {
-                                    titulo: {
-                                        type: 'string'
-                                    },
-                                    curso: {
-                                        type: 'string'
-                                    }
-                                }
-                            }
+                            $ref: '#/components/schemas/formacao'
                         },
                         email: {
                             type: 'string'
@@ -109,7 +116,7 @@ const swaggerOptions = {
                                     verbo_post: {
                                         type: 'boolean'
                                     }
-                                }                                
+                                }
                             }
                         }
                     }
@@ -181,6 +188,17 @@ const swaggerOptions = {
                     type: 'array',
                     items: {
                         $ref: '#/components/schemas/parceiro'
+                    }
+                },
+                login: {
+                    type: 'object',
+                    properties: {
+                        email: {
+                            type: 'string'
+                        },
+                        senha: {
+                            type: 'string'
+                        }
                     }
                 }
             }
