@@ -7,7 +7,7 @@ import cors from 'cors';
 
 dotenv.config();
 
-const port = process.env.port || 3031
+const port = process.env.PORT || 3031
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))

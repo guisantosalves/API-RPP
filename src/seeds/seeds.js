@@ -53,6 +53,8 @@ const generateUsuarios = async (qtdUsuarios) => {
         const nome = faker.name.findName();
         const email = nome.toLowerCase().replaceAll(" ", "") + getRandomInt(99) + "@gmail.com";
 
+        const routes = ["parceiros", "parceiros:id", "publicacoes", "publicacoes:id", "usuarios", "usuarios:id"]
+
         const usuario = {
             nome: nome,
             email: email,
@@ -63,7 +65,17 @@ const generateUsuarios = async (qtdUsuarios) => {
             }],
             ativo: getRandomInt(2) > 1,
             adm: getRandomInt(2) > 1,
-            path_photo: "unknown.png"
+            path_photo: "unknown.png",
+            rotas: routes.map(route => (
+                {
+                    rota: route,
+                    verbo_get: faker.random.boolean(),
+                    verbo_put: faker.random.boolean(),
+                    verbo_patch: faker.random.boolean(),
+                    verbo_delete: faker.random.boolean(),
+                    verbo_post: faker.random.boolean()
+                }
+            ))
         }
         usuariosArray.push(usuario)
     }
