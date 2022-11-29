@@ -1,5 +1,6 @@
 import express from "express";
 import PublicacaoController from "../controllers/PublicacaoController.js";
+import authMiddleware from "../middlewares/AuthMidleware.js";
 
 const router = express.Router();
 
@@ -163,9 +164,9 @@ const router = express.Router();
 router
   .get("/publicacoes", PublicacaoController.listarPublicacoes)
   .get("/publicacoes/:id", PublicacaoController.listarPublicacaoPorId)
-  .post("/publicacoes", PublicacaoController.cadastrarPublicacao)
-  .put("/publicacoes/:id", PublicacaoController.atualizarPublicacao)
-  .delete("/publicacoes/:id", PublicacaoController.excluirPublicacao)
-  .patch("/publicacoes/:id", PublicacaoController.atualizarPublicacao)
+  .post("/publicacoes", authMiddleware, PublicacaoController.cadastrarPublicacao)
+  .put("/publicacoes/:id", authMiddleware, PublicacaoController.atualizarPublicacao)
+  .delete("/publicacoes/:id", authMiddleware, PublicacaoController.excluirPublicacao)
+  .patch("/publicacoes/:id", authMiddleware, PublicacaoController.atualizarPublicacao)
 
 export default router;

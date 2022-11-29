@@ -12,7 +12,7 @@ function FiltrosUsuarios(req) {
 
   const options = {
     page: parseInt(page) || 1,
-    limit: parseInt(perPage || limit) < 10 ? parseInt(perPage || limit) : 10 || 10,
+    limit: parseInt(perPage || limit) < 10 ? parseInt(perPage || limit) : 25 || 25,
   }
 
   const query = {}

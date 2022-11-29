@@ -1,5 +1,6 @@
 import express from "express";
 import ParceirosController from "../controllers/ParceirosController.js";
+import authMiddleware from "../middlewares/AuthMidleware.js";
 
 const router = express.Router();
 
@@ -130,9 +131,9 @@ const router = express.Router();
 router
     .get("/parceiros", ParceirosController.listarParceiros)
     .get("/parceiros/:id", ParceirosController.listarParceiroPorId)
-    .post("/parceiros", ParceirosController.cadastrarParceiro)
-    .put("/parceiros/:id", ParceirosController.atualizarParceiro)
-    .delete("/parceiros/:id", ParceirosController.excluirParceiro)
-    .patch("/parceiros/:id", ParceirosController.atualizarParceiro)
+    .post("/parceiros", authMiddleware, ParceirosController.cadastrarParceiro)
+    .put("/parceiros/:id", authMiddleware, ParceirosController.atualizarParceiro)
+    .delete("/parceiros/:id", authMiddleware, ParceirosController.excluirParceiro)
+    .patch("/parceiros/:id", authMiddleware, ParceirosController.atualizarParceiro)
 
 export default router;

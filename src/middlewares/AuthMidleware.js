@@ -1,19 +1,16 @@
 import jwt from 'jsonwebtoken';
-import config from '../config/auth.js';
 import { promisify } from 'util';
 
 const authMiddleware = async (req, res, next) => {
-  const auth = req.headers.authorization;
+  const token = req.headers.authorization;
 
-  if (!auth) {
+  if (!token) {
     return res.status(498).json({code: 498, message: "O token de autenticação não existe!" })
   }
 
-  const [, token] = auth.split(' '); // desestruturação
-
   try {
     // promisify converte uma função de callback para uma função async/await
-    const decoded = await promisify(jwt.verify)(token, config.secret);
+    const decoded = jwt.verify(token, process.env.SECRET)
 
     if (!decoded) { // se não ocorrer a decodificação do token
       return res.status(498).json({ error: true, code: 498, message: "O token está expirado!" })
@@ -27,4 +24,5 @@ const authMiddleware = async (req, res, next) => {
   }
 
 }
+
 export default authMiddleware;

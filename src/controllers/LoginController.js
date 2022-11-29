@@ -14,7 +14,7 @@ class LoginController {
     if (!userExist) {
       return res.status(400).json({ code: 400, message: "Usuário inexistente!" })
     }
-
+    console.log(userExist)
     // se a senha não bater
     if (!(await bcrypt.compare(senha, userExist.senha))) {
       return res.status(400).json({ code: 400, message: "Senha inválida!" })

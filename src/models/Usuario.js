@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
 import mongoosePaginate from 'mongoose-paginate';
-
+mongoose.set('debug', true)
 
 const usuarioSchema = new mongoose.Schema(
     {
-        nome: { type: String, required: true},
-        email: { 
-            type: String, 
+        nome: { type: String, required: true },
+        email: {
+            type: String,
             required: true,
             match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
         },
-        senha: { type: String, required: true},
+        senha: { type: String, required: true },
         formacao: [
             {
                 titulo: { type: String, required: true },
@@ -33,7 +33,7 @@ const usuarioSchema = new mongoose.Schema(
             }
         ]
     },
-    
+
     { versionKey: false }
 );
 
