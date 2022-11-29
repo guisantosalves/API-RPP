@@ -3,11 +3,12 @@ import publicacoes from "../../models/Publicacao.js"
 
 function FiltrosPublicacao(req) {
     const titulo = req.query.titulo
-    const nomeUsuario = req.query.nomeUsuario
-    const idUsuario = req.query.idUsuario
+    const usuarioId = req.query.usuarioId
     const { page, perPage, limit } = req.query
     const { dataInicial, dataFinal } = req.query
-    const tag = req.query.tag
+    const tags = req.query.tags
+    const tipo = req.query.tipo
+    const registro = req.query.registro
 
     const options = {
         page: parseInt(page) || 1,
@@ -15,36 +16,50 @@ function FiltrosPublicacao(req) {
     }
 
     const query = {}
-
-    /*if(titulo){
+    
+    if(titulo){
       const regexTitulo = new RegExp(titulo, 'i')
-      data = data.filter((pub) => pub.titulo.match(regexTitulo));
+
+      query.titulo = regexTitulo;
     }
 
-    if(tag){
-      data = data.filter((pub) => pub.tags.find(t => t === tag))
+    if(dataInicial && dataFinal){
+      const inicial = new Date(dataInicial);
+      const final = new Date(dataFinal)
+      query.data = {
+        $gte: inicial,
+        $lte: final,
+      }
     }
 
-    if(nomeUsuario){
-      const regexUsuario = new RegExp(nomeUsuario, 'i')
-      data = data.filter((pub) => pub.usuario.nome.match(regexUsuario))
+    if(tipo){
+      const arrayTipo = tipo.split(";")
+      query.tipo = {
+        $in: arrayTipo
+      }
     }
 
-    // Inutilizar até resolver a situação dos ids dos usuários não estarem entrando nas publicações no seed
-    // if (idUsuario){
-    //   data = data.filter((pub) => pub.usuario["_id"] === idUsuario)
-    // }
+    if(registro){
 
-    if (dataInicial && dataFinal){
-      data = data.filter((pub) => {
-        const date = pub.data.getTime()
+      const regexRegistro = new RegExp(registro,'i')
+      query.registro = regexRegistro
 
-        const min = new Date(dataInicial).getTime()
-        const max = new Date(dataFinal).getTime()
-        
-        return(min <= date && date <= max)
-      })
-    }*/
+    }
+
+    if(tags){
+      const arrayTags = tags.split(";")
+      query.tags = {
+        $all: arrayTags
+      }
+
+    }
+
+    if(usuarioId){
+      query.usuarioId = usuarioId
+
+    }
+
+
 
     const filters = {
       query: query,
