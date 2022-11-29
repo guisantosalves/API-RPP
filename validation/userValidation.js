@@ -1,4 +1,4 @@
-const validatingUser = async (req, res, verbo, model, callback) => {
+const userValidation = async (req, res, verbo, model, callback) => {
     const userID = req.user_id
 
     const resultUserId = await model.findById(userID)
@@ -15,31 +15,31 @@ const validatingUser = async (req, res, verbo, model, callback) => {
     const verifyingVerb = resultUserId.rotas.map((item, index) => {
         switch (verbo) {
             case 'GET':
-                if (item.get == true) {
+                if (item.verbo_get == true) {
                     return true;
                 } else {
                     return false;
                 }
             case 'POST':
-                if (item.post == true) {
+                if (item.verbo_post == true) {
                     return true;
                 } else {
                     return false;
                 }
             case 'PATCH':
-                if (item.patch == true) {
+                if (item.verbo_patch == true) {
                     return true;
                 } else {
                     return false;
                 }
             case 'PUT':
-                if (item.put == true) {
+                if (item.verbo_put == true) {
                     return true;
                 } else {
                     return false;
                 }
             case 'DELETE':
-                if (item.delete == true) {
+                if (item.verbo_delete == true) {
                     return true;
                 } else {
                     return false;
@@ -54,4 +54,4 @@ const validatingUser = async (req, res, verbo, model, callback) => {
     return await callback()
 }
 
-export default validatingUser
+export default userValidation
