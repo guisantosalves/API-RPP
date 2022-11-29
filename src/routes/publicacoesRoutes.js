@@ -10,40 +10,45 @@ const router = express.Router();
  *   get:
  *     parameters:
  *      - name: titulo
- *        description: Filtra publicações cujo titulo corresponda ao parâmetro informado.
+ *        description: Filtra por publicações cujo o título corresponda ao informado.
  *        in: path
  *        schema: 
  *          type: String
  *        required: false
- *      - name: data
- *        description: Filtra publicações cuja data corresponda ao parâmetro informado.
+ *      - name: dataInicial
+ *        description: Determina uma data inicial para um intervalo de pesquisa. Deve ser usado em conjunto com o dataFinal.
+ *        in: path
+ *        schema:
+ *          type: Date
+ *        required: false
+ *      - name: dataFinal
+ *        description: Determina uma data final para um intervalo de pesquisa. Deve ser usado em conjunto com o dataInicial.
  *        in: path
  *        schema:
  *          type: Date
  *        required: false
  *      - name: tipo
- *        description: Filtra publicações cujo tipo corresponda ao parâmetro informado.
+ *        description: Filtra por publicações por um tipo específico. É possível filtrar por múltiplos tipos ao separar os atributos do parâmetro por ponto e vírgula(;)
  *        in: path
  *        schema: 
  *          type: String
  *        required: false
  *      - name: registro 
- *        description: Filtra publicações cujo registro corresponda ao parâmetro informado.
+ *        description: Filtra por publicações que contenham o parâmetro informado no seu registro.
  *        in: path
  *        schema:  
  *          type: String
  *        required: false
  *      - name: tags
- *        description: Filtra publicações cujo tags corresponda ao parâmetro informado.
+ *        description: Filtra por publicações que contenham as tags informadas. É possível usar múltiplas tags, desde que elas sejam sepradas por ponto e vírgula na requisição.
  *        in: path
  *        schema:
  *          type: String
  *        required: false
  *      - name: usuarioId
- *        description: Filtra publicações cujo usuário corresponda ao parâmetro informado.
+ *        description: Filtra por publicações cujo autor corresponde ao ID informado.
  *        in: path
  *        required: false
- * 
  * 
  *     tags:
  *       - Publicações
