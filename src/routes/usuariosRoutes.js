@@ -41,6 +41,21 @@ const router = express.Router();
  *        schema:
  *          type: string
  *        required: false
+ *      - name: page
+ *        description: Informa a página de início da listagem de parceiros
+ *        in: query
+ *        schema:
+ *          type: int
+ *        required: false
+ *        default: 1
+ *      - name: limit
+ *        description: Informa o número máximo de parceiros na exibição.
+ *        in: query
+ *        schema:
+ *          type: int
+ *        required: false
+ *        default: 10
+ * 
  *     tags:
  *       - Usuários
  *     summary: Recupera todos os usuários

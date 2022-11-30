@@ -49,6 +49,20 @@ const router = express.Router();
  *        description: Filtra por publicações cujo autor corresponde ao ID informado.
  *        in: query
  *        required: false
+ *      - name: page
+ *        description: Informa a página de início da listagem de publicações
+ *        in: query
+ *        schema:
+ *          type: int
+ *        required: false
+ *        default: 1
+ *      - name: limit
+ *        description: Informa o número máximo de publicações na exibição.
+ *        in: query
+ *        schema:
+ *          type: int
+ *        required: false
+ *        default: 10
  * 
  *     tags:
  *       - Publicações
@@ -71,8 +85,6 @@ const router = express.Router();
  *       - bearerAuth: []
  *     tags:
  *       - Publicações
- *     security:
- *       - bearerAuth: []
  *     summary: Cadastra uma nova publicação
  *     requestBody: 
  *       content: 

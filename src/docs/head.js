@@ -78,6 +78,39 @@ const swaggerOptions = {
                 },
                 usuario: {
                     type: 'object',
+                    example: {
+                        formacao: [{
+                            titulo: "Graduação",
+                            curso: "História"
+                        }],
+                        nome: "Carlos Eduardo",
+                        email: "carloseduardo@gmail.com",
+                        senha: "12345678",
+                        ativo: true,
+                        path_photo: "unknown.png",
+                        rotas: [{
+                            rota: "publicacoes",
+                            verbo_get: true,
+                            verbo_post: true,
+                            verbo_put: true,
+                            verbo_patch: true,
+                            verbo_delete: true
+                        },{
+                            rota: "usuarios",
+                            verbo_get: true,
+                            verbo_post: true,
+                            verbo_put: true,
+                            verbo_patch: true,
+                            verbo_delete: true
+                        },{
+                            rota: "parceiros",
+                            verbo_get: true,
+                            verbo_post: true,
+                            verbo_put: true,
+                            verbo_patch: true,
+                            verbo_delete: true
+                        }]
+                    },
                     properties: {
                         id: {
                             type: 'string'
@@ -137,6 +170,17 @@ const swaggerOptions = {
                 },
                 publicacao: {
                     type: 'object',
+                    example: {
+                        data: "25/09/2022",
+                        titulo: "Normas de utilização de computadores",
+                        registro: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                        tags: [
+                            'ab',
+                            'et'
+                        ],
+                        tipo: "Artigo",
+                        usuarioId: "63856301774f0678e56ec2f3"
+                    },
                     properties: {
                         id: {
                             type: 'string'
@@ -173,6 +217,11 @@ const swaggerOptions = {
                 },
                 parceiro: {
                     type: 'object',
+                    example: {
+                        nome: "UNIR",
+                        ativo: true,
+                        caminho_logo: "unknown.png"
+                    },
                     properties: {
                         id: {
                             type: 'string'
@@ -200,7 +249,7 @@ const swaggerOptions = {
                 login: {
                     type: 'object',
                     example: {
-                        email: "carlosfelipe.st28@gmail.com",
+                        email: "carloseduardo@gmail.com",
                         senha: "12345678"
                     },
                     properties: {

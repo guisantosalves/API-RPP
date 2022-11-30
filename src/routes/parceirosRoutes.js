@@ -10,6 +10,27 @@ const router = express.Router();
  * 
  *  /parceiros:
  *    get:
+ *      parameters:
+ *        - name: nome
+ *          description: Filtra por parceiros cujo o nome contenha o parâmetro informado.
+ *          in: query
+ *          schema:
+ *            type: string
+ *          required: false
+ *        - name: page
+ *          description: Informa a página de início da listagem de parceiros
+ *          in: query
+ *          schema:
+ *            type: int
+ *          required: false
+ *          default: 1
+ *        - name: limit
+ *          description: Informa o número máximo de parceiros na exibição.
+ *          in: query
+ *          schema:
+ *            type: int
+ *          required: false
+ *          default: 5
  *      tags:
  *        - Parceiros
  *      summary: Recupera todos os parceiros
