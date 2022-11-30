@@ -3,7 +3,7 @@ import parceiros from "../../models/Parceiro.js"
 function FiltrosParceiros(req) {
   const nome = req.query.nome
   const page = req.query.page
-  const limit = req.query.perPage || req.query.limit
+  const limit = req.query.limit
 
   const options = {
     page: parseInt(page) || 1,

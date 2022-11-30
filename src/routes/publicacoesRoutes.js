@@ -90,7 +90,7 @@ const router = express.Router();
  *       content: 
  *         application/json:
  *           schema:
- *             $ref: "#/components/schemas/publicacao_put"
+ *             $ref: "#/components/schemas/publicacao"
  *
  *     responses:
  *       '201':
@@ -117,7 +117,7 @@ const router = express.Router();
  *     - name: id
  *       in: path
  *       schema: 
- *         type: integer
+ *         type: string
  *       required: true
  *   get:
  *     tags:

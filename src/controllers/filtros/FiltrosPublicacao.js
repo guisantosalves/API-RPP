@@ -4,7 +4,8 @@ import publicacoes from "../../models/Publicacao.js"
 function FiltrosPublicacao(req) {
     const titulo = req.query.titulo
     const usuarioId = req.query.usuarioId
-    const { page, perPage, limit } = req.query
+    const page = req.query.page
+    const limit = req.query.limit
     const { dataInicial, dataFinal } = req.query
     const tags = req.query.tags
     const tipo = req.query.tipo
@@ -12,7 +13,7 @@ function FiltrosPublicacao(req) {
 
     const options = {
         page: parseInt(page) || 1,
-        limit: parseInt(perPage || limit) < 2 ? parseInt(perPage || limit) : 10 || 10,
+        limit: parseInt(limit) < 10 ? parseInt(limit) : 10 || 10,
     }
 
     const query = {}

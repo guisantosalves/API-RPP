@@ -8,11 +8,12 @@ function FiltrosUsuarios(req) {
   const tituloFormacao = req.query.tituloFormacao
   const cursoFormacao = req.query.cursoFormacao
   const adm = req.query.adm
-  const { page, perPage, limit } = req.query
+  const page = req.query.page
+  const limit = req.query.limit
 
   const options = {
     page: parseInt(page) || 1,
-    limit: parseInt(perPage || limit) < 10 ? parseInt(perPage || limit) : 10 || 10,
+    limit: parseInt(limit) < 10 ? parseInt(limit) : 25 || 25,
   }
 
   const query = {}
@@ -41,17 +42,17 @@ function FiltrosUsuarios(req) {
     query.email= regexEmail
   }
 
-  /*if (tituloFormacao){
+  if (tituloFormacao){
     const regexFormacao = new RegExp(tituloFormacao, 'i')
 
-    query["formacao.titulo"] = regexFormacao
+    query['formacao.titulo'] = regexFormacao
   }
 
   if (cursoFormacao){
     const regexFormacao = new RegExp(cursoFormacao, 'i')
 
     query["formacao.curso"] = regexFormacao
-  }*/
+  }
 
   if (adm){
     if (adm == 'false')
