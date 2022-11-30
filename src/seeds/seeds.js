@@ -114,6 +114,7 @@ const generatePublicacoes = async (qtd) => {
 
 await generatePublicacoes(40)
 
+await parceiros.deleteMany()
 
 const generateParceiros = async (qtd) => {
   const parceirosArray = []
