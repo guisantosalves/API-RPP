@@ -1,7 +1,7 @@
 import parceiros from "../models/Parceiro.js";
 import FiltrosParceiros from "./filtros/FiltrosParceiros.js";
 import usuarios from '../models/Usuario.js'
-import validatingUser from "../../validation/userValidation.js";
+import userValidation from "../../validation/userValidation.js";
 
 class ParceirosController {
   static listarParceiros = async (req, res) => {
@@ -45,7 +45,7 @@ class ParceirosController {
     res.setHeader('Content-Type', 'application/json')
 
     try {
-      validatingUser(req, res, req.method, usuarios, async () => {
+      userValidation(req, res, req.method, usuarios, async () => {
         const myNewSave = new parceiros({
           nome: req.body.nome,
           ativo: req.body.ativo,
@@ -67,7 +67,7 @@ class ParceirosController {
   static atualizarParceiro = async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     try {
-      validatingUser(req, res, req.method, usuarios, async () => {
+      userValidation(req, res, req.method, usuarios, async () => {
         const id = req.params.id;
         parceiros.findByIdAndUpdate({ _id: id }, {
           nome: req.body.nome,
@@ -92,7 +92,7 @@ class ParceirosController {
   static excluirParceiro = (req, res) => {
     try {
       const id = req.params.id;
-      validatingUser(req, res, req.method, usuarios, async () => {
+      userValidation(req, res, req.method, usuarios, async () => {
         parceiros.findByIdAndDelete(id, (err, docs) => {
           res.status(200).send({ message: "Parceiro removido com sucesso" })
         })
@@ -108,7 +108,7 @@ class ParceirosController {
     const nomefromQuery = req.query.nome;
 
     try {
-      validatingUser(req, res, req.method, usuarios, async () => {
+      userValidation(req, res, req.method, usuarios, async () => {
         parceiros.find({ nome: { 'nome': { "$regex": nome, "$options": "i" } } }).then(result => {
           res.status(200)
           res.send(result)

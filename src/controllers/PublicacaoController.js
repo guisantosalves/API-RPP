@@ -1,7 +1,7 @@
 import publicacoes from "../models/Publicacao.js";
 import FiltrosPublicacao from "./filtros/FiltrosPublicacao.js";
 import usuarios from '../models/Usuario.js'
-import validatingUser from "../../validation/userValidation.js";
+import userValidation from "../../validation/userValidation.js";
 
 class PublicacaoController {
 
@@ -45,7 +45,7 @@ class PublicacaoController {
 
     try {
       let publicacao = new publicacoes(req.body);
-      validatingUser(req, res, req.method, usuarios, async () => {
+      userValidation(req, res, req.method, usuarios, async () => {
         publicacao.save((err) => {
           if (err) {
             res.status(500).send({ message: `${err.message} - Falha ao cadastrar publicação.` })
@@ -66,7 +66,7 @@ class PublicacaoController {
 
     try {
       const id = req.params.id;
-      validatingUser(req, res, req.method, usuarios, async () => {
+      userValidation(req, res, req.method, usuarios, async () => {
         publicacoes.findByIdAndUpdate(id, { $set: req.body }, (err) => {
           if (!err) {
             res.status(200).send({ message: 'Publicação atualizada com sucesso' })
@@ -86,7 +86,7 @@ class PublicacaoController {
   static excluirPublicacao = async (req, res) => {
     try {
       const id = req.params.id;
-      validatingUser(req, res, req.method, usuarios, async () => {
+      userValidation(req, res, req.method, usuarios, async () => {
         publicacoes.findByIdAndDelete(id, (err) => {
           if (!err) {
             res.status(200).send({ message: 'Publicação removida com sucesso' })

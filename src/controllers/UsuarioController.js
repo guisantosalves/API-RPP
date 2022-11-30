@@ -1,7 +1,7 @@
 import usuarios from "../models/Usuario.js";
 import FiltrosUsuarios from "./filtros/FiltrosUsuarios.js";
 import bcrypt from 'bcrypt';
-import validatingUser from "../../validation/userValidation.js";
+import userValidation from "../../validation/userValidation.js";
 
 class UsuarioController {
 
@@ -85,7 +85,7 @@ class UsuarioController {
       const id = req.params.id;
       const Method = req.method;
 
-      validatingUser(req, res, Method, usuarios, async () => {
+      userValidation(req, res, Method, usuarios, async () => {
         usuarios.findByIdAndUpdate(id, { $set: req.body }, (err) => {
           if (!err) {
             res.status(200).send({ message: 'Usuário atualizado com sucesso' })
@@ -109,7 +109,7 @@ class UsuarioController {
       const id = req.params.id;
       const method = req.method
 
-      validatingUser(req, res, method, usuarios, async () => {
+      userValidation(req, res, method, usuarios, async () => {
         usuarios.findByIdAndDelete(id, (err) => {
           if (!err) {
             res.status(200).send({ message: 'Usuário removido com sucesso' })

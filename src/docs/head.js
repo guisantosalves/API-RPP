@@ -199,6 +199,10 @@ const swaggerOptions = {
                 },
                 login: {
                     type: 'object',
+                    example: {
+                        email: "carlosfelipe.st28@gmail.com",
+                        senha: "12345678"
+                    },
                     properties: {
                         email: {
                             type: 'string'
@@ -209,10 +213,7 @@ const swaggerOptions = {
                     }
                 }
             }
-        },
-        security: [{
-            '- bearerAuth': []
-        }]
+        }
     },
     apis: ["./src/routes/*.js"]
 }

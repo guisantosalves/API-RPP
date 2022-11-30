@@ -118,6 +118,8 @@ const router = express.Router();
  *             example: Not Found
  * 
  *   put:
+ *     security: 
+ *       - bearerAuth: []
  *     tags:
  *       - Usuários
  *     summary: Atualiza um usuário pelo ID (todos os campos)
@@ -147,6 +149,8 @@ const router = express.Router();
  *           application/json:
  *             example: Not Found
  *   patch:
+ *     security: 
+ *       - bearerAuth: []
  *     tags:
  *       - Usuários
  *     summary: Atualiza um usuário pelo ID (Um ou vários campos)
@@ -167,8 +171,10 @@ const router = express.Router();
  *         description: Nenhum usuário encontrado
  *         content:
  *           application/json:
- *             example: Not Foundg
+ *             example: Not Found
  *   delete:
+ *     security: 
+ *       - bearerAuth: []
  *     tags:
  *       - Usuários
  *     summary: Apaga um usuário pelo ID

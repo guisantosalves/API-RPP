@@ -26,7 +26,9 @@ const router = express.Router();
  *            application/json:
  *              example: Not Found
  *     
- *    post:
+ *    post: 
+ *      security: 
+ *       - bearerAuth: []
  *      tags:
  *        - Parceiros
  *      summary: Cadastra um novo parceiro
@@ -80,6 +82,8 @@ const router = express.Router();
  *              example: Not Found
  * 
  *    put:
+ *      security:
+ *        - bearerAuth: []
  *      tags:
  *        - Parceiros
  *      summary: Atualiza um parceiro pelo ID
@@ -102,7 +106,36 @@ const router = express.Router();
  *          content:
  *            application/json:
  *              example: Not Found
+ * 
+ *    patch:
+ *      security:
+ *        - bearerAuth: []
+ *      tags:
+ *        - Parceiros
+ *      summary: Atualiza parcialmente um parceiro pelo ID
+ *      requestBody:
+ *        description: Atualiza parcialmente um parceiro pelo ID
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/parceiro'
+ *      responses:
+ *        '200':
+ *          description: Sucesso
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/parceiro'
+ *               
+ *        '404':
+ *          description: Nenhum usuário encontrado
+ *          content:
+ *            application/json:
+ *              example: Not Found
+ * 
  *    delete:
+ *      security: 
+ *        - bearerAuth: []
  *      tags:
  *        - Parceiros
  *      summary: Apaga um parceiro pelo ID

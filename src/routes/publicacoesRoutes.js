@@ -67,6 +67,8 @@ const router = express.Router();
  *             example: "Connection Error"
  *   
  *   post:
+ *     security: 
+ *       - bearerAuth: []
  *     tags:
  *       - Publicações
  *     security:
@@ -123,6 +125,8 @@ const router = express.Router();
  *             example: Not Found
  *   
  *   put:
+ *     security: 
+ *       - bearerAuth: []
  *     tags:
  *       - Publicações
  *     summary: Atualiza uma publicação por ID(TOdos os campos)
@@ -154,6 +158,8 @@ const router = express.Router();
  *           application/json:
  *             example: Not Found
  *   patch:
+ *     security: 
+ *       - bearerAuth: []
  *     tags:
  *       - Publicações
  *     summary: Atualiza uma publicação por ID (Um ou vários campos)
@@ -186,6 +192,8 @@ const router = express.Router();
  *             example: Not Found
  * 
  *   delete:
+ *     security: 
+ *       - bearerAuth: []
  *     tags:
  *       - Publicações
  *     summary: Apaga publicação por ID

@@ -4,6 +4,8 @@ import { promisify } from 'util';
 const authMiddleware = async (req, res, next) => {
   const auth = req.headers.authorization;
 
+  console.log(req)
+
   if (!auth) {
     return res.status(498).json({code: 498, message: "O token de autenticação não existe!" })
   }
