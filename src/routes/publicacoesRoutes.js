@@ -11,43 +11,43 @@ const router = express.Router();
  *     parameters:
  *      - name: titulo
  *        description: Filtra por publicações cujo o título corresponda ao informado.
- *        in: path
+ *        in: query
  *        schema: 
  *          type: String
  *        required: false
  *      - name: dataInicial
  *        description: Determina uma data inicial para um intervalo de pesquisa. Deve ser usado em conjunto com o dataFinal.
- *        in: path
+ *        in: query
  *        schema:
  *          type: Date
  *        required: false
  *      - name: dataFinal
  *        description: Determina uma data final para um intervalo de pesquisa. Deve ser usado em conjunto com o dataInicial.
- *        in: path
+ *        in: query
  *        schema:
  *          type: Date
  *        required: false
  *      - name: tipo
  *        description: Filtra por publicações por um tipo específico. É possível filtrar por múltiplos tipos ao separar os atributos do parâmetro por ponto e vírgula(;)
- *        in: path
+ *        in: query
  *        schema: 
  *          type: String
  *        required: false
  *      - name: registro 
  *        description: Filtra por publicações que contenham o parâmetro informado no seu registro.
- *        in: path
+ *        in: query
  *        schema:  
  *          type: String
  *        required: false
  *      - name: tags
  *        description: Filtra por publicações que contenham as tags informadas. É possível usar múltiplas tags, desde que elas sejam sepradas por ponto e vírgula na requisição.
- *        in: path
+ *        in: query
  *        schema:
  *          type: String
  *        required: false
  *      - name: usuarioId
  *        description: Filtra por publicações cujo autor corresponde ao ID informado.
- *        in: path
+ *        in: query
  *        required: false
  * 
  *     tags:
@@ -69,6 +69,8 @@ const router = express.Router();
  *   post:
  *     tags:
  *       - Publicações
+ *     security:
+ *       - bearerAuth: []
  *     summary: Cadastra uma nova publicação
  *     requestBody: 
  *       content: 

@@ -13,39 +13,33 @@ const router = express.Router();
  *     parameters:
  *      - name: ativo
  *        description: Filtra por usuários cujo ativo seja igual ao informado. É true por padrão. Se não for nem true nem false, retorna todos os tipos de ativo.
- *        in: path
+ *        in: query
  *        schema: 
  *          type: boolean
  *        required: false
  *      - name: nome
  *        description: Filtra por usuários cujo o nome contenha o parâmetro informado.
- *        in: path
+ *        in: query
  *        schema:
  *          type: string
  *        required: false
  *      - name: email
  *        description: Filtra por usuários cujo o email do login contenha o parâmetro informado.
- *        in: path
+ *        in: query
  *        schema:
  *          type: string
  *        required: false
  *      - name: tituloFormacao
  *        description: Filtra por usuários cujo o titulo da formação contenha o parâmetro informado.
- *        in: path
+ *        in: query
  *        schema:
  *          type: string
  *        required: false
  *      - name: cursoFormacao
  *        description: Filtra por usuários cujo o curso da formação contenha o parâmetro informado.
- *        in: path
+ *        in: query
  *        schema:
  *          type: string
- *        required: false
- *      - name: adm
- *        description: Filtra por usuários cujo a situação 'adm' é igual à informada. 
- *        in: path
- *        schema: 
- *           type: boolean
  *        required: false
  *     tags:
  *       - Usuários
@@ -96,7 +90,7 @@ const router = express.Router();
  *     - name: id
  *       in: path
  *       schema: 
- *         type: integer
+ *         type: string
  *       required: true
  *   get:
  *     tags:

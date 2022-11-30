@@ -54,6 +54,13 @@ const swaggerOptions = {
             }],
         paths: {},
         components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT'
+                }
+            },
             schemas: {
                 formacao: {
                     type: 'array',
@@ -202,7 +209,10 @@ const swaggerOptions = {
                     }
                 }
             }
-        }
+        },
+        security: [{
+            '- bearerAuth': []
+        }]
     },
     apis: ["./src/routes/*.js"]
 }
